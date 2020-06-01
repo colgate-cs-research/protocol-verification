@@ -1,0 +1,34 @@
+{
+    "edges": [
+        {
+            "node1": {
+                "hostname": "router1",
+                "interfaceName": "eth1"
+            },
+            "node2": {
+                "hostname": "router2",
+                "interfaceName": "eth1"
+            }
+        },
+        {
+            "node1": {
+                "hostname": "router2",
+                "interfaceName": "eth2"
+            },
+            "node2": {
+                "hostname": "router3",
+                "interfaceName": "eth1"
+            }
+        },
+        {
+            "node1": {
+                "hostname": "router3",
+                "interfaceName": "eth2"
+            },
+            "node2": {
+                "hostname": "router1",
+                "interfaceName": "eth2"
+            }
+        }
+    ]
+}
