@@ -3,83 +3,83 @@
 import argparse
 import docker
 import json
-import pprint
 import os
-
-#refresh/empty networks/containers
-os.system("docker stop $(docker ps -aq)")
-os.system("docker rm $(docker ps -aq)")
-os.system("docker system prune -f")
+import time
 
 def load_config(filepath):
+    '''Read JSON configuration'''
+    topology = os.path.basename(filepath).split('.')[0]
     with open(filepath, 'r') as config_file:
         config_json = json.load(config_file)
-    pp = pprint.PrettyPrinter()
-    pp.pprint(config_json)
-    return config_json
+    return topology, config_json
 
-def launch_containers(config):
-    client = docker.from_env()
-    for key, value in config.items():
-        config_list = value
-    #config_list is a list
-    #each item in config list is a dict with key=node, value = router + bridge
-    #create a list of routers: router_list
-    router_list_bridge_dict = parsing(config_list)
-    router_list = router_list_bridge_dict[0]
-    bridge_dict = router_list_bridge_dict[1]
-    # for each router in router list, create a container
-    container_create(router_list,client)
-    #create bridges and link containers
-    network_create(bridge_dict,client)
-    #list all neworks
-    #list all containers
-    print("ALL NETWORKS")
-    os.system("docker network ls")
-    print("All CONTAINERS")
-    os.system("docker container ls -a")
+def launch_topology(topology, router_list, bridge_dict, client):
+    '''Launch containers and bridges'''
+    container_create(router_list, client, topology)
+    network_create(bridge_dict, client)
+
+    #list all neworks and containers
+    #print("All CONTAINERS")
+    #for container in client.containers.list(all=True):
+    #    print(container.name, container.status)
+    #print("ALL NETWORKS")
+    #for network in client.networks.list():
+    #    print(network.name, network.containers)
 
 def network_create(bridge_dict,client):
+    '''Create bridges and add containers to the bridge'''
     # for each bridge
     for bridge, cor_routers in bridge_dict.items():
         #create the bridge
+        print("Creating %s" % bridge)
         current_network=client.networks.create (str(bridge),driver="bridge")
         #for each router in the bridge, assign that container to that bridge
         for s_router in cor_routers:
+            print("Connecting %s to %s" % (s_router, bridge))
             current_container = client.containers.get(s_router)
             current_network.connect(current_container)
 
-def container_create(router_list,client):
+def container_create(router_list, client, topology):
+    client.images.pull('frrouting/frr')
     for router in router_list:
-        client.containers.run('frrouting/frr', detach=True, name=str(router))
+        print("Starting %s" % router)
+        client.containers.run('frrouting/frr', detach=True, name=str(router), labels=[topology])
 
-def parsing(config_list):
-    router_list=[]
+def parse_config(config):
+    '''Extract list of routers and bridges from config'''
+    router_list=set()
     #create a dict of bridges: bridge_dict
     #contains a keyvalue pair where key=bridge_name & value=[router1, router2] i.e. connecting routers
     bridge_dict={}
-    node_num = 1
-    for list_dict in config_list:
-        #three times
-        for key, host_inter in list_dict.items():
-            #two times
-            if host_inter['hostname'] not in router_list:
-                router_list.append(host_inter['hostname'])
-            if host_inter["interfaceName"] in bridge_dict:
-                if host_inter["hostname"] not in bridge_dict[host_inter["interfaceName"]]:
-                    bridge_dict[host_inter["interfaceName"]].append(host_inter['hostname'])
-            else: 
-                bridge_dict[host_inter["interfaceName"]]=list()
-                bridge_dict[host_inter["interfaceName"]].append(host_inter['hostname'])
+    for edge in config["edges"]:
+        for node in edge.values():
+            router_list.add(node['hostname'])
+            if node["interfaceName"] not in bridge_dict:
+                bridge_dict[node["interfaceName"]]=set()
+            bridge_dict[node["interfaceName"]].add(node['hostname'])
     return router_list, bridge_dict
+
+def cleanup_topology(topology, client):
+    for container in client.containers.list(filters={"label": topology}):
+        print("Cleaning up %s" % container.name)
+        container.stop()
+        container.remove()
+
+    print("Cleaning up networks")
+    client.networks.prune()
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     settings = parser.parse_args()
 
-    config = load_config(settings.config)
-    launch_containers(config)
+    topology, config = load_config(settings.config)
+    router_list, bridge_dict = parse_config(config)
+
+    client = docker.from_env()
+    cleanup_topology(topology, client)
+    launch_topology(topology, router_list, bridge_dict, client)
+    client.close()
 
 if __name__ == "__main__":
     main()
