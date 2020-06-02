@@ -3,31 +3,31 @@
         {
             "node1": {
                 "hostname": "router1",
-                "interfaceName": "eth1"
+                "interfaceName": "bridge1"
             },
             "node2": {
                 "hostname": "router2",
-                "interfaceName": "eth1"
+                "interfaceName": "bridge1"
             }
         },
         {
             "node1": {
                 "hostname": "router2",
-                "interfaceName": "eth2"
+                "interfaceName": "bridge2"
             },
             "node2": {
                 "hostname": "router3",
-                "interfaceName": "eth1"
+                "interfaceName": "bridge2"
             }
         },
         {
             "node1": {
                 "hostname": "router3",
-                "interfaceName": "eth2"
+                "interfaceName": "bridge3"
             },
             "node2": {
                 "hostname": "router1",
-                "interfaceName": "eth2"
+                "interfaceName": "bridge3"
             }
         }
     ]
