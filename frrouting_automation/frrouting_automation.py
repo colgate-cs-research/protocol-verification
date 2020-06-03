@@ -2,9 +2,9 @@
 
 import argparse
 import docker
+import ipaddress
 import json
 import os
-import time
 
 def load_config(filepath):
     '''Read JSON configuration'''
@@ -28,11 +28,23 @@ def launch_topology(topology, router_list, bridge_dict, client):
 
 def network_create(bridge_dict,client):
     '''Create bridges and add containers to the bridge'''
+    # Determine IP subnets to use
+    n = len(bridge_dict)
+    n = 29 - n.bit_length()
+    supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
+    subnets = list(supernet.subnets(new_prefix=29))
+    print(subnets)
+
     # for each bridge
+    i = 0
     for bridge, cor_routers in bridge_dict.items():
+        # Determine network configuration for bridge
+        ipam_pool = docker.types.IPAMPool(subnet=str(subnets[i]))
+        i += 1
+        ipam_config = docker.types.IPAMConfig(pool_configs=[ipam_pool])
         #create the bridge
         print("Creating %s" % bridge)
-        current_network=client.networks.create (str(bridge),driver="bridge")
+        current_network=client.networks.create (str(bridge), driver='bridge', ipam=ipam_config)
         #for each router in the bridge, assign that container to that bridge
         for s_router in cor_routers:
             print("Connecting %s to %s" % (s_router, bridge))
