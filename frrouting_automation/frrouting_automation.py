@@ -40,10 +40,11 @@ def network_create(bridge_dict,client):
             current_network.connect(current_container)
 
 def container_create(router_list, client, topology):
+    '''Create and start a container for each router'''
     client.images.pull('frrouting/frr')
-    for router in router_list:
+    for router in sorted(router_list):
         print("Starting %s" % router)
-        client.containers.run('frrouting/frr', detach=True, name=str(router), labels=[topology])
+        client.containers.run('frrouting/frr', detach=True, name=str(router), labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
 
 def parse_config(config):
     '''Extract list of routers and bridges from config'''
@@ -60,6 +61,7 @@ def parse_config(config):
     return router_list, bridge_dict
 
 def cleanup_topology(topology, client):
+    '''Stop and remove existing containers and bridges'''
     for container in client.containers.list(filters={"label": topology}):
         print("Cleaning up %s" % container.name)
         container.stop()
@@ -71,14 +73,23 @@ def cleanup_topology(topology, client):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
+    parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
     settings = parser.parse_args()
 
+    # Load and parse configuration
     topology, config = load_config(settings.config)
     router_list, bridge_dict = parse_config(config)
 
     client = docker.from_env()
-    cleanup_topology(topology, client)
-    launch_topology(topology, router_list, bridge_dict, client)
+    # Stop old instance
+    if (settings.action in ['stop', 'restart']):
+        cleanup_topology(topology, client)
+    # Start new instance
+    if (settings.action in ['start', 'restart']):
+        if client.containers.list(filters={"label": topology}):
+            print("ERROR: %s is already running; stop or restart the topology" % topology)
+        else:
+            launch_topology(topology, router_list, bridge_dict, client)
     client.close()
 
 if __name__ == "__main__":
