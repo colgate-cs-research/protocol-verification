@@ -48,8 +48,7 @@ def network_create(bridge_dict,client):
         #for each router in the bridge, assign that container to that bridge
         for s_router in cor_routers:
             print("Connecting %s to %s" % (s_router, bridge))
-            current_container = client.containers.get(s_router)
-            current_network.connect(current_container)
+            current_network.connect(client.containers.get(s_router))
 
 def container_create(router_list, client, topology):
     '''Create and start a container for each router'''
