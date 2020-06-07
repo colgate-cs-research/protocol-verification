@@ -29,7 +29,6 @@ def ospf_config(router_list, client, topology):
             #for each router in all routers
         #Copy contents of a sample daemons file into this location in a router: ROUTERNAME:/etc/frr/daemons
         #Copy contents of a sample config file into this location in a router: ROUTERNAME:/etc/frr/ospfd.conf
-    
     #for each router in all routers
         #restart router  (docker exec -it router1 /usr/lib/frr/frrinit.sh restart)
     for container in client.containers.list(filters={"label": topology}):
