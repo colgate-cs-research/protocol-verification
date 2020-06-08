@@ -91,7 +91,7 @@ def network_create(bridge_dict,client,router_class_list):
                         id_num+=1
         as_num += 1
     #config routers
-    ospf_config(router_class_list, link_class_list,client)
+    bgp_config(router_class_list, link_class_list,client)
 
 
                     
