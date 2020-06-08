@@ -33,8 +33,12 @@ def network_create(bridge_dict,client):
     supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
     subnets = list(supernet.subnets(new_prefix=29))
     print(subnets)
-
-
+    
+    #first two addrs reserved
+    #0 1
+    #8 9
+    #16 17
+    #link and router dictionaries
     # for each bridge
     i = 0
     for bridge, cor_routers in bridge_dict.items():
@@ -49,6 +53,34 @@ def network_create(bridge_dict,client):
         for s_router in cor_routers:
             print("Connecting %s to %s" % (s_router, bridge))
             current_network.connect(client.containers.get(s_router))
+
+class Link:
+    def __init__(self, name, subnet):
+        self.name = name
+        self.routers = []
+        self.subnet = subnet
+
+    def add_router(router):
+        self.routers.append(router)
+
+    def get_routers():
+        return self.routers
+
+    def get_subnet():
+        return self.subnets
+
+    def get_address(router):
+        if router not in self.routers:
+            return None
+        return self.subnet.hosts()[self.routers.index(router)]
+
+class Router:
+    def __init__(self, name):
+        self.name = name
+        self.links = []
+
+    def add_link(link):
+        self.links.append(link)
 
 def container_create(router_list, client, topology):
     '''Create and start a container for each router'''
