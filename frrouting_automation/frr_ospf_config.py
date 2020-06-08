@@ -23,6 +23,7 @@ def ospf_config(router):
     #configurate current router
     os.system("docker cp configs/ospf_daemons " + router +":/etc/frr/daemons")
     os.system("docker cp configs/ospfd.conf " + router +":/etc/frr/ospfd.conf")
+    #os.system("docker exec -it " + router + " touch /var/log/output.log")
 
 
 def network_create(bridge_dict,client):
@@ -61,6 +62,10 @@ def container_create(router_list, client, topology):
         ospf_config(router)
         print("Starting %s" % router)
         current_router = client.containers.get(router)
+        current_router.start()
+        os.system("docker exec -it " + router + " touch /var/log/output.log")
+        #os.system("docker exec -it " + router + " chmod 777 /var/log/output.log")
+        current_router.stop()
         current_router.start()
 
 def parse_config(config):
