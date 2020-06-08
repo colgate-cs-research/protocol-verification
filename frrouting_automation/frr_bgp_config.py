@@ -21,6 +21,8 @@ def launch_topology(topology, router_list, bridge_dict, client):
 
 def ospf_config(router):
     #configurate current router
+    #os.system("touch ")
+    os.system("docker cp configs/empty.log " + router +":/var/log/output.log")
     os.system("docker cp configs/ospf_daemons " + router +":/etc/frr/daemons")
     os.system("docker cp configs/ospfd.conf " + router +":/etc/frr/ospfd.conf")
 
@@ -94,6 +96,8 @@ def container_create(router_list, client, topology):
         print("Starting %s" % router)
         current_router = client.containers.get(router)
         current_router.start()
+        os.system("docker exec -it " + router + " touch /var/log/output.log")
+        
 
 def parse_config(config):
     '''Extract list of routers and bridges from config'''
