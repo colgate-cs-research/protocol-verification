@@ -157,6 +157,8 @@ def container_create(router_list, client, topology):
         router_class_list.append(current_router)
     return router_class_list
 
+        
+
 def parse_config(config):
     '''Extract list of routers and bridges from config'''
     router_list=set()
