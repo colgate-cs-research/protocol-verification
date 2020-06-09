@@ -1,4 +1,23 @@
 {
+
+    "protocols":[
+        {
+            "protocol1": {
+                "router": "router1",
+                "protocol": ["bgp","ospf"]
+            },
+            "protocol2": {
+                "router": "router2",
+                "protocol": ["ospf"]
+            },
+            "protocol3": {
+                "router": "router3",
+                "protocol": ["bgp"]
+            }
+
+        }
+
+    ],
     "edges": [
         {
             "node1": {
