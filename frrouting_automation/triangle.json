@@ -4,11 +4,11 @@
         {
             "protocol1": {
                 "router": "router1",
-                "protocol": ["bgp","ospf"]
+                "protocol": ["bgp"]
             },
             "protocol2": {
                 "router": "router2",
-                "protocol": ["ospf"]
+                "protocol": ["bgp"]
             },
             "protocol3": {
                 "router": "router3",

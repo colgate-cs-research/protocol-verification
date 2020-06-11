@@ -15,7 +15,7 @@ router bgp as_num
  !router network ad bridge
  network ad_bridge
 
-!neighbour config
+ !neighbour config
 
 log file bgpd.log
 !

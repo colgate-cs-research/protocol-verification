@@ -20,8 +20,9 @@ def load_config(filepath):
 def launch_topology(topology, router_list, bridge_dict, client,protocol_dict):
     '''Launch containers and bridges'''
     router_class_list = container_create(router_list, client, topology)
-    network_create(bridge_dict, client,router_class_list, protocol_dict)
-
+    link_class_list = network_create(bridge_dict, client,router_class_list, protocol_dict)
+    #config routers
+    config(router_class_list, link_class_list,client,protocol_dict)
 
 def network_create(bridge_dict,client,router_class_list,protocol_dict):
     '''Create bridges and add containers to the bridge'''
@@ -31,7 +32,7 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
     supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
     subnets = list(supernet.subnets(new_prefix=29))
     print(subnets)
-    static_id_num = ipaddress.IPv4Address('10.10.0.2')
+    static_id_num = ipaddress.IPv4Address('10.0.0.1')
     i = 0
     #create list of links
     link_class_list = []
@@ -45,7 +46,6 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
             id_num = static_id_num+8
         # Determine network configuration for bridge
         ipam_pool = docker.types.IPAMPool(subnet=str(subnets[i]))
-        i += 1
         ipam_config = docker.types.IPAMConfig(pool_configs=[ipam_pool])
         #create the bridge
         print("Creating %s" % bridge)
@@ -53,7 +53,8 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
         #for each router in the bridge, assign that container to that bridge
         current_link = Link(bridge,subnets[i])
         link_class_list.append(current_link)
-        for s_router in cor_routers:
+        i += 1
+        for s_router in sorted(cor_routers):
             print("Connecting %s to %s" % (s_router, bridge))
             current_network.connect(client.containers.get(s_router))
             #two direction connect link class and router class
@@ -62,14 +63,13 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
                     router_object.add_link(current_link)
                     current_link.add_router(router_object)
                     # assign as number to router object
-                    as_suc = router_object.add_as_num(as_num)
-                    if as_suc == 1:
+                    if router_object.as_num == None:
+                        router_object.add_as_num(as_num)
                         as_num += 1
                     if router_object.id_num == None:
                         router_object.add_id_num(id_num)
                         id_num+=1
-    #config routers
-    config(router_class_list, link_class_list,client,protocol_dict)
+    return link_class_list
 
 def container_create(router_list, client, topology):
     '''Create and start a container for each router'''
@@ -120,7 +120,7 @@ def bgp_config(router_object, pro_num):
     for link_bridge in router_object.links:
         for linked_router in link_bridge.routers:
             if linked_router.name != router_object.name:
-                filedata=filedata.replace('!neighbour config', 'neighbor '+str(linked_router.id_num)+' remote-as '+str(linked_router.as_num)+'\n!neighbour config')
+                filedata=filedata.replace('!neighbour config', 'neighbor '+str(link_bridge.get_address(linked_router))+' remote-as '+str(linked_router.as_num)+'\n !neighbour config')
     with open('configs/bgpd.conf', 'w') as file:
         file.write(filedata)
     #modifying daemons files
@@ -179,7 +179,7 @@ class Link:
     def get_address(self, router):
         if router not in self.routers:
             return None
-        return self.subnet.hosts()[self.routers.index(router)]
+        return list(self.subnet.hosts())[self.routers.index(router)+1]
 
 class Router:
     def __init__(self, name, ad_bridge):
@@ -195,9 +195,7 @@ class Router:
     def add_as_num(self, as_num):
         if self.as_num == None:
             self.as_num = as_num
-            return 1
-        else:
-            return 0
+
     def add_id_num (self, id_num):
         if self.id_num == None:
             self.id_num = id_num
