@@ -8,8 +8,6 @@ import os
 import fileinput
 
 
-
-
 def load_config(filepath):
     '''Read JSON configuration'''
     topology = os.path.basename(filepath).split('.')[0]
@@ -36,7 +34,6 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
     i = 0
     #create list of links
     link_class_list = []
-    as_num = 1
     loop_count = 0
     for bridge, cor_routers in bridge_dict.items():
         if loop_count == 0:
@@ -54,22 +51,27 @@ def network_create(bridge_dict,client,router_class_list,protocol_dict):
         current_link = Link(bridge,subnets[i])
         link_class_list.append(current_link)
         i += 1
-        for s_router in sorted(cor_routers):
-            print("Connecting %s to %s" % (s_router, bridge))
-            current_network.connect(client.containers.get(s_router))
-            #two direction connect link class and router class
-            for router_object in router_class_list:
-                if (router_object.name == s_router):
-                    router_object.add_link(current_link)
-                    current_link.add_router(router_object)
-                    # assign as number to router object
-                    if router_object.as_num == None:
-                        router_object.add_as_num(as_num)
-                        as_num += 1
-                    if router_object.id_num == None:
-                        router_object.add_id_num(id_num)
-                        id_num+=1
+        link_router_connect(cor_routers, bridge, current_network, router_class_list, current_link, id_num, client)
     return link_class_list
+
+def link_router_connect(cor_routers, bridge, current_network, router_class_list, current_link, id_num, client):
+    as_num = 1
+    for s_router in sorted(cor_routers):
+        print("Connecting %s to %s" % (s_router, bridge))
+        current_network.connect(client.containers.get(s_router))
+        #two direction connect link class and router class
+        for router_object in router_class_list:
+            if (router_object.name == s_router):
+                router_object.add_link(current_link)
+                current_link.add_router(router_object)
+                # assign as number to router object
+                if router_object.as_num == None:
+                    router_object.add_as_num(as_num)
+                    as_num += 1
+                if router_object.id_num == None:
+                    router_object.add_id_num(id_num)
+                    id_num+=1
+
 
 def container_create(router_list, client, topology):
     '''Create and start a container for each router'''
@@ -222,10 +224,11 @@ def parse_config(config):
 def cleanup_topology(topology, client):
     '''Stop and remove existing containers and bridges'''
     for container in client.containers.list(filters={"label": topology}):
-        print("Cleaning up %s" % container.name)
+        print("Cleaning up running container %s" % container.name)
         container.stop()
         container.remove()
-
+    print("Cleaning up all unused containers")  
+    client.containers.prune()
     print("Cleaning up networks")
     client.networks.prune()
 
