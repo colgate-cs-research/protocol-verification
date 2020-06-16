@@ -114,7 +114,7 @@ def config(router_class_list, link_class_list, client,protocol_dict):
 def bgp_config(router_object, pro_num):
     print("Configuring BGP for "+router_object.name)
     #find all neighbors
-    with open('configs/bgpd.conf_temp.txt', 'r') as file:
+    with open('configs/bgpd.conf_temp', 'r') as file:
         filedata = file.read()
     filedata=filedata.replace('as_num',str(router_object.as_num))
     filedata=filedata.replace('id_num',str(router_object.id_num))

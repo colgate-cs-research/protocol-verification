@@ -8,7 +8,7 @@
             },
             "protocol2": {
                 "router": "router2",
-                "protocol": ["bgp"]
+                "protocol": ["bgp","ospf"]
             },
             "protocol3": {
                 "router": "router3",
