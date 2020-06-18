@@ -1,0 +1,30 @@
+{
+    "routers":[
+        {
+            "name": "router1",
+            "protocols": ["bgp"]
+        },
+        {
+            "name": "router2",
+            "protocols": ["bgp"]
+        },
+        {
+            "name": "router3",
+            "protocols": ["bgp"]
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["router1", "router2"]
+        },
+        {
+            "name": "bridge2",
+            "routers": ["router2", "router3"]
+        },
+        {
+            "name": "bridge3",
+            "routers": ["router3", "router1"]
+        }
+    ]
+}

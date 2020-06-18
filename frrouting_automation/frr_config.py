@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import bisect
 import docker
 import ipaddress
 import json
@@ -15,153 +16,107 @@ def load_config(filepath):
         config_json = json.load(config_file)
     return topology, config_json
 
-def launch_topology(topology, router_list, bridge_dict, client,protocol_dict):
+def launch_topology(topology, routers, links, client):
     '''Launch containers and bridges'''
-    router_class_list = container_create(router_list, client, topology)
-    link_class_list = network_create(bridge_dict, client,router_class_list, protocol_dict)
-    #config routers
-    config(router_class_list, link_class_list,client,protocol_dict)
+    create_containers(routers, client, topology)
+    create_networks(links, client)
+    config_routers(routers, client)
 
-def network_create(bridge_dict,client,router_class_list,protocol_dict):
+def create_networks(links, client):
     '''Create bridges and add containers to the bridge'''
-    # Determine IP subnets to use
-    n = len(bridge_dict)
-    n = 29 - n.bit_length()
-    supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
-    subnets = list(supernet.subnets(new_prefix=29))
-    print(subnets)
-    static_id_num = ipaddress.IPv4Address('10.0.0.1')
-    i = 0
-    #create list of links
-    link_class_list = []
-    loop_count = 0
-    for bridge, cor_routers in bridge_dict.items():
-        if loop_count == 0:
-            loop_count += 1
-            id_num = static_id_num
-        else:
-            id_num = static_id_num+8
+    for link_name in sorted(links.keys()):
+        link = links[link_name]
+
         # Determine network configuration for bridge
-        ipam_pool = docker.types.IPAMPool(subnet=str(subnets[i]))
+        ipam_pool = docker.types.IPAMPool(subnet=str(link.subnet))
         ipam_config = docker.types.IPAMConfig(pool_configs=[ipam_pool])
-        #create the bridge
-        print("Creating %s" % bridge)
-        current_network=client.networks.create (str(bridge), driver='bridge', ipam=ipam_config)
-        #for each router in the bridge, assign that container to that bridge
-        current_link = Link(bridge,subnets[i])
-        link_class_list.append(current_link)
-        i += 1
-        link_router_connect(cor_routers, bridge, current_network, router_class_list, current_link, id_num, client)
-    return link_class_list
 
-def link_router_connect(cor_routers, bridge, current_network, router_class_list, current_link, id_num, client):
-    as_num = 1
-    for s_router in sorted(cor_routers):
-        print("Connecting %s to %s" % (s_router, bridge))
-        current_network.connect(client.containers.get(s_router))
-        #two direction connect link class and router class
-        for router_object in router_class_list:
-            if (router_object.name == s_router):
-                router_object.add_link(current_link)
-                current_link.add_router(router_object)
-                # assign as number to router object
-                if router_object.as_num == None:
-                    router_object.add_as_num(as_num)
-                    as_num += 1
-                if router_object.id_num == None:
-                    router_object.add_id_num(id_num)
-                    id_num+=1
+        # Create the bridge
+        print("Creating %s" % link.name)
+        current_network = client.networks.create(link.name, driver='bridge', 
+                ipam=ipam_config)
 
+        # For each router in the bridge, assign that container to that bridge
+        for router in link.routers:
+            print("Connecting %s to %s" % (router.name, link.name))
+            current_network.connect(client.containers.get(router.name))
 
-def container_create(router_list, client, topology):
-    '''Create and start a container for each router'''
+def create_containers(routers, client, topology):
+    '''Create a container for each router'''
     client.images.pull('frrouting/frr')
-    #create a list of router class objects
-    router_class_list = []
-    #range of addresses for router class objects
-    n = len(router_list)
-    n = 29 - n.bit_length()
-    supernet = ipaddress.IPv4Network('10.20.0.0/%d' % n)
-    subnets = list(supernet.subnets(new_prefix=29))
-    print(subnets)
-    i = 0
-    #create router containers
-    for router in sorted(router_list):
-        print("Creating %s" % router)
-        client.containers.create('frrouting/frr', detach=True, name=str(router), labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
-        #create router class objects
-        current_router = Router(router,subnets[i])
-        i+=1
-        #append to router_class_list
-        router_class_list.append(current_router)
-    return router_class_list
+    images = set()
 
-def config(router_class_list, link_class_list, client,protocol_dict):
-    for router_object in router_class_list:
-        pro_num = 0
-        for i in range(len(protocol_dict[router_object.name])):
-            #configuring routers with BGP
-            if protocol_dict[router_object.name][i] == "bgp":
-                pro_num = bgp_config(router_object, pro_num)
-            #configuring routers with OSPF
-            elif protocol_dict[router_object.name][i] == "ospf":
-                pro_num = ospf_config(router_object, pro_num)
+    for router_name in sorted(routers.keys()):
+        router = routers[router_name]
+        print("Creating %s" % router.name)
+        if router.image not in images:
+            client.images.pull(router.image)
+            images.add(router.image)
+        client.containers.create(router.image, detach=True, name=router.name, 
+                labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
 
-        print("Starting %s" % router_object.name)
-        current_router = client.containers.get(router_object.name)
-        current_router.start()
+def config_routers(routers, client):
+    for router_name in sorted(routers.keys()):
+        router = routers[router_name]
+        config_daemons(router)
 
-def bgp_config(router_object, pro_num):
-    print("Configuring BGP for "+router_object.name)
-    #find all neighbors
+        if "bgp" in router.protocols:
+            config_bgp(router)
+        if "ospf" in router.protocols:
+            config_ospf(router)
+
+        print("Starting %s" % router.name)
+        container = client.containers.get(router.name)
+        container.start()
+
+def config_daemons(router):
+    '''Configure daemons'''
+    # Load template
+    with open('configs/daemons_temp', 'r') as file:
+        template = file.read()
+
+    # Fill-in template
+    for protocol in router.protocols:
+        template = template.replace(protocol+'d=no', protocol+'d=yes')
+
+    # Put configuration on router
+    with open('/tmp/daemons', 'w') as file:
+        file.write(template)
+    os.system("docker cp /tmp/daemons " + router.name +":/etc/frr/daemons")
+
+def config_bgp(router):
+    print("Configuring BGP for "+router.name)
+
+    # Load configuration template
     with open('configs/bgpd.conf_temp', 'r') as file:
-        filedata = file.read()
-    filedata=filedata.replace('as_num',str(router_object.as_num))
-    filedata=filedata.replace('id_num',str(router_object.id_num))
-    filedata=filedata.replace('ad_bridge',str(router_object.ad_bridge))
-    for link_bridge in router_object.links:
-        for linked_router in link_bridge.routers:
-            if linked_router.name != router_object.name:
-                filedata=filedata.replace('!neighbour config', 'neighbor '+str(link_bridge.get_address(linked_router))+' remote-as '+str(linked_router.as_num)+'\n !neighbour config')
-    with open('configs/bgpd.conf', 'w') as file:
-        file.write(filedata)
-    #modifying daemons files
-    if pro_num == 0:
-        with open('configs/daemons_temp', 'r') as file:
-            filedata = file.read()
-        filedata=filedata.replace('bgpd=no','bgpd=yes')
-        with open('configs/daemons', 'w') as file:
-            file.write(filedata)
-        pro_num = 1
-    else:
-        with open('configs/daemons', 'r') as file:
-            filedata = file.read()
-        filedata=filedata.replace('bgpd=no','bgpd=yes')
-        with open('configs/daemons', 'w') as file:
-            file.write(filedata)
-    os.system("docker cp configs/daemons " + router_object.name +":/etc/frr/daemons")
-    os.system("docker cp configs/bgpd.conf " + router_object.name +":/etc/frr/bgpd.conf")
-    return pro_num
+        template = file.read()
 
-def ospf_config(router_object, pro_num):
-    print("Configuring OSPF for "+router_object.name)
-    if pro_num ==0:
-        with open('configs/daemons_temp', 'r') as file:
-            filedata = file.read()
-        filedata=filedata.replace('ospfd=no','ospfd=yes')
-        with open('configs/daemons', 'w') as file:
-            file.write(filedata)
-        pro_num = 1
-    else:
-        with open('configs/daemons', 'r') as file:
-            filedata = file.read()
-        filedata=filedata.replace('ospfd=no','ospfd=yes')
-        with open('configs/daemons', 'w') as file:
-            file.write(filedata)
-    os.system("docker cp configs/daemons " + router_object.name +":/etc/frr/daemons")
-    os.system("docker cp configs/ospfd.conf " + router_object.name +":/etc/frr/ospfd.conf")
-    return pro_num
+    # Fill-in holes in template
+    template = template.replace('<as_num>',str(router.as_num))
+    template = template.replace('<id_num>',str(router.id_num))
+    template = template.replace('<ad_bridge>',str(router.ad_bridge))
 
+    # TODO: support networks
+    networks = ""
+    template = template.replace(' <networks>\n', networks)
+
+    # Determine neighbors
+    neighbors = ""
+    for link in router.links:
+        for linked_router in link.routers:
+            if linked_router != router and "bgp" in linked_router.protocols:
+                neighbors += ' neighbor '+str(link.get_address(linked_router))+' remote-as '+str(linked_router.as_num)+'\n'
+    template = template.replace(' <neighbours>\n', neighbors)
+
+    # Put configuration on router
+    with open('/tmp/bgpd.conf', 'w') as file:
+        file.write(template)
+    os.system("docker cp /tmp/bgpd.conf " + router.name +":/etc/frr/bgpd.conf")
+
+def config_ospf(router):
+    # Put configuration on router
+    print("Configuring OSPF for "+router.name)
+    os.system("docker cp configs/ospfd.conf " + router.name +":/etc/frr/ospfd.conf")
 
 class Link:
     def __init__(self, name, subnet):
@@ -169,8 +124,15 @@ class Link:
         self.routers = []
         self.subnet = subnet
 
+    @classmethod
+    def from_config(self, config, subnet):
+        link = Link(config["name"], subnet) 
+        return link
+
     def add_router(self, router):
-        self.routers.append(router)
+        # Routers must be inserted in lexicographic order, because routers are
+        # started in lexicographic order
+        bisect.insort(self.routers, router)
 
     def get_routers():
         return self.routers
@@ -183,43 +145,91 @@ class Link:
             return None
         return list(self.subnet.hosts())[self.routers.index(router)+1]
 
+    def __str__(self):
+        return "Link<%s,%s,[%s]>" % (self.name, self.subnet, 
+                ','.join([r.name for r in self.routers]))
+
 class Router:
-    def __init__(self, name, ad_bridge):
+    def __init__(self, name, as_num):
         self.name = name
+        self.image = 'frrouting/frr'
         self.links = []
-        self.as_num = None
-        self.ad_bridge = ad_bridge
+        self.protocols = set()
+        self.as_num = as_num
+        self.ad_bridge = None
         self.id_num = None
 
-    def add_link(self, link):
-        self.links.append(link)
-    
-    def add_as_num(self, as_num):
-        if self.as_num == None:
-            self.as_num = as_num
+    @classmethod
+    def from_config(self, config, as_num):
+        router = Router(config["name"], as_num) 
+        if "protocols" in config:
+            for protocol in config["protocols"]:
+                router.add_protocol(protocol)
+        if "image" in config:
+            self.image = config["image"]
+        return router
 
-    def add_id_num (self, id_num):
-        if self.id_num == None:
-            self.id_num = id_num
-    
+    def add_link(self, link):
+        if self.id_num is None:
+            self.id_num = link.get_address(self)
+        self.links.append(link)
+
+    def add_protocol(self, protocol):
+        if protocol not in ["bgp", "ospf"]:
+            raise ConfigurationError("Invalid protocol: %s" % protocol)
+        self.protocols.add(protocol)
+
+    def __lt__(self, other):
+        return self.name < other.name
+
+class ConfigurationError(Exception):
+    pass    
 
 def parse_config(config):
-    '''Extract list of routers and bridges from config'''
-    router_list=set()
-    #create a dict of bridges: bridge_dict
-    #contains a keyvalue pair where key=bridge_name & value=[router1, router2] i.e. connecting routers
-    bridge_dict={}
-    protocol_dict ={}
-    for protocol in config["protocols"]:
-        for pro in protocol.values():
-            protocol_dict[pro["router"]] = (pro["protocol"])
-    for edge in config["edges"]:
-        for node in edge.values():
-            router_list.add(node['hostname'])
-            if node["interfaceName"] not in bridge_dict:
-                bridge_dict[node["interfaceName"]]=set()
-            bridge_dict[node["interfaceName"]].add(node['hostname'])
-    return router_list, bridge_dict, protocol_dict
+    '''Extract list of routers and links from config'''
+
+    # Create router objects
+    as_nums = (n for n in range(1,len(config["routers"])+1))
+    routers = {}
+    for router_config in config["routers"]:
+        # Use specified or auto-generated ASN
+        if "as_num" in router_config:
+            as_num = router_config["as_num"]
+        else:
+            as_num = next(as_nums)
+        
+        # Create router
+        router = Router.from_config(router_config, as_num)
+        routers[router.name] = router
+
+    # Determine IP subnets to use
+    n = len(config["links"])
+    n = 29 - n.bit_length()
+    supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
+    subnets = supernet.subnets(new_prefix=29)
+    
+    # Create link objects
+    links = {}
+    for link_config in config["links"]:
+        # Use specified or auto-generated subnet
+        if "subnet" in link_config:
+            subnet = link_config["subnet"]
+        else:
+            subnet = next(subnets)
+
+        # Create link
+        link = Link.from_config(link_config, subnet)
+        links[link.name] = link
+
+        # Add routers to link
+        for router_name in link_config["routers"]:
+            if router_name not in routers:
+                raise ConfigurationError("No such node: %s" % router_name) 
+            router = routers[router_name]
+            link.add_router(router)
+            router.add_link(link)
+        print(link)
+    return routers, links
 
 def cleanup_topology(topology, client):
     '''Stop and remove existing containers and bridges'''
@@ -240,7 +250,7 @@ def main():
 
     # Load and parse configuration
     topology, config = load_config(settings.config)
-    router_list, bridge_dict, protocol_dict = parse_config(config)
+    routers, links = parse_config(config)
 
     client = docker.from_env()
     # Stop old instance
@@ -251,7 +261,7 @@ def main():
         if client.containers.list(filters={"label": topology}):
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
-            launch_topology(topology, router_list, bridge_dict, client,protocol_dict)
+            launch_topology(topology, routers, links, client)
     client.close()
 
 if __name__ == "__main__":

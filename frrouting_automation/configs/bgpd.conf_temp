@@ -8,15 +8,12 @@ hostname bgpd
 password zebra
 enable password zebra
 
-!router as num
-router bgp as_num
- !router id num
- bgp router-id id_num
- !router network ad bridge
- network ad_bridge
-
- !neighbour config
-
+router bgp <as_num>
+ bgp router-id <id_num>
+ no bgp ebgp-requires-policy
+ <networks>
+ <neighbours>
+!
 log file /tmp/bgp.log debugging
 debug bgp keepalives
 debug bgp neighbor-events
