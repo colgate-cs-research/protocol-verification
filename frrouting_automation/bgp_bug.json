@@ -1,42 +1,23 @@
 {
-
-    "protocols":[
+    "routers":[
         {
-            "protocol1": {
-                "router": "router1",
-                "protocol": ["bgp"]
-            },
-            "protocol2": {
-                "router": "router2",
-                "protocol": ["bgp"]
-            },
-            "protocol3": {
-                "router": "router3",
-                "protocol": ["bgp"]
-            }
-        }
-
-    ],
-    "edges": [
-        {
-            "node1": {
-                "hostname": "router1",
-                "interfaceName": "bridge1"
-            },
-            "node2": {
-                "hostname": "router2",
-                "interfaceName": "bridge1"
-            }
+            "name": "router1",
+            "protocols": ["bgp"]
         },
         {
-            "node1": {
-                "hostname": "router2",
-                "interfaceName": "bridge2"
-            },
-            "node2": {
-                "hostname": "router3",
-                "interfaceName": "bridge2"
-            }
+            "name": "router2",
+            "protocols": ["bgp"]
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["router1", "router2"]
+        },
+        {
+            "name": "bridge2",
+            "routers": ["router2"],
+            "subnet": "10.20.2.0/24"
         }
     ]
 }
