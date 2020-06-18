@@ -3,7 +3,7 @@
 ! OSPFd sample configuration file
 !
 !
-hostname ospfd
+hostname <router_name>
 password zebra
 enable password zebra
 !

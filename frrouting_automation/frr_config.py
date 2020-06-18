@@ -59,6 +59,7 @@ def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         config_daemons(router)
+        config_vtysh(router)
 
         if "bgp" in router.protocols:
             config_bgp(router)
@@ -84,6 +85,21 @@ def config_daemons(router):
         file.write(template)
     os.system("docker cp /tmp/daemons " + router.name +":/etc/frr/daemons")
 
+def config_vtysh(router):
+    '''Configure vtysh'''
+    # Load template
+    with open('configs/vtysh.conf_temp', 'r') as file:
+        template = file.read()
+
+    # Fill-in template
+    template = template.replace('<router_name>', router.name)
+
+    # Put configuration on router
+    with open('/tmp/vtysh.conf', 'w') as file:
+        file.write(template)
+    os.system("docker cp /tmp/vtysh.conf " + router.name +":/etc/frr/vtysh.conf")
+
+
 def config_bgp(router):
     print("Configuring BGP for "+router.name)
 
@@ -92,9 +108,9 @@ def config_bgp(router):
         template = file.read()
 
     # Fill-in holes in template
+    template = template.replace('<router_name>', router.name)
     template = template.replace('<as_num>',str(router.as_num))
     template = template.replace('<id_num>',str(router.id_num))
-    template = template.replace('<ad_bridge>',str(router.ad_bridge))
 
     # TODO: support networks
     networks = ""
@@ -114,9 +130,19 @@ def config_bgp(router):
     os.system("docker cp /tmp/bgpd.conf " + router.name +":/etc/frr/bgpd.conf")
 
 def config_ospf(router):
-    # Put configuration on router
     print("Configuring OSPF for "+router.name)
-    os.system("docker cp configs/ospfd.conf " + router.name +":/etc/frr/ospfd.conf")
+
+# Load configuration template
+    with open('configs/ospfd.conf_temp', 'r') as file:
+        template = file.read()
+
+    # Fill-in holes in template
+    template = template.replace('<router_name>', router.name)
+
+    # Put configuration on router
+    with open('/tmp/ospfd.conf', 'w') as file:
+            file.write(template)
+    os.system("docker cp /tmp/ospfd.conf " + router.name +":/etc/frr/ospfd.conf")
 
 class Link:
     def __init__(self, name, subnet):
@@ -228,7 +254,6 @@ def parse_config(config):
             router = routers[router_name]
             link.add_router(router)
             router.add_link(link)
-        print(link)
     return routers, links
 
 def cleanup_topology(topology, client):
