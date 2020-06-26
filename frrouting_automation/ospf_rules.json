@@ -1,0 +1,167 @@
+{
+    "OSPF rules":[
+        {
+            "Events":[
+                    {
+                        "Informational Setting Logged":[
+                            {
+                                "State(s)":["Waiting"],
+                                "Event":"WaitTimer",
+                                "New state":["DR Other","Backup","DR"]
+                            },
+                            {
+                                "State(s)":["DR Other","Backup","DR"],
+                                "Event":"NeighborChange",
+                                "New state":["DR Other","Backup","DR"]
+                            },
+                            {
+                                "State(s)":["Waiting"],
+                                "Event":"BackupSeen",
+                                "New state":["DR Other","Backup","DR"]
+
+                            },
+                            {
+                                "State(s)":["Down"],
+                                "Event":"InterfaceUP",
+                                "New state":["DR Other","Point-to-Point","Waiting"]
+                            },
+                            {
+                                "State(s)":["Down","Loopback","Waiting","Point-to-point","DR Other","Backup","DR"],
+                                "Event":"InterfaceDown",
+                                "New state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Loopback","Waiting","Point-to-point","DR Other","Backup","DR"],
+                                "Event":"LoopInd",
+                                "New state":["Loopback"]
+                            },
+                            {
+                                "State(s)":["Loopback"],
+                                "Event":"UnloopInd",
+                                "New state":["Down"]
+                            }
+                        ]
+                    },
+                    {   " Neighbor State Machine":[
+                            {
+                                "State(s)":["Down"],
+                                "Event":"Start",
+                                "New state":["Attempt"]
+                            },
+                            {
+                                "State(s)":["Attempt"],
+                                "Event":"HelloReceived",
+                                "New state":["Init"]
+                            },
+                            {
+                                "State(s)":["Down"],
+                                "Event":"HelloReceived",
+                                "New state":["Init"]
+                            },
+                            {
+                                "State(s)":["Init"],
+                                "Event":"HelloReceived",
+                                "New state":["Init"]
+                            },
+                            {
+                                "State(s)":["Init"],
+                                "Event":"2-WayReceived",
+                                "New state":["2-Way","ExStart"]
+                            },
+                            {
+                                "State(s)":["ExStart"],
+                                "Event":"NegotiationDone",
+                                "New state":["Exchange"]
+                            },
+                            {
+                                "State(s)":["Exchange"],
+                                "Event":"ExchangeDone",
+                                "New state":["Full","Loading"]
+                            },
+                            {
+                                "State(s)":["Loading"],
+                                "Event":"Loading Done",
+                                "New state":["Full"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"AdjOK?",
+                                "New state":["2-Way","ExStart"]
+                            },
+                            {
+                                "State(s)":["ExStart"],
+                                "Event":"AdjOK?",
+                                "New state":["ExStart","2-Way"]
+                            },
+                            {
+                                "State(s)":["Exchange"],
+                                "Event":"SeqNumberMismatch",
+                                "New state":["ExStart"]
+                            },
+                            {
+                                "State(s)":["Exchange "],
+                                "Event":"BadLSReq",
+                                "New state":["ExStart"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"KillNbr",
+                                "New state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"LLDown",
+                                "New state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"InactivityTimer",
+                                "New state":["Down"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"1-WayReceived",
+                                "New state":["Init"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"2-WayReceived",
+                                "New state":["2-Way"]
+                            },
+                            {
+                                "State(s)":["Init"],
+                                "Event":"1-WayReceived",
+                                "New state":["Init"]
+                            }
+                        ]
+                    }
+            ],
+            "Packets":[
+                {
+                    "Hello":[
+                        {
+                            "Field": "network_mask",
+                            "Value": "incoming_interface.network_mask"
+                        },
+                        {
+                            "Field": "HelloInterval",
+                            "Value": "incoming_interface.HelloInterval"
+                        },
+                        {
+                            "Field": "RouterDeadInterval",
+                            "Value": "incoming_interface.RouterDeadInterval" 
+                        }
+                    ]
+                },
+                {
+                    "Database description":[
+                        {
+                            "Field": "Interface MTU",
+                            "Value": "interface.mtu"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
