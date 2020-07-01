@@ -111,8 +111,11 @@ def config_bgp(router):
     template = template.replace('<as_num>',str(router.as_num))
     template = template.replace('<id_num>',str(router.id_num))
 
-    # TODO: support networks
+    # Advertise bridges that only contain this router
     networks = ""
+    for link in router.links:
+        if len(link.routers) == 1:
+            networks += ' network '+str(link.subnet)+'\n'
     template = template.replace(' <networks>\n', networks)
 
     # Determine neighbors
@@ -120,7 +123,9 @@ def config_bgp(router):
     for link in router.links:
         for linked_router in link.routers:
             if linked_router != router and "bgp" in linked_router.protocols:
-                neighbors += ' neighbor '+str(link.get_address(linked_router))+' remote-as '+str(linked_router.as_num)+'\n'
+                peer = link.get_address(linked_router)
+                neighbors += ' neighbor %s remote-as %d\n' % (peer, linked_router.as_num)
+                neighbors += ' neighbor %s next-hop-self\n' % (peer)
     template = template.replace(' <neighbours>\n', neighbors)
 
     # Put configuration on router
