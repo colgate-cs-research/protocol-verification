@@ -1,0 +1,38 @@
+2020/06/29 22:09:00 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: Down (PacketReceived)
+2020/06/29 22:09:00 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: State change Down -> Init (PacketReceived)
+2020/06/29 22:09:00 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: Init (1-WayReceived)
+2020/06/29 22:09:03 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: Down (PacketReceived)
+2020/06/29 22:09:03 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: State change Down -> Init (PacketReceived)
+2020/06/29 22:09:03 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: Init (1-WayReceived)
+2020/06/29 22:09:10 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: Init (PacketReceived)
+2020/06/29 22:09:10 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: Init (2-WayReceived)
+2020/06/29 22:09:10 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: State change Init -> 2-Way (2-WayReceived)
+2020/06/29 22:09:13 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: Init (PacketReceived)
+2020/06/29 22:09:13 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: Init (2-WayReceived)
+2020/06/29 22:09:13 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: State change Init -> 2-Way (2-WayReceived)
+2020/06/29 22:09:20 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: 2-Way (PacketReceived)
+2020/06/29 22:09:20 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: 2-Way (2-WayReceived)
+2020/06/29 22:09:23 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: 2-Way (PacketReceived)
+2020/06/29 22:09:23 OSPF: NSM[eth2:10.10.0.18:172.17.0.4:default]: 2-Way (2-WayReceived)
+2020/06/29 22:09:30 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: 2-Way (PacketReceived)
+2020/06/29 22:09:30 OSPF: NSM[eth1:10.10.0.2:172.17.0.3:default]: 2-Way (2-WayReceived)
+2020/06/30 05:10:33 OSPF: ISM[eth1:10.10.0.2]: Timer (Hello timer expire)
+2020/06/30 05:10:33 OSPF: ISM[eth2:10.10.0.18]: Timer (Hello timer expire)
+/ # cat /tmp/ospf.log 
+2020/06/30 05:10:33 OSPF: ISM[eth1:10.10.0.2]: Down (InterfaceUp)
+2020/06/30 05:10:33 OSPF: ISM[eth1:10.10.0.2]: State change Down -> Waiting
+2020/06/30 05:10:33 OSPF: ISM[eth2:10.10.0.18]: Down (InterfaceUp)
+/ # cat /tmp/ospf.log 
+2020/06/30 05:11:56 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/30 05:11:56 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/30 05:12:01 OSPF: ospf_recv_packet: fd 15(default) on interface 1762(eth1)
+2020/06/30 05:12:01 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/30 05:12:01 OSPF:  src [10.10.0.3],
+2020/06/30 05:12:01 OSPF:  dst [224.0.0.5]
+/ # cat /tmp/ospf.log 
+2020/06/30 05:11:56 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/30 05:11:56 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/30 05:12:01 OSPF: ospf_recv_packet: fd 15(default) on interface 1762(eth1)
+2020/06/30 05:12:01 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/30 05:12:01 OSPF:  src [10.10.0.3],
+2020/06/30 05:12:01 OSPF:  dst [224.0.0.5]

@@ -33,8 +33,7 @@ def create_networks(links, client):
 
         # Create the bridge
         print("Creating %s" % link.name)
-        current_network = client.networks.create(link.name, driver='bridge', 
-                ipam=ipam_config)
+        current_network = client.networks.create(link.name, driver='bridge', ipam=ipam_config)
 
         # For each router in the bridge, assign that container to that bridge
         for router in link.routers:
@@ -43,7 +42,7 @@ def create_networks(links, client):
 
 def create_containers(routers, client, topology):
     '''Create a container for each router'''
-    client.images.pull('frrouting/frr')
+    client.images.pull('colgatenetresearch/frr:version-6.0')
     images = set()
 
     for router_name in sorted(routers.keys()):

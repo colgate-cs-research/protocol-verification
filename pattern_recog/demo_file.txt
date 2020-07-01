@@ -1,0 +1,464 @@
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface lo ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 0.0.0.0
+2020/06/25 18:02:18 OSPF: Router-ID[OLD:0.0.0.0]: Update
+2020/06/25 18:02:18 OSPF: Router-ID[OLD:0.0.0.0]: Update to 0.0.0.0
+2020/06/25 18:02:18 OSPF: Router-ID[NEW:172.17.0.2]: Update
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_configured: 0
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_act_attached: 0
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_configured: 0
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_act_attached: 0
+2020/06/25 18:02:18 OSPF: ospf_if_new: ospf interface eth1 vrf default id 0 created
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_new: ospf interface eth2 vrf default id 0 created
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface lo ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: interface 10.10.0.2 [1342] join AllSPFRouters Multicast group.
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_act_attached: 0
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_act_attached: 0
+2020/06/25 18:02:18 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:02:18 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:02:18 OSPF: there are 0 of them
+2020/06/25 18:02:18 OSPF: SPF: calculation timer scheduled
+2020/06/25 18:02:18 OSPF: SPF: calculation timer delay = 0 msec
+2020/06/25 18:02:18 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:18 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:18 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:18 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:02:18 OSPF: interface 10.10.0.18 [1344] join AllSPFRouters Multicast group.
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:02:18 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:02:18 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:02:18 OSPF: there are 0 of them
+2020/06/25 18:02:18 OSPF: ospf_lsa_maxage_delete: lsa Type1,id(172.17.0.2),ar(172.17.0.2) is not found in maxage db.
+2020/06/25 18:02:18 OSPF: SPF: calculation timer scheduled
+2020/06/25 18:02:18 OSPF: SPF: calculation timer is already scheduled: 0x55c65f46cb00
+2020/06/25 18:02:18 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:18 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:18 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:18 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:18 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: SPF: Timer (SPF calculation expire)
+2020/06/25 18:02:18 OSPF: ospf_spf_calculate: Start
+2020/06/25 18:02:18 OSPF: ospf_spf_calculate: running Dijkstra for area 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_vertex_new: Created Router vertex 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_spf_next: Next vertex of Router vertex 172.17.0.2
+2020/06/25 18:02:18 OSPF: SPF Result: 0 [R] 172.17.0.2
+2020/06/25 18:02:18 OSPF: ========== OSPF routing table ==========
+2020/06/25 18:02:18 OSPF: ========================================
+2020/06/25 18:02:18 OSPF: ospf_process_stub():processing stubs for area 0.0.0.0
+2020/06/25 18:02:18 OSPF: ospf_process_stubs():processing router LSA, id: 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_process_stubs(): we have 2 links to process
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): Start
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): processing route to 10.10.0.0/29
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): calculated cost is 0 + 10 = 10
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): installing new route
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): this network is on this router
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): the interface is eth1:10.10.0.2
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): Stop
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): Start
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): processing route to 10.10.0.16/29
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): calculated cost is 0 + 10 = 10
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): installing new route
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): this network is on this router
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): the interface is eth2:10.10.0.18
+2020/06/25 18:02:18 OSPF: ospf_intra_add_stub(): Stop
+2020/06/25 18:02:18 OSPF: ospf_process_stubs(): after examining links:  Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:02:18 OSPF: ospf_spf_calculate Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:02:18 OSPF: ospf_spf_calculate: Stop. 1 vertices
+2020/06/25 18:02:18 OSPF: ospf_vertex_free: Free Router vertex 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_ia_routing():start
+2020/06/25 18:02:18 OSPF: ospf_ia_routing():not ABR, considering all areas
+2020/06/25 18:02:18 OSPF: Pruning unreachable networks
+2020/06/25 18:02:18 OSPF: Pruning unreachable routers
+2020/06/25 18:02:18 OSPF: ospf_spf_calculate_timer: ospf install new route, vrf default id 0 new_table count 3
+2020/06/25 18:02:18 OSPF: SPF Processing Time(usecs): 91
+2020/06/25 18:02:18 OSPF:             SPF Time: 56
+2020/06/25 18:02:18 OSPF:            InterArea: 2
+2020/06/25 18:02:18 OSPF:                Prune: 1
+2020/06/25 18:02:18 OSPF:         RouteInstall: 23
+2020/06/25 18:02:18 OSPF: Reason(s) for SPF: N, S, ABR, ASBR
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface lo ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: Router-ID[OLD:172.17.0.2]: Update
+2020/06/25 18:02:18 OSPF: Router-ID[OLD:172.17.0.2]: Update to 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth0 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: make_hello: options: 2, int: eth1:10.10.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: make_hello: options: 2, int: eth2:10.10.0.18
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth1 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_write to 224.0.0.5, id 59051, off 0, len 64, interface eth1, mtu 1500:
+2020/06/25 18:02:18 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:02:18 OSPF: ospf_write to 224.0.0.5, id 59052, off 0, len 64, interface eth2, mtu 1500:
+2020/06/25 18:02:18 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface eth2 ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:18 OSPF: ospf_if_update: interface lo ifp->vrf_id 0 ospf vrf default vrf_id 0 router_id 172.17.0.2
+2020/06/25 18:02:19 OSPF: SPF Processing Time(usecs): External Routes: 8
+2020/06/25 18:02:23 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:02:23 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:02:23 OSPF:  src [10.10.0.3],
+2020/06/25 18:02:23 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:23 OSPF: Packet 172.17.0.3 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:23 OSPF: NSM[eth1:10.10.0.2:0.0.0.0]: start
+2020/06/25 18:02:23 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:27 OSPF: ospf_recv_packet: fd 15(default) on interface 1344(eth2)
+2020/06/25 18:02:27 OSPF: Hello received from [172.17.0.4] via [eth2:10.10.0.18]
+2020/06/25 18:02:27 OSPF:  src [10.10.0.19],
+2020/06/25 18:02:27 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:27 OSPF: Packet 172.17.0.4 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:27 OSPF: NSM[eth2:10.10.0.18:0.0.0.0]: start
+2020/06/25 18:02:27 OSPF: Executed ping -c 1 -I eth2 10.10.0.19 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:28 OSPF: make_hello: options: 2, int: eth1:10.10.0.2
+2020/06/25 18:02:28 OSPF: make_hello: options: 2, int: eth2:10.10.0.18
+2020/06/25 18:02:28 OSPF: ospf_write to 224.0.0.5, id 59053, off 0, len 68, interface eth1, mtu 1500:
+2020/06/25 18:02:28 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:02:28 OSPF: ospf_write to 224.0.0.5, id 59054, off 0, len 68, interface eth2, mtu 1500:
+2020/06/25 18:02:28 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/25 18:02:33 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:02:33 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:02:33 OSPF:  src [10.10.0.3],
+2020/06/25 18:02:33 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:33 OSPF: Packet 172.17.0.3 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:33 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:37 OSPF: ospf_recv_packet: fd 15(default) on interface 1344(eth2)
+2020/06/25 18:02:37 OSPF: Hello received from [172.17.0.4] via [eth2:10.10.0.18]
+2020/06/25 18:02:37 OSPF:  src [10.10.0.19],
+2020/06/25 18:02:37 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:37 OSPF: Packet 172.17.0.4 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:37 OSPF: Executed ping -c 1 -I eth2 10.10.0.19 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:38 OSPF: make_hello: options: 2, int: eth1:10.10.0.2
+2020/06/25 18:02:38 OSPF: make_hello: options: 2, int: eth2:10.10.0.18
+2020/06/25 18:02:38 OSPF: ospf_write to 224.0.0.5, id 59055, off 0, len 68, interface eth1, mtu 1500:
+2020/06/25 18:02:38 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:02:38 OSPF: ospf_write to 224.0.0.5, id 59056, off 0, len 68, interface eth2, mtu 1500:
+2020/06/25 18:02:38 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/25 18:02:43 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:02:43 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:02:43 OSPF:  src [10.10.0.3],
+2020/06/25 18:02:43 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:43 OSPF: Packet 172.17.0.3 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:43 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:47 OSPF: ospf_recv_packet: fd 15(default) on interface 1344(eth2)
+2020/06/25 18:02:47 OSPF: Hello received from [172.17.0.4] via [eth2:10.10.0.18]
+2020/06/25 18:02:47 OSPF:  src [10.10.0.19],
+2020/06/25 18:02:47 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:47 OSPF: Packet 172.17.0.4 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:47 OSPF: Executed ping -c 1 -I eth2 10.10.0.19 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:48 OSPF: make_hello: options: 2, int: eth1:10.10.0.2
+2020/06/25 18:02:48 OSPF: make_hello: options: 2, int: eth2:10.10.0.18
+2020/06/25 18:02:48 OSPF: ospf_write to 224.0.0.5, id 59057, off 0, len 68, interface eth1, mtu 1500:
+2020/06/25 18:02:48 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:02:48 OSPF: ospf_write to 224.0.0.5, id 59058, off 0, len 68, interface eth2, mtu 1500:
+2020/06/25 18:02:48 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/25 18:02:53 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:02:53 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:02:53 OSPF:  src [10.10.0.3],
+2020/06/25 18:02:53 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:53 OSPF: Packet 172.17.0.3 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:53 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:57 OSPF: ospf_recv_packet: fd 15(default) on interface 1344(eth2)
+2020/06/25 18:02:57 OSPF: Hello received from [172.17.0.4] via [eth2:10.10.0.18]
+2020/06/25 18:02:57 OSPF:  src [10.10.0.19],
+2020/06/25 18:02:57 OSPF:  dst [224.0.0.5]
+2020/06/25 18:02:57 OSPF: Packet 172.17.0.4 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:02:57 OSPF: Executed ping -c 1 -I eth2 10.10.0.19 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:58 OSPF: DR-Election[1st]: Backup 10.10.0.3
+2020/06/25 18:02:58 OSPF: DR-Election[1st]: DR     10.10.0.3
+2020/06/25 18:02:58 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:02:58 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:02:58 OSPF: there are 0 of them
+2020/06/25 18:02:58 OSPF: ospf_lsa_maxage_delete: lsa Type1,id(172.17.0.2),ar(172.17.0.2) is not found in maxage db.
+2020/06/25 18:02:58 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (2-Way)
+2020/06/25 18:02:58 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:02:58 OSPF: DR-Election[1st]: Backup 10.10.0.19
+2020/06/25 18:02:58 OSPF: DR-Election[1st]: DR     10.10.0.19
+2020/06/25 18:02:58 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:02:58 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:02:58 OSPF: there are 0 of them
+2020/06/25 18:02:58 OSPF: ospf_lsa_maxage_delete: lsa Type1,id(172.17.0.2),ar(172.17.0.2) is not found in maxage db.
+2020/06/25 18:02:58 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (2-Way)
+2020/06/25 18:02:58 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (2-Way)
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:02:58 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:02:58 OSPF: make_hello: options: 2, int: eth1:10.10.0.2
+2020/06/25 18:02:58 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:58 OSPF: Executed ping -c 1 -I eth2 10.10.0.19 > /dev/null 2>&1 & successfully
+2020/06/25 18:02:58 OSPF: make_hello: options: 2, int: eth2:10.10.0.18
+2020/06/25 18:02:58 OSPF: ospf_write to 224.0.0.5, id 59059, off 0, len 68, interface eth1, mtu 1500:
+2020/06/25 18:02:58 OSPF: Hello sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:02:58 OSPF: ospf_write to 224.0.0.5, id 59060, off 0, len 68, interface eth2, mtu 1500:
+2020/06/25 18:02:58 OSPF: Hello sent to [224.0.0.5] via [eth2:10.10.0.18].
+2020/06/25 18:02:58 OSPF: ospf_write to 10.10.0.3, id 59061, off 0, len 52, interface eth1, mtu 1500:
+2020/06/25 18:02:58 OSPF: Database Description sent to [10.10.0.3] via [eth1:10.10.0.2].
+2020/06/25 18:02:58 OSPF: ospf_write to 10.10.0.19, id 59062, off 0, len 52, interface eth2, mtu 1500:
+2020/06/25 18:02:58 OSPF: Database Description sent to [10.10.0.19] via [eth2:10.10.0.18].
+2020/06/25 18:03:03 OSPF: ospf_write to 10.10.0.3, id 59063, off 0, len 52, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Database Description sent to [10.10.0.3] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: ospf_write to 10.10.0.19, id 59064, off 0, len 52, interface eth2, mtu 1500:
+2020/06/25 18:03:03 OSPF: Database Description sent to [10.10.0.19] via [eth2:10.10.0.18].
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Database Description received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [10.10.0.2]
+2020/06/25 18:03:03 OSPF: Executed ping -c 1 -I eth1 10.10.0.3 > /dev/null 2>&1 & successfully
+2020/06/25 18:03:03 OSPF: ospf_write to 10.10.0.3, id 59065, off 0, len 72, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Database Description sent to [10.10.0.3] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Database Description received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [10.10.0.2]
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Link State Request received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [10.10.0.2]
+2020/06/25 18:03:03 OSPF: ospf_ls_upd_send_queue start
+2020/06/25 18:03:03 OSPF: listcount = 1, [eth1:10.10.0.2]dst 224.0.0.6
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: Start
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: List Iteration 0
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: Stop
+2020/06/25 18:03:03 OSPF: ospf_ls_upd_send_queue stop
+2020/06/25 18:03:03 OSPF: ospf_write to 10.10.0.3, id 59066, off 0, len 52, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Database Description sent to [10.10.0.3] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: ospf_write to 10.10.0.3, id 59067, off 0, len 56, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Link State Request sent to [10.10.0.3] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: ospf_write to 224.0.0.6, id 59068, off 0, len 96, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Link State Update sent to [224.0.0.6] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Hello received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [224.0.0.5]
+2020/06/25 18:03:03 OSPF: Packet 172.17.0.3 [Hello:RECV]: Options *|-|-|-|-|-|E|- vrf default
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Link State Update received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [224.0.0.5]
+2020/06/25 18:03:03 OSPF: LSA[Type1:172.17.0.3]: 0x55c65f558a00 new LSA created with Link State Update
+2020/06/25 18:03:03 OSPF: default:LSA[Flooding]: start, NBR 172.17.0.3 (Loading), cur(0x0), New-LSA[Type1,id(172.17.0.3),ar(172.17.0.3)]
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(172.17.0.3), LSA[Type1,id(172.17.0.3),ar(172.17.0.3)] AGE 1
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (Loading)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): nbr adj is not Full
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(172.17.0.3), LSA[Type1,id(172.17.0.3),ar(172.17.0.3)] AGE 1
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (ExStart)
+2020/06/25 18:03:03 OSPF: SPF: calculation timer scheduled
+2020/06/25 18:03:03 OSPF: SPF: calculation timer delay = 0 msec
+2020/06/25 18:03:03 OSPF: DR-Election[1st]: Backup 10.10.0.2
+2020/06/25 18:03:03 OSPF: DR-Election[1st]: DR     10.10.0.3
+2020/06/25 18:03:03 OSPF: DR-Election[2nd]: Backup 10.10.0.2
+2020/06/25 18:03:03 OSPF: DR-Election[2nd]: DR     10.10.0.3
+2020/06/25 18:03:03 OSPF: interface 10.10.0.2 [1342] join AllDRouters Multicast group.
+2020/06/25 18:03:03 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:03:03 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:03:03 OSPF: there are 0 of them
+2020/06/25 18:03:03 OSPF: ospf_lsa_maxage_delete: lsa Type1,id(172.17.0.2),ar(172.17.0.2) is not found in maxage db.
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (Loading)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): nbr adj is not Full
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (ExStart)
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): Start
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): looked through areas
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): bb_configured: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): bb_act_attached: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): areas_configured: 1
+2020/06/25 18:03:03 OSPF: ospf_check_abr_status(): areas_act_attached: 1
+2020/06/25 18:03:03 OSPF: [router-LSA]: (router-LSA area update)
+2020/06/25 18:03:03 OSPF: counting fully adjacent virtual neighbors in area 0.0.0.0
+2020/06/25 18:03:03 OSPF: there are 0 of them
+2020/06/25 18:03:03 OSPF: ospf_lsa_maxage_delete: lsa Type1,id(172.17.0.2),ar(172.17.0.2) is not found in maxage db.
+2020/06/25 18:03:03 OSPF: SPF: calculation timer scheduled
+2020/06/25 18:03:03 OSPF: SPF: calculation timer is already scheduled: 0x55c65f558720
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (Full)
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(NULL), LSA[Type1,id(172.17.0.2),ar(172.17.0.2)] AGE 0
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (ExStart)
+2020/06/25 18:03:03 OSPF: SPF: Timer (SPF calculation expire)
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: Start
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: running Dijkstra for area 0.0.0.0
+2020/06/25 18:03:03 OSPF: ospf_vertex_new: Created Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_spf_next: Next vertex of Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: Looking up Network LSA, ID: 10.10.0.3
+2020/06/25 18:03:03 OSPF: No LSA found
+2020/06/25 18:03:03 OSPF: SPF Result: 0 [R] 172.17.0.2
+2020/06/25 18:03:03 OSPF: ========== OSPF routing table ==========
+2020/06/25 18:03:03 OSPF: ========================================
+2020/06/25 18:03:03 OSPF: ospf_process_stub():processing stubs for area 0.0.0.0
+2020/06/25 18:03:03 OSPF: ospf_process_stubs():processing router LSA, id: 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_process_stubs(): we have 2 links to process
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): Start
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): processing route to 10.10.0.16/29
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): calculated cost is 0 + 10 = 10
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): installing new route
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): this network is on this router
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): the interface is eth2:10.10.0.18
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): Stop
+2020/06/25 18:03:03 OSPF: ospf_process_stubs(): after examining links:  Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: Stop. 1 vertices
+2020/06/25 18:03:03 OSPF: ospf_vertex_free: Free Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_ia_routing():start
+2020/06/25 18:03:03 OSPF: ospf_ia_routing():not ABR, considering all areas
+2020/06/25 18:03:03 OSPF: Pruning unreachable networks
+2020/06/25 18:03:03 OSPF: Pruning unreachable routers
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate_timer: ospf install new route, vrf default id 0 new_table count 1
+2020/06/25 18:03:03 OSPF: SPF Processing Time(usecs): 848
+2020/06/25 18:03:03 OSPF:             SPF Time: 800
+2020/06/25 18:03:03 OSPF:            InterArea: 3
+2020/06/25 18:03:03 OSPF:                Prune: 2
+2020/06/25 18:03:03 OSPF:         RouteInstall: 29
+2020/06/25 18:03:03 OSPF: Reason(s) for SPF: N, S, ABR, ASBR
+2020/06/25 18:03:03 OSPF: ospf_ls_upd_send_queue start
+2020/06/25 18:03:03 OSPF: listcount = 2, [eth1:10.10.0.2]dst 224.0.0.5
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: Start
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: List Iteration 0
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: List Iteration 1
+2020/06/25 18:03:03 OSPF: ospf_make_ls_upd: Stop
+2020/06/25 18:03:03 OSPF: ospf_ls_upd_send_queue stop
+2020/06/25 18:03:03 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:03 OSPF: Link State Update received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:03 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:03 OSPF:  dst [224.0.0.5]
+2020/06/25 18:03:03 OSPF: LSA[Type1:172.17.0.3]: 0x55c65f557860 new LSA created with Link State Update
+2020/06/25 18:03:03 OSPF: LSA[Type2:10.10.0.3]: 0x55c65f5574c0 new LSA created with Link State Update
+2020/06/25 18:03:03 OSPF: default:LSA[Flooding]: start, NBR 172.17.0.3 (Full), cur(0x55c65f558a00), New-LSA[Type1,id(172.17.0.3),ar(172.17.0.3)]
+2020/06/25 18:03:03 OSPF: default:LSA[Flooding]: LSA is received recently.
+2020/06/25 18:03:03 OSPF: ospf_lsa_discard() in ospf_ls_upd() point 5: lsa 0x55c65f557860 Type-1
+2020/06/25 18:03:03 OSPF: default:LSA[Flooding]: start, NBR 172.17.0.3 (Full), cur(0x0), New-LSA[Type2,id(10.10.0.3),ar(172.17.0.3)]
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth1:10.10.0.2, INBR(172.17.0.3), LSA[Type2,id(10.10.0.3),ar(172.17.0.3)] AGE 1
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.3(default) (Full)
+2020/06/25 18:03:03 OSPF: default:ospf_flood_through_interface(): considering int eth2:10.10.0.18, INBR(172.17.0.3), LSA[Type2,id(10.10.0.3),ar(172.17.0.3)] AGE 1
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.2(default) (2-Way)
+2020/06/25 18:03:03 OSPF: ospf_flood_through_interface(): considering nbr 172.17.0.4(default) (ExStart)
+2020/06/25 18:03:03 OSPF: SPF: calculation timer scheduled
+2020/06/25 18:03:03 OSPF: SPF: calculation timer delay = 49 msec
+2020/06/25 18:03:03 OSPF: ospf_write to 224.0.0.5, id 59069, off 0, len 144, interface eth1, mtu 1500:
+2020/06/25 18:03:03 OSPF: Link State Update sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:03:03 OSPF: SPF: Timer (SPF calculation expire)
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: Start
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: running Dijkstra for area 0.0.0.0
+2020/06/25 18:03:03 OSPF: ospf_vertex_new: Created Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_spf_next: Next vertex of Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: Looking up Network LSA, ID: 10.10.0.3
+2020/06/25 18:03:03 OSPF: found the LSA
+2020/06/25 18:03:03 OSPF: ospf_vertex_new: Created Network vertex 10.10.0.3
+2020/06/25 18:03:03 OSPF: ospf_nexthop_calculation(): Start
+2020/06/25 18:03:03 OSPF: V (parent): Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:03:03 OSPF: W (dest)  : Network vertex 10.10.0.3  distance 0 flags 0
+2020/06/25 18:03:03 OSPF: V->W distance: 10
+2020/06/25 18:03:03 OSPF: ospf_nexthop_calculation: considering link:eth1 type:2 link_id:10.10.0.3 link_data:10.10.0.2
+2020/06/25 18:03:03 OSPF: ospf_spf_add_parent: Adding 172.17.0.2 as parent of 10.10.0.3
+2020/06/25 18:03:03 OSPF: ospf_spf_next: Next vertex of Network vertex 10.10.0.3
+2020/06/25 18:03:03 OSPF: found Router LSA 172.17.0.2
+2020/06/25 18:03:03 OSPF: The LSA is already in SPF
+2020/06/25 18:03:03 OSPF: found Router LSA 172.17.0.3
+2020/06/25 18:03:03 OSPF: The LSA doesn't have a link back
+2020/06/25 18:03:03 OSPF: SPF Result: 0 [R] 172.17.0.2
+2020/06/25 18:03:03 OSPF: SPF Result: 1 [N] 10.10.0.3/29
+2020/06/25 18:03:03 OSPF:  nexthop 0x55c65f532420 0.0.0.0 eth1:10.10.0.2
+2020/06/25 18:03:03 OSPF: ========== OSPF routing table ==========
+2020/06/25 18:03:03 OSPF: N 10.10.0.0/29       0.0.0.0         intra-area 10
+2020/06/25 18:03:03 OSPF:   -> 0.0.0.0
+2020/06/25 18:03:03 OSPF: ========================================
+2020/06/25 18:03:03 OSPF: ospf_process_stub():processing stubs for area 0.0.0.0
+2020/06/25 18:03:03 OSPF: ospf_process_stubs():processing router LSA, id: 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_process_stubs(): we have 2 links to process
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): Start
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): processing route to 10.10.0.16/29
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): calculated cost is 0 + 10 = 10
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): installing new route
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): this network is on this router
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): the interface is eth2:10.10.0.18
+2020/06/25 18:03:03 OSPF: ospf_intra_add_stub(): Stop
+2020/06/25 18:03:03 OSPF: ospf_process_stubs(): after examining links:  Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:03:03 OSPF:  child: Network vertex 10.10.0.3  distance 10 flags 0
+2020/06/25 18:03:03 OSPF: ospf_process_stub():processing stubs for area 0.0.0.0
+2020/06/25 18:03:03 OSPF: ospf_process_stubs(): after examining links:  Network vertex 10.10.0.3  distance 10 flags 0
+2020/06/25 18:03:03 OSPF: parent 172.17.0.2 backlink 0 nexthop 0.0.0.0  interface eth1:10.10.0.2
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate Router vertex 172.17.0.2  distance 0 flags 0
+2020/06/25 18:03:03 OSPF:  child: Network vertex 10.10.0.3  distance 10 flags 1
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate: Stop. 2 vertices
+2020/06/25 18:03:03 OSPF: ospf_vertex_free: Free Router vertex 172.17.0.2
+2020/06/25 18:03:03 OSPF: ospf_vertex_free: Free Network vertex 10.10.0.3
+2020/06/25 18:03:03 OSPF: ospf_ia_routing():start
+2020/06/25 18:03:03 OSPF: ospf_ia_routing():not ABR, considering all areas
+2020/06/25 18:03:03 OSPF: Pruning unreachable networks
+2020/06/25 18:03:03 OSPF: Pruning unreachable routers
+2020/06/25 18:03:03 OSPF: ospf_spf_calculate_timer: ospf install new route, vrf default id 0 new_table count 3
+2020/06/25 18:03:03 OSPF: Route: Router Routing Table free
+2020/06/25 18:03:03 OSPF: SPF Processing Time(usecs): 269
+2020/06/25 18:03:03 OSPF:             SPF Time: 215
+2020/06/25 18:03:03 OSPF:            InterArea: 3
+2020/06/25 18:03:03 OSPF:                Prune: 3
+2020/06/25 18:03:03 OSPF:         RouteInstall: 38
+2020/06/25 18:03:03 OSPF: Reason(s) for SPF: AS, ABR, ASBR, M
+2020/06/25 18:03:04 OSPF: ospf_write to 224.0.0.5, id 59070, off 0, len 84, interface eth1, mtu 1500:
+2020/06/25 18:03:04 OSPF: Link State Acknowledgment sent to [224.0.0.5] via [eth1:10.10.0.2].
+2020/06/25 18:03:04 OSPF: ospf_recv_packet: fd 15(default) on interface 1342(eth1)
+2020/06/25 18:03:04 OSPF: Link State Acknowledgment received from [172.17.0.3] via [eth1:10.10.0.2]
+2020/06/25 18:03:04 OSPF:  src [10.10.0.3],
+2020/06/25 18:03:04 OSPF:  dst [224.0.0.5]
+2020/06/25 18:03:04 OSPF: SPF Processing Time(usecs): External Routes: 5
