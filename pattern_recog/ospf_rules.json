@@ -1,0 +1,292 @@
+{
+    "OSPF_rules":[
+        {
+            "Events":[
+                    {
+                        "Informational_Setting_Logged":[
+                            {
+                                "State(s)":["Waiting"],
+                                "Event":"WaitTimer",
+                                "New_state":["DR Other","Backup","DR"]
+                            },
+                            {
+                                "State(s)":["DR Other","Backup","DR"],
+                                "Event":"NeighborChange",
+                                "New_state":["DR Other","Backup","DR"]
+                            },
+                            {
+                                "State(s)":["Waiting"],
+                                "Event":"BackupSeen",
+                                "New_state":["DR Other","Backup","DR"]
+
+                            },
+                            {
+                                "State(s)":["Down"],
+                                "Event":"InterfaceUp",
+                                "New_state":["DR Other","Point-to-Point","Waiting"]
+                            },
+                            {
+                                "State(s)":["Down","Loopback","Waiting","Point-to-point","DR Other","Backup","DR"],
+                                "Event":"InterfaceDown",
+                                "New_state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Loopback","Waiting","Point-to-point","DR Other","Backup","DR"],
+                                "Event":"LoopInd",
+                                "New_state":["Loopback"]
+                            },
+                            {
+                                "State(s)":["Loopback"],
+                                "Event":"UnloopInd",
+                                "New_state":["Down"]
+                            }
+                        ]
+                    },
+                    {   "Neighbor_State_Machine":[
+                            {
+                                "State(s)":["Down"],
+                                "Event":"Start",
+                                "New_state":["Attempt"]
+                            },
+                            {
+                                "State(s)":["Attempt"],
+                                "Event":"PacketReceived",
+                                "New_state":["Init"]
+                            },
+                            {
+                                "State(s)":["Down"],
+                                "Event":"PacketReceived",
+                                "New_state":["Init"]
+                            },
+                            {
+                                "State(s)":["Init","2-Way","ExStart","Exchange","Full","Loading"],
+                                "Event":"PacketReceived",
+                                "New_state":["Init"]
+                            },
+                            {
+                                "State(s)":["Init"],
+                                "Event":"2-WayReceived",
+                                "New_state":["2-Way","ExStart"]
+                            },
+                            {
+                                "State(s)":["ExStart"],
+                                "Event":"NegotiationDone",
+                                "New_state":["Exchange"]
+                            },
+                            {
+                                "State(s)":["Exchange"],
+                                "Event":"ExchangeDone",
+                                "New_state":["Full","Loading"]
+                            },
+                            {
+                                "State(s)":["Loading"],
+                                "Event":"Loading Done",
+                                "New_state":["Full"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"AdjOK?",
+                                "New_state":["2-Way","ExStart"]
+                            },
+                            {
+                                "State(s)":["ExStart"],
+                                "Event":"AdjOK?",
+                                "New_state":["ExStart","2-Way"]
+                            },
+                            {
+                                "State(s)":["Exchange"],
+                                "Event":"SeqNumberMismatch",
+                                "New_state":["ExStart"]
+                            },
+                            {
+                                "State(s)":["Exchange "],
+                                "Event":"BadLSReq",
+                                "New_state":["ExStart"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"KillNbr",
+                                "New_state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"LLDown",
+                                "New_state":["Down"]
+                            },
+                            {
+                                "State(s)":["Down","Attempt","Init","2-Way","ExStart","Exchange","Loading","Full"],
+                                "Event":"InactivityTimer",
+                                "New_state":["Down"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"1-WayReceived",
+                                "New_state":["Init"]
+                            },
+                            {
+                                "State(s)":["2-Way"],
+                                "Event":"2-WayReceived",
+                                "New_state":["2-Way"]
+                            },
+                            {
+                                "State(s)":["Init"],
+                                "Event":"1-WayReceived",
+                                "New_state":["Init"]
+                            }
+                        ]
+                    }
+            ]
+        },
+        {
+            "Packets":[
+                {
+                    "Protocol":[
+                        {
+                            "Field":"Checksum",
+                            "Value":"[correct]"
+                        },
+                        {
+                            "Field":"ip_destination_address",
+                            "Value":["incoming_interface.ip_address","***one_of_AllSPFRouters_address***","***one_of_AllDRouters_address***"]
+                        },
+                        {
+                            "Field":"ip_protocol",
+                            "value":"OSPF"
+                        },
+                        {
+                            "Field":"ip_address",
+                            "value":"***not_local_router_generated_packet***"
+                        }
+                    ]
+                },
+                {
+                    "OSPF packet header":[
+                        {
+                            "Field":"version_numer",
+                            "Value":"2"
+                        },
+                        {
+                            "Field":"area_id",
+                            "Value":["incoming_interface.area_id","***inidicates_backbone***"]
+                        },
+                        {
+                            "Field":"ip_destination",
+                            "value":"ALLDRouters",
+                            "state":["DR","Backup"]
+                        },
+                        {
+                            "Field":"AuType",
+                            "value":"****associated_area_AuType**"
+                        },
+                        {
+                            "Field":"authetication_type",
+                            "Value":"***correct_value***"
+                        }
+                    ]
+                },
+                {
+                    "Hello":[
+                        {
+                            "Field": "network_mask",
+                            "Value": "incoming_interface.network_mask"
+                        },
+                        {
+                            "Field": "HelloInterval",
+                            "Value": "incoming_interface.HelloInterval"
+                        },
+                        {
+                            "Field": "RouterDeadInterval",
+                            "Value": "incoming_interface.RouterDeadInterval" 
+                        }
+                    ]
+                },
+                {
+                    "Database Description":[
+                        {
+                            "Field":"Interface_MTU_IP_datagram_size",
+                            "Value":"***larger_than_incoming_interface_MTU***",
+                            "Action":"***reject_packet***" 
+                        },
+                        {
+                            "Neighbor State(s)":["Down","Attempt"],
+                            "Action":"***reject_packet***" 
+                        },
+                        {
+                            "Neighbor State(s)":"Init",
+                            "Event":"2-WayReceived",
+                            "New Neighbor State(s)":["2-Way","ExStart"]
+                        },
+                        {
+                            "Neighbor State(s)":"2-Way",
+                            "Action":"***ignore_packet***"  
+                        },
+                        {
+                            "Neighbor State(s)":"ExStart",
+                            "Conditions":["***case1***","***case2***"],
+                            "Event":"NegotiationDone",
+                            "New Neighbor State(s)":["Exchange"]
+                        },
+                        {
+                            "Neighbor State(s)":"ExStart",
+                            "Conditions":"***failing_case1_and_case2***",
+                            "Action":"***ignore_packet***"  
+                        },
+                        {
+                            "Neighbor State(s)":"Exchange",
+                            "Conditions":["***MS-bit_inconsistent_with_master/slave_state***",
+                                        "***initialize(I)_bit_is_set***",
+                                        "***Options_field_inconsistent_with_optional_OSPF_capabilities_previously_received_from_neighbor***"
+                                        ],
+                            "Event":"SeqNumberMismatch",
+                            "Action":"***stop_processing_packet***",
+                            "New Neighbor State(s)":"ExStart"
+                        },
+                        {
+                            "Neighbor State(s)":"Exchange",
+                            "Conditions":["***DD_sequence_number_inconsistent_with_neighbor_DD_sequence_number***"],
+                            "Action":"***stop_processing_packet***"    
+                        },
+                        {
+                            "Neighbor State(s)":["Loading","Full"],
+                            "Conditions":["***Receving_any_other_packet_besides_duplicates***"],
+                            "Event":"SeqNumberMismatch",
+                            "Action":"***discard_duplicates***",
+                            "New Neighbor State(s)":"ExStart"
+                        }
+
+                    ]
+                },
+                {
+                    "Link State Request":[
+                        {
+                            "Neighbor State(s)":["Exchange","Loading","Full"],
+                            "Condition":"***LSA_found_in_database",
+                            "Action":"***receive_LSR_packets***"
+                        },
+                        {
+                            "Neighbor State(s)":["Exchange","Loading","Full"],
+                            "Condition":"***LSA_not_found_in_database",
+                            "Event":"BadLSReq"
+                        }
+                    ]
+                },
+                {
+                    "Link State Acknowledgments":[
+                        {
+                            "Neighbor State(s)":["ExStart","2-Way","Init","Attempt","Down"],
+                            "Action":"***discard_LSA_packet***"
+                        },
+                        {
+                            "Condition":"***LSA acknowledged have an instance on the Link state retransmission list for the neighbor and the acknowledgment is for the same instance that is contained on the list***",
+                            "Action":"***remove item from list***"
+                        },
+                        {
+                            "Condition":"***LSA acknowledged have an instance on the Link state retransmission list for the neighbor and the acknowledgment is not for the same instance that is contained on the list***",
+                            "Action":"***Log the questionable acknowledgment***"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
