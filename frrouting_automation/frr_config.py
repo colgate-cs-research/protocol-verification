@@ -275,6 +275,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
+    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on or off", required=False)
+
     settings = parser.parse_args()
 
     # Load and parse configuration
@@ -291,6 +293,8 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
+    if (settings.tcp in ['tcpon']):
+        os.system('docker run --rm --net=host -v $PWD/tcpdump:/tcpdump kaazing/tcpdump')
     client.close()
 
 if __name__ == "__main__":
