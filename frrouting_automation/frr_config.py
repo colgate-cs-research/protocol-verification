@@ -278,7 +278,8 @@ def shark(protocol):
     print(cap, file=s)
     for pkt in cap:
         if protocol in pkt:
-            print(getattr(pkt, protocol), file=s)
+            print(pkt, file=s)
+            print('~', file=s)
     s.close()
 
 def main():
