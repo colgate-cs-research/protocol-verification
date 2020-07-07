@@ -7,6 +7,7 @@ import ipaddress
 import json
 import os
 import fileinput
+import pyshark
 
 
 def load_config(filepath):
@@ -271,11 +272,21 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
+def shark(protocol):
+    cap = pyshark.FileCapture('tcpdump.pcap')
+    s = open('shark'+protocol+'.txt', 'w')
+    print(cap, file=s)
+    for pkt in cap:
+        if protocol in pkt:
+            print(getattr(pkt, protocol), file=s)
+    s.close()
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on or off", required=False)
+    parser.add_argument("-t", "--tcp", choices=['tcpon', 'tcpoff'], help="Option to have tcpdump on or off", required=False)
+    parser.add_argument("-s", "--shark", choices=['ospf', 'bgp'], help="Option to look at ospf or bgp packets with tshark", required=False)
 
     settings = parser.parse_args()
 
@@ -293,8 +304,20 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
-    if (settings.tcp in ['tcpon']):
-        os.system('docker run --rm --net=host -v $PWD/tcpdump:/tcpdump kaazing/tcpdump')
+    if (settings.shark in ['ospf']):
+        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
+        shark('ospf')
+        if(settings.tcp in['tcpoff']):
+            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
+            os.system('rm tcpdump.pcap')
+    elif(settings.shark in ['bgp']):
+        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
+        shark('bgp')
+        if(settings.tcp in['tcpoff']):
+            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
+            os.system('rm tcpdump.pcap')
+    elif (settings.tcp in ['tcpon']):
+        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
     client.close()
 
 if __name__ == "__main__":
