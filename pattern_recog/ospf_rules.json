@@ -187,15 +187,15 @@
                 {
                     "Hello":[
                         {
-                            "Field": "network_mask",
+                            "Field": "hello_network_mask",
                             "Value": "incoming_interface.network_mask"
                         },
                         {
-                            "Field": "HelloInterval",
+                            "Field": "hello_hello_interval",
                             "Value": "incoming_interface.HelloInterval"
                         },
                         {
-                            "Field": "RouterDeadInterval",
+                            "Field": "hello_router_dead_interval",
                             "Value": "incoming_interface.RouterDeadInterval" 
                         }
                     ]
