@@ -275,11 +275,26 @@ def cleanup_topology(topology, client):
 def shark(protocol):
     cap = pyshark.FileCapture('tcpdump.pcap')
     s = open('shark'+protocol+'.txt', 'w')
+    p = open('sharkpar'+protocol+'.txt', 'w')
     print(cap, file=s)
+    count = 0
     for pkt in cap:
+        count += 1
         if protocol in pkt:
-            print(pkt, file=s)
-            print('~', file=s)
+            if pkt.ospf.msg == '1':
+                # print(pkt.ospf.field_names)
+                # print(pkt.ospf.checksum)
+                # print(pkt.ospf.msg)
+                 print('PACKET RECIEVED NUMBER: :' + str(count) + ' (this number is not part of the packet)',file=s)
+                 print('PACKET RECIEVED NUMBER: :' +str(count) + ' (this number is not part of the packet)',file=p)
+                 print('srcrouter: '+ pkt.ospf.srcrouter, file=p)
+                 print('hello_network_mask: '+pkt.ospf.hello_network_mask, file=p)
+                 print('hello_hello_interval: '+pkt.ospf.hello_hello_interval, file=p)
+                 print('hello_router_dead_interval: '+pkt.ospf.hello_router_dead_interval, file=p)
+                 print('hello_active_neighbor: ' +pkt.ospf.hello_active_neighbor, file=p)
+                 print(pkt, file=s)
+                 print('~', file=s)
+                 print('~', file=p)
     s.close()
 
 def main():
