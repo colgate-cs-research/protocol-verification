@@ -275,24 +275,20 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
-def shark(protocol):
+def shark(protocol, packet_type):
     cap = pyshark.FileCapture('tcpdump.pcap')
     s = open('shark'+protocol+'.txt', 'w')
     p = open('sharkpar'+protocol+'.txt', 'w')
     print(cap, file=s)
     count = 0
 
-    #counter = 0
     for pkt in cap:
         count += 1
         if protocol in pkt:
-            if pkt.ospf.msg == '1':
-                 #if counter == 0:
-                  #  print(dir(pkt.ospf))
-                   # counter == 1
-                # print(pkt.ospf.field_names)
-                # print(pkt.ospf.checksum)
-                # print(pkt.ospf.msg)
+            if packet_type == '6':
+                print(pkt, file=s)
+                print('~', file=s)
+            elif (pkt.ospf.msg == '1') and (packet_type == '1'):
                  print('PACKET RECIEVED NUMBER: :' + str(count) + ' (this number is not part of the packet)',file=s)
                  print('PACKET RECIEVED NUMBER: :' +str(count) + ' (this number is not part of the packet)',file=p)
                  print('srcrouter: '+ pkt.ospf.srcrouter, file=p)
@@ -308,6 +304,9 @@ def shark(protocol):
                  print(pkt, file=s)
                  print('~', file=s)
                  print('~', file=p)
+            elif pkt.ospf.msg == packet_type:
+                print(pkt, file=s)
+                print('~', file=s)
     s.close()
 
 def main():
@@ -316,6 +315,7 @@ def main():
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
     parser.add_argument("-t", "--tcp", choices=['tcpon', 'tcpoff'], help="Option to have tcpdump on or off", required=False)
     parser.add_argument("-s", "--shark", choices=['ospf', 'bgp'], help="Option to look at ospf or bgp packets with tshark", required=False)
+    parser.add_argument("-p", "--packet", choices=['1', '2', '3', '4', '5'], help="Option to choose packet type", required=False)
 
     settings = parser.parse_args()
 
@@ -334,9 +334,13 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
+    #Settings for tcpdump and wireshark
     if (settings.shark in ['ospf']):
         os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-        shark('ospf')
+        if(settings.packet in ['1','2','3','4','5']):
+            shark('ospf', settings.packet)
+        else:
+            shark('ospf', '6')
         if(settings.tcp in['tcpoff']):
             print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
             os.system('rm tcpdump.pcap')
