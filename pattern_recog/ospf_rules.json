@@ -154,7 +154,7 @@
                             "value":"OSPF"
                         },
                         {
-                            "Field":"ip_address",
+                            "Field":"srcrouter",
                             "value":"***not_local_router_generated_packet***"
                         }
                     ]
@@ -162,7 +162,7 @@
                 {
                     "OSPF packet header":[
                         {
-                            "Field":"version_numer",
+                            "Field":"version_number",
                             "Value":"2"
                         },
                         {
@@ -170,12 +170,12 @@
                             "Value":["incoming_interface.area_id","***inidicates_backbone***"]
                         },
                         {
-                            "Field":"ip_destination",
-                            "value":"ALLDRouters",
+                            "Field":"incoming_interface",
+                            "value":"OSPFDesignatedRouters for mgm",
                             "state":["DR","Backup"]
                         },
                         {
-                            "Field":"AuType",
+                            "Field":"auth_type",
                             "value":"****associated_area_AuType**"
                         },
                         {

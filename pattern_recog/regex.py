@@ -26,6 +26,7 @@ def package_verification(rule):
     os.system("cp ~/protocol-verification/frrouting_automation/sharkparospf.txt ~/protocol-verification/pattern_recog")
     router_id_name ={}
     interface_id_name ={}
+    #create router name and id dictionary
     with open(rule) as f:
         rules = json.load(f)
     with open ("router_id_name.txt") as file:
@@ -41,6 +42,7 @@ def package_verification(rule):
                         spec = spec.split(": ")
                         router_id = spec[1]
                         router_id_name[router_id] = router
+                        #fill interface id and corresponding name
             os.system("docker exec -it "+router+" vtysh -c 'show ip ospf neighbor' > ipneighbor.txt")
             with open ("ipneighbor.txt") as nfile:
                 while peek_line(nfile):
@@ -52,9 +54,7 @@ def package_verification(rule):
                             in_int = i.split(":")
                             if in_int[1] not in interface_id_name:
                                 interface_id_name[in_int[1]] = in_int[0]
-    print(interface_id_name)
-    print(router_id_name)
-
+    #we iterate through every package in the sharkparospf file
     with open("sharkparospf.txt") as sharkfile:
         sharkcontent=sharkfile.read()
     sharkcontent = sharkcontent.split("~\n")
@@ -89,9 +89,20 @@ def package_verification(rule):
                             if iccontent[i] != "":
                                 while iccontent[i][0] == " " and iccontent[i][0]!="":
                                     iccontent[i] = iccontent[i].replace(" ", "", 1)
+                if field == "area_id":
+                    arg = "show ip ospf"
+                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > area_info.txt")
+                    with open("area_info.txt") as areafile:
+                        areacontent = areafile.read()
+                        areacontent = areacontent.split("\n")
+                        for i in range(len(areacontent)):
+                            if areacontent[i] != "":
+                                while areacontent[i][0] == " " and areacontent[i][0]!="":
+                                    areacontent[i] = areacontent[i].replace(" ", "", 1)
+                #we go in to the ospf_rule.py file and if a field matchs a file in the package:
                 for i in rules["OSPF_rules"][1]["Packets"][2]["Hello"]:
                     if i["Field"].count(field)>0:
-                        print("Rule Found: Verifying Field " + i["Field"])
+                        print("**Hello Packet Rule Found: Verifying Field " + i["Field"])
                         if field == "hello_hello_interval":
                             checking_hello_interval_n = iccontent[21]
                             checking_hello_interval_n = checking_hello_interval_n.split(" ")
@@ -124,8 +135,37 @@ def package_verification(rule):
                                 print("Rule Followed: Packet Network Mask field matches Incoming Interface Network Mask")
                             else:
                                 print("*****Notfication (Error): Rule not followed")
-
-
+                for i in rules["OSPF_rules"][1]["Packets"][1]["OSPF packet header"]:
+                    if i["Field"].count(field)>0:
+                        print("**Packer Header Rule Found: Verifying Field " + i["Field"])
+                        if field == "area_id":
+                            checking_area_id_n = iccontent[9]
+                            checking_area_id_n = checking_area_id_n.split(" ")
+                            checking_area_id = checking_area_id_n[1]
+                            if value == checking_area_id:
+                                print("Rule Followed: Packet Area ID field matches Incoming Interface Area ID")
+                            else:
+                                print("*****Notfication (Error): Rule not followed")
+                        if field == "version_number":
+                            if value == "2":
+                                print("Rule Followed: Packet Version Number field specified as 2")
+                            else:
+                                print("*****Notfication (Error): Rule not followed")
+                        if field == "incoming_interface":
+                            checking_state_n = iccontent[15]
+                            checking_state_n = checking_state_n.split(" ")
+                            checking_state = checking_state_n[1]
+                            checking_int_mgm_n = iccontent[19]
+                            if checking_state == "Backup" or checking_state == "DR":
+                                if checking_int_mgm_n.count("OSPFDesignatedRouters"):
+                                    print("Rule Followed: Incoming Interface with OSPFDesignatedRouters is with state DR or Backup")
+                        if field == "auth_type":
+                            checking_auth_type_n = areacontent[22]
+                            if checking_auth_type_n == "Area has no authentication":
+                                if value == "0":
+                                    print("Rule Followed: Packet Auth_type field specified as Null as associated area auth_type")
+                        
+                        ######modification needed if authen type set to value other than null for area (auth set for area)
 #verifies and categorizes messages
 def message_categorization(file, rule):
     ISM_states = ["Down","Loopback","Waiting","Point-to-point","DR Other","Backup","DR"]

@@ -281,10 +281,15 @@ def shark(protocol):
     p = open('sharkpar'+protocol+'.txt', 'w')
     print(cap, file=s)
     count = 0
+
+    #counter = 0
     for pkt in cap:
         count += 1
         if protocol in pkt:
             if pkt.ospf.msg == '1':
+                 #if counter == 0:
+                  #  print(dir(pkt.ospf))
+                   # counter == 1
                 # print(pkt.ospf.field_names)
                 # print(pkt.ospf.checksum)
                 # print(pkt.ospf.msg)
@@ -296,6 +301,10 @@ def shark(protocol):
                  print('hello_router_dead_interval: '+pkt.ospf.hello_router_dead_interval, file=p)
                  print('hello_active_neighbor: ' +pkt.ospf.hello_active_neighbor, file=p)
                  print('incoming_interface: '+ pkt.ip.src, file = p)
+                 print('version_number: ' + pkt.ospf.version, file = p)
+                 print('area_id: ' + pkt.ospf.area_id, file=p)
+                 print('auth_type: '+ pkt.ospf.auth_type, file=p)
+                 print('auth_none: '+ pkt.ospf.auth_none, file=p)
                  print(pkt, file=s)
                  print('~', file=s)
                  print('~', file=p)
