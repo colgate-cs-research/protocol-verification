@@ -7,7 +7,7 @@ import ipaddress
 import json
 import os
 import fileinput
-import pyshark
+#import pyshark
 
 
 def load_config(filepath):
@@ -43,14 +43,14 @@ def create_networks(links, client):
 
 def create_containers(routers, client, topology):
     '''Create a container for each router'''
-    client.images.pull('colgatenetresearch/frr:version-6.0')
+    #client.images.pull('frrouting/frr')
     images = set()
 
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s" % router.name)
         if router.image not in images:
-            client.images.pull(router.image)
+            #client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name, 
                 labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
@@ -60,6 +60,7 @@ def config_routers(routers, client):
         router = routers[router_name]
         config_daemons(router)
         config_vtysh(router)
+        #scapyintegration(router,filename)
 
         if "bgp" in router.protocols:
             config_bgp(router)
@@ -186,7 +187,7 @@ class Link:
 class Router:
     def __init__(self, name, as_num):
         self.name = name
-        self.image = 'frrouting/frr'
+        self.image = 'scapyintergration:latest'
         self.links = []
         self.protocols = set()
         self.as_num = as_num
@@ -301,12 +302,25 @@ def shark(protocol):
                  print('~', file=p)
     s.close()
 
+def scapyintegration(routers,filename):
+    
+
+    if (filename.lower()=="all"):
+        for router_name in sorted(routers.keys()):
+            os.system("docker cp ~/protocol-verification/frrouting_automation/scapy_scripts/. " + router_name +":/tmp/")
+    
+    else:
+        for router_name in sorted(routers.keys()):
+            os.system("docker cp ~/protocol-verification/frrouting_automation/scapy_scripts/"+filename+" " + router_name +":/tmp/"+filename)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
     parser.add_argument("-t", "--tcp", choices=['tcpon', 'tcpoff'], help="Option to have tcpdump on or off", required=False)
     parser.add_argument("-s", "--shark", choices=['ospf', 'bgp'], help="Option to look at ospf or bgp packets with tshark", required=False)
+    parser.add_argument("-sc", "--scapy", help="Transfer all files using 'all' or a specific file using its filename", required=False)
 
     settings = parser.parse_args()
 
@@ -339,6 +353,14 @@ def main():
             os.system('rm tcpdump.pcap')
     elif (settings.tcp in ['tcpon']):
         os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
+
+    if (settings.scapy in ['all']):
+        scapyintegration(routers,'all')
+
+    else:
+        scapyintegration(routers,settings.scapy)
+
+
     client.close()
 
 if __name__ == "__main__":
