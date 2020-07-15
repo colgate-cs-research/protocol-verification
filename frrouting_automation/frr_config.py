@@ -68,8 +68,6 @@ def config_routers(routers, client):
         print("Starting %s" % router.name)
         container = client.containers.get(router.name)
         container.start()
-        with open('router_id_name.txt', 'a') as file:
-            file.write(router.name+"\n")
             
 
 def config_daemons(router):
@@ -288,7 +286,6 @@ def main():
 
     client = docker.from_env()
     # Stop old instance
-    open('router_id_name.txt', 'w').close()
     if (settings.action in ['stop', 'restart']):
         cleanup_topology(topology, client)
     # Start new instance

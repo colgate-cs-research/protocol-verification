@@ -24,19 +24,21 @@ def ISM_messages(message,time,date):
     pass
     
 def package_verification(rule):
-    os.system("cp ~/protocol-verification/frrouting_automation/router_id_name.txt ~/protocol-verification/pattern_recog")
-    os.system("cp ~/protocol-verification/frrouting_automation/sharkparospf.txt ~/protocol-verification/pattern_recog")
     router_id_name ={}
     interface_id_name ={}
     #create router name and id dictionary
     with open(rule) as f:
         rules = json.load(f)
-    with open ("router_id_name.txt") as file:
+    os.system("docker container ls > router_list.txt")
+    with open ("router_list.txt") as file:
+        file.readline()
         while peek_line(file):
-            router = file.readline()
+            router_n = file.readline()
+            router_n = router_n.split(" ")
+            router = router_n[len(router_n)-1]
             router = router.replace("\n","")
-            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf' > ipcontent.txt")
-            with open ("ipcontent.txt") as ipfile:
+            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf' > temp.txt")
+            with open ("temp.txt") as ipfile:
                 while peek_line(ipfile):
                     spec = ipfile.readline()
                     if "Router ID" in spec:
@@ -45,8 +47,9 @@ def package_verification(rule):
                         router_id = spec[1]
                         router_id_name[router_id] = router
                         #fill interface id and corresponding name
-            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf neighbor' > ipneighbor.txt")
-            with open ("ipneighbor.txt") as nfile:
+            #open('temp.txt', 'w').close()
+            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf neighbor' > temp.txt")
+            with open ("temp.txt") as nfile:
                 while peek_line(nfile):
                     ncontent = nfile.readline()
                     if ":" in ncontent:
@@ -56,6 +59,7 @@ def package_verification(rule):
                             in_int = i.split(":")
                             if in_int[1] not in interface_id_name:
                                 interface_id_name[in_int[1]] = in_int[0]
+            #open('temp.txt', 'w').close()
     #we iterate through every package in the sharkparospf file
     with open("sharkparospf.txt") as sharkfile:
         sharkcontent=sharkfile.read()
@@ -82,8 +86,8 @@ def package_verification(rule):
                     incoming_interface = value
                     print("Incoming interface is "+ incoming_interface)
                     arg = "show ip ospf interface " + interface_id_name[incoming_interface]
-                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > interfacecontent.txt")
-                    with open("interfacecontent.txt") as icfile:
+                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > temp.txt")
+                    with open("temp.txt") as icfile:
                         iccontent = icfile.read()
                         iccontent = iccontent.replace("\n",",")
                         iccontent = iccontent.split(",")
@@ -91,16 +95,18 @@ def package_verification(rule):
                             if iccontent[i] != "":
                                 while iccontent[i][0] == " " and iccontent[i][0]!="":
                                     iccontent[i] = iccontent[i].replace(" ", "", 1)
+                    #open('temp.txt', 'w').close()
                 if field == "area_id":
                     arg = "show ip ospf"
-                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > area_info.txt")
-                    with open("area_info.txt") as areafile:
+                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > temp.txt")
+                    with open("temp.txt") as areafile:
                         areacontent = areafile.read()
                         areacontent = areacontent.split("\n")
                         for i in range(len(areacontent)):
                             if areacontent[i] != "":
                                 while areacontent[i][0] == " " and areacontent[i][0]!="":
                                     areacontent[i] = areacontent[i].replace(" ", "", 1)
+                    #open('temp.txt', 'w').close()
                 #we go in to the ospf_rule.py file and if a field matchs a file in the package:
                 for i in rules["OSPF_rules"][1]["Packets"][2]["Hello"]:
                     if i["Field"].count(field)>0:
