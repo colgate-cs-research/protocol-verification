@@ -310,6 +310,8 @@ def shark(packet_type):
     fc = open('fullcapture.txt', 'w')
     pt = {'Hello': '1', 'DB': '2', 'LSR': '3', 'LSU': '4', 'LSA' : '5', 'ALL' : '6'}
     ptype = pt[packet_type]
+    if ptype == '1':
+        spec = open('sharkparospf.txt', 'w')
     print(cap, file=fc)
     count = 0
 
@@ -322,8 +324,23 @@ def shark(packet_type):
                 print('PACKET RECIEVED NUMBER IN CAPTURE: ' +str(count), file=p)
                 print(pkt, file=p)
                 print('~', file=p)
+                if(ptype == '1'):
+                    print('PACKET RECIEVED NUMBER IN CAPTURE: ' + str(count), file=spec)
+                    print('srcrouter: ' + pkt.ospf.srcrouter, file=spec)
+                    print('hello_network_mask: ' + pkt.ospf.hello_network_mask, file=spec)
+                    print('hello_hello_intervl: ' + pkt.ospf.hello_network_mask, file=spec)
+                    print('hello_router_dead_interval: ' + pkt.ospf.hello_network_mask, file=spec)
+                    print('hello_active_neighbor: ' + pkt.ospf.hello_active_neighbor, file=spec)
+                    print('incoming_interface: ' + pkt.ip.src, file=spec)
+                    print('version_number: ' + pkt.ospf.version, file=spec)
+                    print('area_id: ' + pkt.ospf.area_id, file=spec)
+                    print('auth_type: ' + pkt.ospf.auth_type, file=spec)
+                    print('auth_none: ' + pkt.ospf.auth_none, file=spec)
+                    print('~', file=spec)
     p.close()
     fc.close()
+    if(ptype == '1'):
+        spec.close()
 
 
 def main():
