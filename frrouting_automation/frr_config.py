@@ -7,7 +7,6 @@ import ipaddress
 import json
 import os
 import fileinput
-import pyshark
 
 
 def load_config(filepath):
@@ -275,47 +274,11 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
-def shark(protocol, packet_type):
-    cap = pyshark.FileCapture('tcpdump.pcap')
-    s = open('shark'+protocol+'.txt', 'w')
-    p = open('sharkpar'+protocol+'.txt', 'w')
-    print(cap, file=s)
-    count = 0
-
-    for pkt in cap:
-        count += 1
-        if protocol in pkt:
-            if packet_type == '6':
-                print(pkt, file=s)
-                print('~', file=s)
-            elif (pkt.ospf.msg == '1') and (packet_type == '1'):
-                 print('PACKET RECIEVED NUMBER: :' + str(count) + ' (this number is not part of the packet)',file=s)
-                 print('PACKET RECIEVED NUMBER: :' +str(count) + ' (this number is not part of the packet)',file=p)
-                 print('srcrouter: '+ pkt.ospf.srcrouter, file=p)
-                 print('hello_network_mask: '+pkt.ospf.hello_network_mask, file=p)
-                 print('hello_hello_interval: '+pkt.ospf.hello_hello_interval, file=p)
-                 print('hello_router_dead_interval: '+pkt.ospf.hello_router_dead_interval, file=p)
-                 print('hello_active_neighbor: ' +pkt.ospf.hello_active_neighbor, file=p)
-                 print('incoming_interface: '+ pkt.ip.src, file = p)
-                 print('version_number: ' + pkt.ospf.version, file = p)
-                 print('area_id: ' + pkt.ospf.area_id, file=p)
-                 print('auth_type: '+ pkt.ospf.auth_type, file=p)
-                 print('auth_none: '+ pkt.ospf.auth_none, file=p)
-                 print(pkt, file=s)
-                 print('~', file=s)
-                 print('~', file=p)
-            elif pkt.ospf.msg == packet_type:
-                print(pkt, file=s)
-                print('~', file=s)
-    s.close()
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", choices=['tcpon', 'tcpoff'], help="Option to have tcpdump on or off", required=False)
-    parser.add_argument("-s", "--shark", choices=['ospf', 'bgp'], help="Option to look at ospf or bgp packets with tshark", required=False)
-    parser.add_argument("-p", "--packet", choices=['1', '2', '3', '4', '5'], help="Option to choose packet type", required=False)
+    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
 
     settings = parser.parse_args()
 
@@ -334,24 +297,9 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
-    #Settings for tcpdump and wireshark
-    if (settings.shark in ['ospf']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-        if(settings.packet in ['1','2','3','4','5']):
-            shark('ospf', settings.packet)
-        else:
-            shark('ospf', '6')
-        if(settings.tcp in['tcpoff']):
-            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
-            os.system('rm tcpdump.pcap')
-    elif(settings.shark in ['bgp']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-        shark('bgp')
-        if(settings.tcp in['tcpoff']):
-            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
-            os.system('rm tcpdump.pcap')
-    elif (settings.tcp in ['tcpon']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
+    #Settings for tcpdump
+    if (settings.tcp in ['tcpon']):
+        os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
     client.close()
 
 if __name__ == "__main__":

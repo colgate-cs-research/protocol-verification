@@ -4,6 +4,8 @@ import argparse
 import os
 import socket
 import struct
+import fileinput
+import pyshark
 
 #peeks into the next line of the file
 def peek_line(f):
@@ -296,11 +298,39 @@ def message_categorization(file, rule):
                         else:
                             print("*****Notfication (Error): Rule Not Found")
 
+def shark(packet_type):
+    cap = pyshark.FileCapture('tcpdump.pcap')
+    p = open('parsed'+packet_type+'.txt', 'w')
+    fc = open('fullcapture.txt', 'w')
+    pt = {'Hello': '1', 'DB': '2', 'LSR': '3', 'LSU': '4', 'LSA' : '5', 'ALL' : '6'}
+    ptype = pt[packet_type]
+    print(cap, file=fc)
+    count = 0
+
+    for pkt in cap:
+        print(pkt, file=fc)
+        print('~', file =fc)
+        count += 1
+        if 'ospf' in pkt:
+            if (pkt.ospf.msg == ptype) or (ptype == '6'):
+                print('PACKET RECIEVED NUMBER IN CAPTURE: ' +str(count), file=p)
+                print(pkt, file=p)
+                print('~', file=p)
+    p.close()
+    fc.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--rule", help="Path to JSON rule file", required=True)
     parser.add_argument("-l", "--log", help="Path to log file", required=True)
+    parser.add_argument("-p", "--packet", choices=['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL'], help="Option to choose OSPF packet type to collect: Hello, DB, LSR, LSU, LSA, or ALL", required=False)
     settings = parser.parse_args()
+    
+    #settings for wireshark
+    if (settings.packet in ['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL']):
+        shark(settings.packet)
+
     file = open(settings.log, "r")
     message_categorization(file,settings.rule)
     package_verification(settings.rule)
