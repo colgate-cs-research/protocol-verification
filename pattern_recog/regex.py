@@ -192,45 +192,54 @@ def message_categorization(file, rule):
             #extracts the time and date
             time = re.search("\\d\\d:\\d\\d:\\d\\d", curr_line).group()
             date = re.search("\\d{4}/\\d{2}/\\d{2}", curr_line).group()
-            #Checks for NSM messages
-            if(re.search("NSM", message)!=None): 
-                NSM_messages(message,time,date)
-                splited_m = message.split()
-                if (NSM_states.count(splited_m[1])>0):
-                    current_state = splited_m[1]
-                    print("Current state is: "+current_state)
-                    event = splited_m[2].replace('(','')
-                    event = event.replace(')','')
-                    print("Event is: "+event)
-                    rule_found = 0
-                    rule_found = nsm_event_ver(rules,current_state,event,rule_found,file,NSM_states)
-                    if rule_found == 0:
-                        if NSM_events.count(event)==0:
-                            print("*****Notfication (Error): Event is not found")
-                        else:
-                            print("*****Notfication (Error): Rule Not Found")
-                elif (splited_m[1] != "State"):
+        #Checks for NSM messages
+            msg_check(rules,file,message,time,date,"NSM",NSM_states,ISM_states,NSM_events,ISM_events)
+        #Checks for ISM messages
+            msg_check(rules,file,message,time,date,"ISM",NSM_states,ISM_states,NSM_events,ISM_events)
+
+def msg_check(rules,file,message,time,date,msg_type,NSM_states,ISM_states,NSM_events,ISM_events):
+    if(re.search(msg_type, message)!=None):
+        if msg_type == "ISM":
+            ISM_messages(message,time,date)
+            list_states = ISM_states
+            list_events = ISM_events
+        elif msg_type =="NSM":
+            NSM_messages(message,time,date)
+            list_states = NSM_states
+            list_events = NSM_events
+        splited_m = message.split()
+        if (list_states.count(splited_m[1])>0):
+            current_state = splited_m[1]
+            print("Current state is: "+current_state)
+            event = splited_m[2].replace('(','')
+            event = event.replace(')','')
+            print("Event is: "+event)
+            rule_found = 0
+            if msg_type == "ISM":
+                rule_found = event_ver(rules,current_state,event,rule_found,file,ISM_states,NSM_states,"ISM")
+            elif msg_type == "NSM":
+                rule_found = event_ver(rules,current_state,event,rule_found,file,ISM_states,NSM_states,"NSM")
+            if rule_found == 0:
+                if list_events.count(event)==0:
+                    print("*****Notfication (Error): Event is not found")
+                else:
+                    print("*****Notfication (Error): Rule Not Found")
+        else:
+            if (splited_m[1] != "State") and msg_type == "NSM":
                     print("*****Notfication (Error): State "+splited_m[1]+ " is not found")
-            #Checks for ISM messages
-            if(re.search("ISM", message)!=None):
-                ISM_messages(message,time,date)
-                splited_m = message.split()
-                if (ISM_states.count(splited_m[1])>0):
-                    current_state = splited_m[1]
-                    print("Current state is: "+current_state)
-                    event = splited_m[2].replace('(','')
-                    event = event.replace(')','')
-                    print("Event is: "+event)
-                    rule_found = 0
-                    rule_found = ism_event_ver(rules,current_state,event,rule_found,file,ISM_states)
-                    if rule_found == 0:
-                        if ISM_events.count(event)==0:
-                            print("*****Notfication (Error): Event is not found")
-                        else:
-                            print("*****Notfication (Error): Rule Not Found")
 
-def nsm_event_ver(rules,current_state,event,rule_found,file,NSM_states):
-    for i in rules["OSPF_rules"][0]["Events"][1]["Neighbor_State_Machine"]:
+def event_ver(rules,current_state,event,rule_found,file,ISM_states,NSM_states,event_type):
+    ind = 0
+    list_states = []
+    if event_type == "ISM":
+        ind = 0
+        list_states = ISM_states
+        event_rules = "Informational_Setting_Logged"
+    elif event_type =="NSM":
+        list_states = NSM_states
+        ind = 1
+        event_rules = "Neighbor_State_Machine"
+    for i in rules["OSPF_rules"][0]["Events"][ind][event_rules]:
         if i["State(s)"].count(current_state)>0 and i["Event"]==event:
             print("Rule Found")
             rule_found =1
@@ -252,54 +261,24 @@ def nsm_event_ver(rules,current_state,event,rule_found,file,NSM_states):
                         if i["New_state"].count(current_state)>0:
                             print("Rule Followed: Old State == New State")
                         elif next_state == "State":
-                            next_event = next_message[6]
-                            next_event = next_event.replace("(","")
-                            next_event = next_event.replace(")","")
-                            if NSM_states.count(next_message[5])==0:
+                            if list_states.count(next_message[5])==0:
                                 print("*****Notfication (Error): New state in following message is not found")
-                            elif NSM_states.count(next_message[3])==0:
+                            elif list_states.count(next_message[3])==0:
                                 print("*****Notfication (Error): Current state in following message is not found")
                             elif next_message[3] != current_state:
                                 print("*****Notfication (Error): Inconsistent current states")
-                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event == event:
-                                print("Rule Followed: Old state transits to new state as indicated in the following message")
-                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event != event:
-                                print("*****Notfication (Error): Inconsistent events")
-                        else:
-                            print("*****Notfication (Error): Rule not followed")
-    return rule_found
-
-def ism_event_ver(rules,current_state,event,rule_found,file,ISM_states):
-    for i in rules["OSPF_rules"][0]["Events"][0]["Informational_Setting_Logged"]:
-        if i["State(s)"].count(current_state)>0 and i["Event"]==event:
-            print("Rule Found")
-            rule_found =1
-            if rule_found == 1:
-                print("Expected state(s):")
-                print(i["New_state"])
-                next_message = "none"
-                while(peek_line(file)):
-                    next_line= peek_line(file).rstrip()
-                    #Checks next string being read is a log message
-                    if(re.search("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:", next_line)!=None):
-                        #extracts the message
-                        next_message=re.split("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:",next_line)[1]
-                        break
-                if next_message!="none":
-                    if type(next_message)!= list:
-                        next_message = next_message.split()
-                        next_state = next_message[1]
-                        if i["New_state"].count(current_state)>0:
-                            print("Rule Followed: Old State == New State")
-                        elif next_state == "State":
-                            if ISM_states.count(next_message[5])==0:
-                                print("*****Notfication (Error): New state in following message is not found")
-                            elif ISM_states.count(next_message[3])==0:
-                                print("*****Notfication (Error): Current state in following message is not found")
-                            elif next_message[3] != current_state:
-                                print("*****Notfication (Error): Inconsistent current states")
-                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0:
-                                print("Rule Followed: Old state transits to new state as indicated in the following message")
+                            else:
+                                if event_type == "ISM":
+                                    if next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0:
+                                        print("Rule Followed: Old state transits to new state as indicated in the following message")
+                                elif event_type == "NSM":
+                                    next_event = next_message[6]
+                                    next_event = next_event.replace("(","")
+                                    next_event = next_event.replace(")","")
+                                    if next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event == event:
+                                        print("Rule Followed: Old state transits to new state as indicated in the following message")
+                                    elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event != event:
+                                        print("*****Notfication (Error): Inconsistent events")
                         else:
                             print("*****Notfication (Error): Rule not followed")
     return rule_found
@@ -355,6 +334,6 @@ def main():
 
     file = open(settings.log, "r")
     message_categorization(file,settings.rule)
-    package_verification(settings.rule)
+    #package_verification(settings.rule)
 
 main()
