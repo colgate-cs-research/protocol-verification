@@ -7,7 +7,8 @@ import ipaddress
 import json
 import os
 import fileinput
-#import pyshark
+
+
 
 
 def load_config(filepath):
@@ -70,8 +71,6 @@ def config_routers(routers, client):
         print("Starting %s" % router.name)
         container = client.containers.get(router.name)
         container.start()
-        with open('router_id_name.txt', 'a') as file:
-            file.write(router.name+"\n")
             
 
 def config_daemons(router):
@@ -276,32 +275,6 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
-def shark(protocol):
-    cap = pyshark.FileCapture('tcpdump.pcap')
-    s = open('shark'+protocol+'.txt', 'w')
-    p = open('sharkpar'+protocol+'.txt', 'w')
-    print(cap, file=s)
-    count = 0
-    for pkt in cap:
-        count += 1
-        if protocol in pkt:
-            if pkt.ospf.msg == '1':
-                # print(pkt.ospf.field_names)
-                # print(pkt.ospf.checksum)
-                # print(pkt.ospf.msg)
-                 print('PACKET RECIEVED NUMBER: :' + str(count) + ' (this number is not part of the packet)',file=s)
-                 print('PACKET RECIEVED NUMBER: :' +str(count) + ' (this number is not part of the packet)',file=p)
-                 print('srcrouter: '+ pkt.ospf.srcrouter, file=p)
-                 print('hello_network_mask: '+pkt.ospf.hello_network_mask, file=p)
-                 print('hello_hello_interval: '+pkt.ospf.hello_hello_interval, file=p)
-                 print('hello_router_dead_interval: '+pkt.ospf.hello_router_dead_interval, file=p)
-                 print('hello_active_neighbor: ' +pkt.ospf.hello_active_neighbor, file=p)
-                 print('incoming_interface: '+ pkt.ip.src, file = p)
-                 print(pkt, file=s)
-                 print('~', file=s)
-                 print('~', file=p)
-    s.close()
-
 def scapyintegration(routers,filename):
     
 
@@ -318,9 +291,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", choices=['tcpon', 'tcpoff'], help="Option to have tcpdump on or off", required=False)
-    parser.add_argument("-s", "--shark", choices=['ospf', 'bgp'], help="Option to look at ospf or bgp packets with tshark", required=False)
     parser.add_argument("-sc", "--scapy", help="Transfer all files using 'all' or a specific file using its filename", required=False)
+    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
+
 
     settings = parser.parse_args()
 
@@ -330,7 +303,6 @@ def main():
 
     client = docker.from_env()
     # Stop old instance
-    open('router_id_name.txt', 'w').close()
     if (settings.action in ['stop', 'restart']):
         cleanup_topology(topology, client)
     # Start new instance
@@ -339,29 +311,17 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
-    if (settings.shark in ['ospf']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-        shark('ospf')
-        if(settings.tcp in['tcpoff']):
-            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
-            os.system('rm tcpdump.pcap')
-    elif(settings.shark in ['bgp']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-        shark('bgp')
-        if(settings.tcp in['tcpoff']):
-            print("If you would like to delete the stored tcp file, reply below with yes, else reply with no.")
-            os.system('rm tcpdump.pcap')
-    elif (settings.tcp in ['tcpon']):
-        os.system('docker run --rm --net=host -v $PWD:/tcpdump kaazing/tcpdump')
-
+    #implementing the scapy function.
     if (settings.scapy in ['all']):
         scapyintegration(routers,'all')
 
     else:
         scapyintegration(routers,settings.scapy)
 
+    #Settings for tcpdump
+    if (settings.tcp in ['tcpon']):
+        os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
 
-    client.close()
 
 if __name__ == "__main__":
     main()

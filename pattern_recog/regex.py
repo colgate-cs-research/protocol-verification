@@ -4,6 +4,8 @@ import argparse
 import os
 import socket
 import struct
+import fileinput
+import pyshark
 
 #peeks into the next line of the file
 def peek_line(f):
@@ -22,18 +24,23 @@ def ISM_messages(message,time,date):
     pass
     
 def package_verification(rule):
-    os.system("cp ~/protocol-verification/frrouting_automation/router_id_name.txt ~/protocol-verification/pattern_recog")
-    os.system("cp ~/protocol-verification/frrouting_automation/sharkparospf.txt ~/protocol-verification/pattern_recog")
+    iccontent = []
+    areacontent = []
     router_id_name ={}
     interface_id_name ={}
+    #create router name and id dictionary
     with open(rule) as f:
         rules = json.load(f)
-    with open ("router_id_name.txt") as file:
+    os.system("docker container ls > router_list.txt")
+    with open ("router_list.txt") as file:
+        file.readline()
         while peek_line(file):
-            router = file.readline()
+            router_n = file.readline()
+            router_n = router_n.split(" ")
+            router = router_n[len(router_n)-1]
             router = router.replace("\n","")
-            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf' > ipcontent.txt")
-            with open ("ipcontent.txt") as ipfile:
+            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf' > temp.txt")
+            with open ("temp.txt") as ipfile:
                 while peek_line(ipfile):
                     spec = ipfile.readline()
                     if "Router ID" in spec:
@@ -41,8 +48,9 @@ def package_verification(rule):
                         spec = spec.split(": ")
                         router_id = spec[1]
                         router_id_name[router_id] = router
-            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf neighbor' > ipneighbor.txt")
-            with open ("ipneighbor.txt") as nfile:
+                        #fill interface id and corresponding name
+            os.system("docker exec -it "+router+" vtysh -c 'show ip ospf neighbor' > temp.txt")
+            with open ("temp.txt") as nfile:
                 while peek_line(nfile):
                     ncontent = nfile.readline()
                     if ":" in ncontent:
@@ -52,9 +60,7 @@ def package_verification(rule):
                             in_int = i.split(":")
                             if in_int[1] not in interface_id_name:
                                 interface_id_name[in_int[1]] = in_int[0]
-    print(interface_id_name)
-    print(router_id_name)
-
+    #we iterate through every package in the sharkparospf file
     with open("sharkparospf.txt") as sharkfile:
         sharkcontent=sharkfile.read()
     sharkcontent = sharkcontent.split("~\n")
@@ -80,8 +86,8 @@ def package_verification(rule):
                     incoming_interface = value
                     print("Incoming interface is "+ incoming_interface)
                     arg = "show ip ospf interface " + interface_id_name[incoming_interface]
-                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > interfacecontent.txt")
-                    with open("interfacecontent.txt") as icfile:
+                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > temp.txt")
+                    with open("temp.txt") as icfile:
                         iccontent = icfile.read()
                         iccontent = iccontent.replace("\n",",")
                         iccontent = iccontent.split(",")
@@ -89,42 +95,81 @@ def package_verification(rule):
                             if iccontent[i] != "":
                                 while iccontent[i][0] == " " and iccontent[i][0]!="":
                                     iccontent[i] = iccontent[i].replace(" ", "", 1)
-                for i in rules["OSPF_rules"][1]["Packets"][2]["Hello"]:
-                    if i["Field"].count(field)>0:
-                        print("Rule Found: Verifying Field " + i["Field"])
-                        if field == "hello_hello_interval":
-                            checking_hello_interval_n = iccontent[21]
-                            checking_hello_interval_n = checking_hello_interval_n.split(" ")
-                            checking_hello_interval = checking_hello_interval_n[1]
-                            checking_hello_interval =checking_hello_interval.replace("s","")
-                            print ("Packet Hello Interval == "+value +"s and Incoming Interface Hello Interval == "+checking_hello_interval+"s")
-                            if value == checking_hello_interval:
-                                print("Rule Followed: Packet Hello Interval field matches Incoming Interface Hello Interval")
-                            else:
-                                print("*****Notfication (Error): Rule not followed")
-                        if field == "hello_router_dead_interval":
-                            checking_dead_interval_n = iccontent[22]
-                            checking_dead_interval_n = checking_dead_interval_n.split(" ")
-                            checking_dead_interval = checking_dead_interval_n[1]
-                            checking_dead_interval =checking_dead_interval.replace("s","")
-                            print ("Packet Dead Interval == "+value +"s and Incoming Interface Dead Interval == "+checking_dead_interval+"s")
-                            if value == checking_dead_interval:
-                                print("Rule Followed: Packet Dead Interval field matches Incoming Interface Dead Interval")
-                            else:
-                                print("*****Notfication (Error): Rule not followed")
-                        if field == "hello_network_mask":
-                            checking_network_mask_n = iccontent[7]
-                            checking_network_mask_n = checking_network_mask_n.split(" ")
-                            checking_network_mask_m = checking_network_mask_n[2]
-                            checking_network_mask_m =checking_network_mask_m.split("/")
-                            checking_network_mask = checking_network_mask_m[1]
-                            checking_network_mask = socket.inet_ntoa(struct.pack(">I", (0xffffffff << (32 - int(checking_network_mask))) & 0xffffffff))
-                            print ("Packet Network Mask == "+value +" and Incoming Interface Network Mask == "+checking_network_mask)
-                            if value == checking_network_mask:
-                                print("Rule Followed: Packet Network Mask field matches Incoming Interface Network Mask")
-                            else:
-                                print("*****Notfication (Error): Rule not followed")
+                if field == "area_id":
+                    arg = "show ip ospf"
+                    os.system("docker exec -it " + router_id_name[srcrouter_id] +" vtysh -c '"+arg+"' > temp.txt")
+                    with open("temp.txt") as areafile:
+                        areacontent = areafile.read()
+                        areacontent = areacontent.split("\n")
+                        for i in range(len(areacontent)):
+                            if areacontent[i] != "":
+                                while areacontent[i][0] == " " and areacontent[i][0]!="":
+                                    areacontent[i] = areacontent[i].replace(" ", "", 1)
+                #we go in to the ospf_rule.py file and if a field matchs a file in the package:                      
+                #hello packet rules
+                hello_packet_ver(rules,field,iccontent,value)
+                #Packer header rules
+                ospf_packet_header_ver(rules,field,iccontent,value,areacontent)
+                
+def hello_packet_ver(rules,field,iccontent,value):
+    for i in rules["OSPF_rules"][1]["Packets"][2]["Hello"]:
+        if i["Field"].count(field)>0:
+            print("**Hello Packet Rule Found: Verifying Field " + i["Field"])
+            if field == "hello_hello_interval":
+                checking_hello_interval = iccontent_split(iccontent,21," ", 1, "s", "replace")
+                print ("Packet Hello Interval == "+value +"s and Incoming Interface Hello Interval == "+checking_hello_interval+"s")
+                checking_value_res(value, checking_hello_interval,"Packet Hello Interval field","Incoming Interface Hello Interval")
+            if field == "hello_router_dead_interval":
+                checking_dead_interval = iccontent_split(iccontent,22," ", 1, "s", "replace")
+                print ("Packet Dead Interval == "+value +"s and Incoming Interface Dead Interval == "+checking_dead_interval+"s")
+                checking_value_res(value, checking_dead_interval,"Packet Dead Interval field","Incoming Interface Dead Interval")
+            if field == "hello_network_mask":
+                checking_network_mask_m = iccontent_split(iccontent, 7, " ", 2, "/", "split")
+                checking_network_mask = checking_network_mask_m[1]
+                checking_network_mask = socket.inet_ntoa(struct.pack(">I", (0xffffffff << (32 - int(checking_network_mask))) & 0xffffffff))
+                print ("Packet Network Mask == "+value +" and Incoming Interface Network Mask == "+checking_network_mask)
+                checking_value_res(value, checking_network_mask,"Packet Network Mask field","Incoming Interface Network Mask")
 
+def ospf_packet_header_ver(rules,field,iccontent,value,areacontent):
+    for i in rules["OSPF_rules"][1]["Packets"][1]["OSPF packet header"]:
+        if i["Field"].count(field)>0:
+            print("**Packer Header Rule Found: Verifying Field " + i["Field"])
+            if field == "area_id":
+                checking_area_id = iccontent_split(iccontent, 9, " ", 1, "null", "none")
+                checking_value_res(value, checking_area_id,"Packet Area ID field","Incoming Interface Area ID")
+            if field == "version_number":
+                checking_value_res(value, "2","Packet Version Number field","2")
+            if field == "incoming_interface":
+                checking_state = iccontent_split(iccontent, 15, " ", 1, "null", "none")
+                checking_int_mgm_n = iccontent[19]
+                if checking_state == "Backup" or checking_state == "DR":
+                    if checking_int_mgm_n.count("OSPFDesignatedRouters"):
+                        print("Rule Followed: Incoming Interface with OSPFDesignatedRouters is with state DR or Backup")
+            if field == "auth_type":
+                checking_auth_type_n = areacontent[22]
+                if checking_auth_type_n == "Area has no authentication":
+                    if value == "0":
+                        print("Rule Followed: Packet Auth_type field specified as Null as associated area auth_type")
+            
+            ######modification needed if authen type set to value other than null for area (auth set for area)
+
+def iccontent_split(iccontent, icind, s1, ind, s2, last_action):
+    checking_interval_n = iccontent[icind]
+    checking_interval_n = checking_interval_n.split(s1)
+    checking_interval = checking_interval_n[ind]
+    if last_action == "replace":
+        checking_interval =checking_interval.replace(s2,"")
+    elif last_action == "split":
+        checking_interval =checking_interval.split(s2)
+    elif last_action == "none":
+        return checking_interval
+    return checking_interval
+
+def checking_value_res(value, checking_value,first,second):
+    if value == checking_value:
+        print("Rule Followed: "+first+" matches "+second)
+    else:
+        print("*****Notfication (Error): Rule not followed")
 
 #verifies and categorizes messages
 def message_categorization(file, rule):
@@ -133,17 +178,9 @@ def message_categorization(file, rule):
     ISM_events = ["WaitTimer","NeighborChange","BackupSeen","InterfaceUp","InterfaceDown","LoopInd","UnloopInd"]
     NSM_events = ["Start","PacketReceived","NegotiationDone","ExchangeDone","Loading Done","AdjOK?","SeqNumberMismatch","BadLSReq","KillNbr","LLDown","InactivityTimer","1-WayReceived","2-WayReceived"]
     #iterates through each line in the given file
-
     with open(rule) as f:
         rules = json.load(f)
-    
     #informational setting logged ism
-    #print(rules["OSPF_rules"][0]["Events"][0]["Informational_Setting_Logged"][1]["State(s)"][1])
-    #for each in rules["OSPF_rules"][0]["Events"][0]["Informational_Setting_Logged"]:
-        #print(each["State(s)"])
-    #nsm
-    #print(rules["OSPF_rules"][0]["Events"][1])
-
     while(peek_line(file)):
         curr_line= file.readline().rstrip()
 
@@ -166,41 +203,7 @@ def message_categorization(file, rule):
                     event = event.replace(')','')
                     print("Event is: "+event)
                     rule_found = 0
-                    for i in rules["OSPF_rules"][0]["Events"][1]["Neighbor_State_Machine"]:
-                        if i["State(s)"].count(current_state)>0 and i["Event"]==event:
-                            print("Rule Found")
-                            rule_found =1
-                            if rule_found == 1:
-                                print("Expected state(s):")
-                                print(i["New_state"])
-                                while(peek_line(file)):
-                                    next_line= peek_line(file).rstrip()
-                                    #Checks next string being read is a log message
-                                    if(re.search("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:", next_line)!=None):
-                                        #extracts the message
-                                        next_message=re.split("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:",next_line)[1]
-                                        break
-                                if type(next_message)!= list:
-                                    next_message = next_message.split()
-                                    next_state = next_message[1]
-                                    if i["New_state"].count(current_state)>0:
-                                        print("Rule Followed: Old State == New State")
-                                    elif next_state == "State":
-                                        next_event = next_message[6]
-                                        next_event = next_event.replace("(","")
-                                        next_event = next_event.replace(")","")
-                                        if NSM_states.count(next_message[5])==0:
-                                            print("*****Notfication (Error): New state in following message is not found")
-                                        elif NSM_states.count(next_message[3])==0:
-                                            print("*****Notfication (Error): Current state in following message is not found")
-                                        elif next_message[3] != current_state:
-                                            print("*****Notfication (Error): Inconsistent current states")
-                                        elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event == event:
-                                            print("Rule Followed: Old state transits to new state as indicated in the following message")
-                                        elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event != event:
-                                            print("*****Notfication (Error): Inconsistent events")
-                                    else:
-                                        print("*****Notfication (Error): Rule not followed")
+                    rule_found = nsm_event_ver(rules,current_state,event,rule_found,file,NSM_states)
                     if rule_found == 0:
                         if NSM_events.count(event)==0:
                             print("*****Notfication (Error): Event is not found")
@@ -219,48 +222,137 @@ def message_categorization(file, rule):
                     event = event.replace(')','')
                     print("Event is: "+event)
                     rule_found = 0
-                    for i in rules["OSPF_rules"][0]["Events"][0]["Informational_Setting_Logged"]:
-                        if i["State(s)"].count(current_state)>0 and i["Event"]==event:
-                            print("Rule Found")
-                            rule_found =1
-                            if rule_found == 1:
-                                print("Expected state(s):")
-                                print(i["New_state"])
-                                while(peek_line(file)):
-                                    next_line= peek_line(file).rstrip()
-                                    #Checks next string being read is a log message
-                                    if(re.search("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:", next_line)!=None):
-                                        #extracts the message
-                                        next_message=re.split("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:",next_line)[1]
-                                        break
-                                if type(next_message)!= list:
-                                    next_message = next_message.split()
-                                    next_state = next_message[1]
-                                    if i["New_state"].count(current_state)>0:
-                                        print("Rule Followed: Old State == New State")
-                                    elif next_state == "State":
-                                        if ISM_states.count(next_message[5])==0:
-                                            print("*****Notfication (Error): New state in following message is not found")
-                                        elif ISM_states.count(next_message[3])==0:
-                                            print("*****Notfication (Error): Current state in following message is not found")
-                                        elif next_message[3] != current_state:
-                                            print("*****Notfication (Error): Inconsistent current states")
-                                        elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0:
-                                            print("Rule Followed: Old state transits to new state as indicated in the following message")
-                                    else:
-                                        print("*****Notfication (Error): Rule not followed")
-
+                    rule_found = ism_event_ver(rules,current_state,event,rule_found,file,ISM_states)
                     if rule_found == 0:
                         if ISM_events.count(event)==0:
                             print("*****Notfication (Error): Event is not found")
                         else:
                             print("*****Notfication (Error): Rule Not Found")
 
+def nsm_event_ver(rules,current_state,event,rule_found,file,NSM_states):
+    for i in rules["OSPF_rules"][0]["Events"][1]["Neighbor_State_Machine"]:
+        if i["State(s)"].count(current_state)>0 and i["Event"]==event:
+            print("Rule Found")
+            rule_found =1
+            if rule_found == 1:
+                print("Expected state(s):")
+                print(i["New_state"])
+                next_message = "none"
+                while(peek_line(file)):
+                    next_line= peek_line(file).rstrip()
+                    #Checks next string being read is a log message
+                    if(re.search("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:", next_line)!=None):
+                        #extracts the message
+                        next_message=re.split("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:",next_line)[1]
+                        break
+                if next_message!="none":
+                    if type(next_message)!= list:
+                        next_message = next_message.split()
+                        next_state = next_message[1]
+                        if i["New_state"].count(current_state)>0:
+                            print("Rule Followed: Old State == New State")
+                        elif next_state == "State":
+                            next_event = next_message[6]
+                            next_event = next_event.replace("(","")
+                            next_event = next_event.replace(")","")
+                            if NSM_states.count(next_message[5])==0:
+                                print("*****Notfication (Error): New state in following message is not found")
+                            elif NSM_states.count(next_message[3])==0:
+                                print("*****Notfication (Error): Current state in following message is not found")
+                            elif next_message[3] != current_state:
+                                print("*****Notfication (Error): Inconsistent current states")
+                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event == event:
+                                print("Rule Followed: Old state transits to new state as indicated in the following message")
+                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0 and next_event != event:
+                                print("*****Notfication (Error): Inconsistent events")
+                        else:
+                            print("*****Notfication (Error): Rule not followed")
+    return rule_found
+
+def ism_event_ver(rules,current_state,event,rule_found,file,ISM_states):
+    for i in rules["OSPF_rules"][0]["Events"][0]["Informational_Setting_Logged"]:
+        if i["State(s)"].count(current_state)>0 and i["Event"]==event:
+            print("Rule Found")
+            rule_found =1
+            if rule_found == 1:
+                print("Expected state(s):")
+                print(i["New_state"])
+                next_message = "none"
+                while(peek_line(file)):
+                    next_line= peek_line(file).rstrip()
+                    #Checks next string being read is a log message
+                    if(re.search("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:", next_line)!=None):
+                        #extracts the message
+                        next_message=re.split("\\d{4}/\\d{2}/\\d{2} \\d\\d:\\d\\d:\\d\\d [OB][SG][P][F]?:",next_line)[1]
+                        break
+                if next_message!="none":
+                    if type(next_message)!= list:
+                        next_message = next_message.split()
+                        next_state = next_message[1]
+                        if i["New_state"].count(current_state)>0:
+                            print("Rule Followed: Old State == New State")
+                        elif next_state == "State":
+                            if ISM_states.count(next_message[5])==0:
+                                print("*****Notfication (Error): New state in following message is not found")
+                            elif ISM_states.count(next_message[3])==0:
+                                print("*****Notfication (Error): Current state in following message is not found")
+                            elif next_message[3] != current_state:
+                                print("*****Notfication (Error): Inconsistent current states")
+                            elif next_message[3]==current_state and i["New_state"].count(next_message[5]) > 0:
+                                print("Rule Followed: Old state transits to new state as indicated in the following message")
+                        else:
+                            print("*****Notfication (Error): Rule not followed")
+    return rule_found
+def shark(packet_type):
+    cap = pyshark.FileCapture('tcpdump.pcap')
+    p = open('parsed'+packet_type+'.txt', 'w')
+    fc = open('fullcapture.txt', 'w')
+    pt = {'Hello': '1', 'DB': '2', 'LSR': '3', 'LSU': '4', 'LSA' : '5', 'ALL' : '6'}
+    ptype = pt[packet_type]
+    if ptype == '1':
+        spec = open('sharkparospf.txt', 'w')
+    print(cap, file=fc)
+    count = 0
+
+    for pkt in cap:
+        print(pkt, file=fc)
+        print('~', file =fc)
+        count += 1
+        if 'ospf' in pkt:
+            if (pkt.ospf.msg == ptype) or (ptype == '6'):
+                print('PACKET RECIEVED NUMBER IN CAPTURE: ' +str(count), file=p)
+                print(pkt, file=p)
+                print('~', file=p)
+                if(ptype == '1'):
+                    print('PACKET RECIEVED NUMBER IN CAPTURE: ' + str(count), file=spec)
+                    print('srcrouter: ' + pkt.ospf.srcrouter, file=spec)
+                    print('hello_network_mask: ' + pkt.ospf.hello_network_mask, file=spec)
+                    print('hello_hello_interval: ' + pkt.ospf.hello_hello_interval, file=spec)
+                    print('hello_router_dead_interval: ' + pkt.ospf.hello_router_dead_interval, file=spec)
+                    print('hello_active_neighbor: ' + pkt.ospf.hello_active_neighbor, file=spec)
+                    print('incoming_interface: ' + pkt.ip.src, file=spec)
+                    print('version_number: ' + pkt.ospf.version, file=spec)
+                    print('area_id: ' + pkt.ospf.area_id, file=spec)
+                    print('auth_type: ' + pkt.ospf.auth_type, file=spec)
+                    print('auth_none: ' + pkt.ospf.auth_none, file=spec)
+                    print('~', file=spec)
+    p.close()
+    fc.close()
+    if(ptype == '1'):
+        spec.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--rule", help="Path to JSON rule file", required=True)
     parser.add_argument("-l", "--log", help="Path to log file", required=True)
+    parser.add_argument("-p", "--packet", choices=['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL'], help="Option to choose OSPF packet type to collect: Hello, DB, LSR, LSU, LSA, or ALL", required=False)
     settings = parser.parse_args()
+    
+    #settings for wireshark
+    if (settings.packet in ['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL']):
+        shark(settings.packet)
+
     file = open(settings.log, "r")
     message_categorization(file,settings.rule)
     package_verification(settings.rule)
