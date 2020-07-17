@@ -282,7 +282,7 @@ def event_ver(rules,current_state,event,rule_found,file,ISM_states,NSM_states,ev
                         else:
                             print("*****Notfication (Error): Rule not followed")
     return rule_found
-def shark(packet_type):
+def shark(packet_type, protocol):
     cap = pyshark.FileCapture('tcpdump.pcap')
     p = open('parsed'+packet_type+'.txt', 'w')
     fc = open('fullcapture.txt', 'w')
@@ -297,7 +297,7 @@ def shark(packet_type):
         print(pkt, file=fc)
         print('~', file =fc)
         count += 1
-        if 'ospf' in pkt:
+        if protocol in pkt:
             if (pkt.ospf.msg == ptype) or (ptype == '6'):
                 print('PACKET RECIEVED NUMBER IN CAPTURE: ' +str(count), file=p)
                 print(pkt, file=p)
@@ -326,11 +326,17 @@ def main():
     parser.add_argument("-r", "--rule", help="Path to JSON rule file", required=True)
     parser.add_argument("-l", "--log", help="Path to log file", required=True)
     parser.add_argument("-p", "--packet", choices=['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL'], help="Option to choose OSPF packet type to collect: Hello, DB, LSR, LSU, LSA, or ALL", required=False)
+    #flag to be implemented in the future when BGP (or other protocols) are implemented to select which protocol packets to capture
+    #parser.add_argument("-pr", "--protocol", choices=['ospf', 'bgp'], help="Option to choose which protocol packets to capture", required=False)
+
     settings = parser.parse_args()
+
+     #flag to be implemented in the future when BGP is implemented to select which protocol packets to capture                                                                                                 #parser.add_argument("-p", "--protocol", choices=['ospf', 'bgp'], help="Option to choose which tpye of protocol packets to capture", required=False)
     
     #settings for wireshark
     if (settings.packet in ['Hello', 'DB', 'LSR', 'LSU', 'LSA', 'ALL']):
-        shark(settings.packet)
+        #what is now ospf should be changed to settings.protocol in the future
+        shark(settings.packet, 'ospf')
 
     file = open(settings.log, "r")
     message_categorization(file,settings.rule)
