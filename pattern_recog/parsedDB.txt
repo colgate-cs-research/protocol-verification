@@ -1,0 +1,2256 @@
+PACKET RECIEVED NUMBER IN CAPTURE: 248
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xceed (52973)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5ab [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0xb703 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 233342203
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 249
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xceed (52973)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5ab [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0xb703 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 233342203
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 261
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef0 (52976)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd588 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x76ed [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1306887444
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 262
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef0 (52976)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd588 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x76ed [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1306887444
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 278
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:03
+	Unused: 1100
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef2 (52978)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5a6 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.3
+	Destination: 10.10.0.2
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8d18 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 126072138
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 279
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:03
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef2 (52978)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5a6 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.3
+	Destination: 10.10.0.2
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8d18 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 126072138
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 285
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: dfd4
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef3 (52979)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd595 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x602a [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1628801190
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 286
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: 1d73
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef3 (52979)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd595 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x602a [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1628801190
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 287
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 2401
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef1 (52977)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd593 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x845b [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 126072138
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000005
+	Checksum: 0x2e53
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 288
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 5ff5
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef1 (52977)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd593 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x845b [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 126072138
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000005
+	Checksum: 0x2e53
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 289
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:03
+	Unused: 1200
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef4 (52980)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd590 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.3
+	Destination: 10.10.0.2
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x4391 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 126072139
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000004
+	Checksum: 0x6f19
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 290
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:03
+	Unused: 4b8a
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef4 (52980)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd590 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.3
+	Destination: 10.10.0.2
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x4391 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 126072139
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000004
+	Checksum: 0x6f19
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 293
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 0100
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef2 (52978)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5a6 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8d1f [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 126072139
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 294
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:02
+	Unused: 0038
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef2 (52978)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd5a6 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.2
+	Destination: 10.10.0.3
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8d1f [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 126072139
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 347
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef7 (52983)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd581 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x76ed [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1306887444
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 348
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef7 (52983)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd581 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x76ed [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1306887444
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 360
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0b
+	Unused: 14df
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef4 (52980)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd594 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.11
+	Destination: 10.10.0.10
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8e21 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1766543992
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 361
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0b
+	Unused: 001d
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef4 (52980)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd594 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.11
+	Destination: 10.10.0.10
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8e21 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1766543992
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 362
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: 0024
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcef9 (52985)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd553 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x3956 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 1766543992
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000005
+	Checksum: 0x2e53
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.3
+	Link State ID: 10.10.0.3
+	Advertising Router: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000005
+	Sequence Number: 0x80000001
+	Checksum: 0xef77
+	Checksum: 0x49bf
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 363
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: 89cb
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcef9 (52985)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd553 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x3956 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 1766543992
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000005
+	Checksum: 0x2e53
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.3
+	Link State ID: 10.10.0.3
+	Advertising Router: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000005
+	Sequence Number: 0x80000001
+	Checksum: 0xef77
+	Checksum: 0x49bf
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 364
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:13
+	Unused: 9800
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef5 (52981)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd583 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.19
+	Destination: 10.10.0.18
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x9729 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 626363750
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 365
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:13
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcef5 (52981)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd583 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.19
+	Destination: 10.10.0.18
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x9729 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x07, (I) Init, (M) More, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .1.. = (I) Init: Set
+	.... ..1. = (M) More: Set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 626363750
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 366
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0b
+	Unused: 1866
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef6 (52982)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd57e [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.11
+	Destination: 10.10.0.10
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x539b [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1766543993
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.4
+	Advertising Router: 172.17.0.4
+	Sequence Number: 0x80000004
+	Checksum: 0x6016
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 367
+Packet (Length: 88)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0b
+	Unused: f8e7
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 72
+	Identification: 0xcef6 (52982)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd57e [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.11
+	Destination: 10.10.0.10
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 52
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x539b [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 1766543993
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.4
+	Advertising Router: 172.17.0.4
+	Sequence Number: 0x80000004
+	Checksum: 0x6016
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 370
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcefa (52986)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd58e [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8e28 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 1766543993
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 371
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:0a
+	Unused: 0102
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcefa (52986)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd58e [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.10
+	Destination: 10.10.0.11
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.3
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x8e28 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 1766543993
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 386
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0a00
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcef8 (52984)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd544 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x504f [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 626363750
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000006
+	Checksum: 0xa0c0
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.3
+	Link State ID: 10.10.0.3
+	Advertising Router: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000004
+	Sequence Number: 0x80000001
+	Checksum: 0x6f19
+	Checksum: 0x49bf
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 387
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 59ff
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcef8 (52984)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd544 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x504f [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 626363750
+	.000 0000 0000 0011 = LS Age (seconds): 3
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.2
+	Advertising Router: 172.17.0.2
+	Sequence Number: 0x80000006
+	Checksum: 0xa0c0
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.3
+	Link State ID: 10.10.0.3
+	Advertising Router: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000004
+	Sequence Number: 0x80000001
+	Checksum: 0x6f19
+	Checksum: 0x49bf
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 418
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:13
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcefc (52988)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd540 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.19
+	Destination: 10.10.0.18
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x5c79 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 626363751
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000005
+	Checksum: 0xef77
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.4
+	Link State ID: 10.10.0.11
+	Advertising Router: 172.17.0.4
+	Advertising Router: 172.17.0.4
+	Sequence Number: 0x80000005
+	Sequence Number: 0x80000001
+	Checksum: 0x51fb
+	Checksum: 0x0bf2
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 419
+Packet (Length: 128)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:13
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 112
+	Identification: 0xcefc (52988)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd540 [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.19
+	Destination: 10.10.0.18
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 92
+	Source OSPF Router: 172.17.0.4
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x5c79 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x01, (MS) Master
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...1 = (MS) Master: Yes
+	DD Sequence: 626363751
+	.000 0000 0000 0100 = LS Age (seconds): 4
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	Link State ID: 172.17.0.3
+	Advertising Router: 172.17.0.3
+	Sequence Number: 0x80000005
+	Checksum: 0xef77
+	Length: 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 1 (Router-LSA), len 48
+	LSA-type 2 (Network-LSA), len 32
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.... ...0 = (MT) Multi-Topology Routing: No
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	.000 0000 0000 0000 = LS Age (seconds): 0
+	0... .... .... .... = Do Not Age Flag: 0
+	0... .... .... .... = Do Not Age Flag: 0
+	LS Type: Router-LSA (1)
+	LS Type: Network-LSA (2)
+	Link State ID: 172.17.0.4
+	Link State ID: 10.10.0.11
+	Advertising Router: 172.17.0.4
+	Advertising Router: 172.17.0.4
+	Sequence Number: 0x80000005
+	Sequence Number: 0x80000001
+	Checksum: 0x51fb
+	Checksum: 0x0bf2
+	Length: 48
+	Length: 32
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 421
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Unicast to another host (3)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcefc (52988)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd57c [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x9731 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 626363751
+
+~
+PACKET RECIEVED NUMBER IN CAPTURE: 423
+Packet (Length: 68)
+Layer SLL:
+	Packet type: Sent by us (4)
+	Link-layer address type: 1
+	Link-layer address length: 6
+	Source: 02:42:0a:0a:00:12
+	Unused: 0000
+	Protocol: IPv4 (0x0800)
+Layer IP:
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+	1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 52
+	Identification: 0xcefc (52988)
+	Flags: 0x0000
+	0... .... .... .... = Reserved bit: Not set
+	.0.. .... .... .... = Don't fragment: Not set
+	..0. .... .... .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: OSPF IGP (89)
+	Header checksum: 0xd57c [validation disabled]
+	Header checksum status: Unverified
+	Source: 10.10.0.18
+	Destination: 10.10.0.19
+Layer OSPF:
+	OSPF Header
+	Version: 2
+	Message Type: DB Description (2)
+	Packet Length: 32
+	Source OSPF Router: 172.17.0.2
+	Area ID: 0.0.0.0 (Backbone)
+	Checksum: 0x9731 [correct]
+	Auth Type: Null (0)
+	Auth Data (none): 0000000000000000
+	OSPF DB Description
+	Interface MTU: 1500
+	Options: 0x02, (E) External Routing
+	0... .... = DN: Not set
+	.0.. .... = O: Not set
+	..0. .... = (DC) Demand Circuits: Not supported
+	...0 .... = (L) LLS Data block: Not Present
+	.... 0... = (N) NSSA: Not supported
+	.... .0.. = (MC) Multicast: Not capable
+	.... ..1. = (E) External Routing: Capable
+	.... ...0 = (MT) Multi-Topology Routing: No
+	DB Description: 0x00
+	.... 0... = (R) OOBResync: Not set
+	.... .0.. = (I) Init: Not set
+	.... ..0. = (M) More: Not set
+	.... ...0 = (MS) Master: No
+	DD Sequence: 626363751
+
+~
