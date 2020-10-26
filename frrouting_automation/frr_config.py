@@ -9,6 +9,8 @@ import os
 import fileinput
 
 
+
+
 def load_config(filepath):
     '''Read JSON configuration'''
     topology = os.path.basename(filepath).split('.')[0]
@@ -42,14 +44,14 @@ def create_networks(links, client):
 
 def create_containers(routers, client, topology):
     '''Create a container for each router'''
-    client.images.pull('colgatenetresearch/frr:version-6.0')
+    #client.images.pull('frrouting/frr')
     images = set()
 
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s" % router.name)
         if router.image not in images:
-            client.images.pull(router.image)
+            #client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name, 
                 labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
@@ -59,6 +61,7 @@ def config_routers(routers, client):
         router = routers[router_name]
         config_daemons(router)
         config_vtysh(router)
+        #scapyintegration(router,filename)
 
         if "bgp" in router.protocols:
             config_bgp(router)
@@ -183,7 +186,7 @@ class Link:
 class Router:
     def __init__(self, name, as_num):
         self.name = name
-        self.image = 'frrouting/frr'
+        self.image = 'scapyintergration:latest'
         self.links = []
         self.protocols = set()
         self.as_num = as_num
@@ -272,11 +275,25 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
+def scapyintegration(routers,filename):
+    
+
+    if (filename.lower()=="all"):
+        for router_name in sorted(routers.keys()):
+            os.system("docker cp ~/protocol-verification/frrouting_automation/scapy_scripts/. " + router_name +":/tmp/")
+    
+    else:
+        for router_name in sorted(routers.keys()):
+            os.system("docker cp ~/protocol-verification/frrouting_automation/scapy_scripts/"+filename+" " + router_name +":/tmp/"+filename)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
+    parser.add_argument("-sc", "--scapy", help="Transfer all files using 'all' or a specific file using its filename", required=False)
     parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
+
 
     settings = parser.parse_args()
 
@@ -294,10 +311,17 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
+    #implementing the scapy function.
+    if (settings.scapy in ['all']):
+        scapyintegration(routers,'all')
+
+    else:
+        scapyintegration(routers,settings.scapy)
+
     #Settings for tcpdump
     if (settings.tcp in ['tcpon']):
         os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
-    client.close()
+
 
 if __name__ == "__main__":
     main()
