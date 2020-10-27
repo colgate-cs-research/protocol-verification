@@ -42,17 +42,17 @@ def create_networks(links, client):
 
 def create_containers(routers, client, topology):
     '''Create a container for each router'''
-    client.images.pull('colgatenetresearch/frr:version-6.0')
     images = set()
 
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
-        print("Creating %s" % router.name)
+        print("Creating %s (%s)" % (router.name, router.image))
         if router.image not in images:
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name, 
-                labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"])
+                labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"],
+                command="/bin/bash", stdin_open=True, tty=True)
 
 def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
@@ -197,7 +197,7 @@ class Router:
             for protocol in config["protocols"]:
                 router.add_protocol(protocol)
         if "image" in config:
-            self.image = config["image"]
+            router.image = config["image"]
         return router
 
     def add_link(self, link):
