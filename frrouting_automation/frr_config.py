@@ -57,7 +57,7 @@ def create_containers(routers, client, topology):
 def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
-        if router.image == "frrouting/frr":
+        if "frr" in router.image:
             config_daemons(router)
             config_vtysh(router)
 
@@ -65,7 +65,7 @@ def config_routers(routers, client):
                 config_bgp(router)
             if "ospf" in router.protocols:
                 config_ospf(router)
-        elif router.image == "colgatenetresearch/bird:latest":
+        elif "bird" in router.image:
             config_bird(router)
 
         print("Starting %s" % router.name)
