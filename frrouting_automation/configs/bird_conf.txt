@@ -1,0 +1,44 @@
+protocol kernel {
+        ipv4 {
+                export all;     # Default is export none
+        };
+        persist;                # Don't remove routes on BIRD shutdown
+}
+protocol device {
+}
+protocol rip {
+        ipv4 {
+                import all;
+                export all;
+        };
+        interface "*";
+}
+protocol ospf MyOSPF {
+     tick 2;
+     rfc1583compat yes;
+     area 0.0.0.0 {
+        stub no;
+        interface "eth1" {
+           hello 10;
+           retransmit 6;
+           cost 10;
+           transmit delay 5;
+           dead count 5;
+           wait 50;
+           type broadcast;
+           authentication simple;
+           password "pass";
+       };
+        interface "eth2" {
+           hello 10;
+           retransmit 6;
+           cost 10;
+           transmit delay 5;
+           dead count 5;
+           wait 50;
+           type broadcast;
+           authentication simple;
+           password "pass";
+       };
+    };
+};

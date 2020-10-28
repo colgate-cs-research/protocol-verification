@@ -51,24 +51,34 @@ def create_containers(routers, client, topology):
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name, 
-                labels=[topology], cap_add=["NET_ADMIN", "SYS_ADMIN"],
+                labels=[topology], cap_add=["ALL"],
                 command="/bin/bash", stdin_open=True, tty=True)
 
 def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
-        config_daemons(router)
-        config_vtysh(router)
+        if router.image == "frrouting/frr":
+            config_daemons(router)
+            config_vtysh(router)
 
-        if "bgp" in router.protocols:
-            config_bgp(router)
-        if "ospf" in router.protocols:
-            config_ospf(router)
+            if "bgp" in router.protocols:
+                config_bgp(router)
+            if "ospf" in router.protocols:
+                config_ospf(router)
+        elif router.image == "colgatenetresearch/bird:latest":
+            config_bird(router)
 
         print("Starting %s" % router.name)
         container = client.containers.get(router.name)
         container.start()
+        os.system("docker exec -it " + router.name +" bin/bash -c 'service bird start'")
             
+def config_bird(router):
+    with open ('configs/bird_conf.txt',"r") as file:
+        template = file.read()
+    with open('/tmp/bird.conf', 'w') as file:
+        file.write(template)
+    os.system("docker cp /tmp/bird.conf " + router.name +":/etc/bird/bird.conf")
 
 def config_daemons(router):
     '''Configure daemons'''
