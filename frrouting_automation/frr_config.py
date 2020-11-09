@@ -7,6 +7,7 @@ import ipaddress
 import json
 import os
 import fileinput
+import time
 
 
 def load_config(filepath):
@@ -67,11 +68,12 @@ def config_routers(routers, client):
                 config_ospf(router)
         elif "bird" in router.image:
             config_bird(router)
-
         print("Starting %s" % router.name)
         container = client.containers.get(router.name)
         container.start()
-        os.system("docker exec -it " + router.name +" bin/bash -c 'service bird start'")
+        if "bird" in router.image:
+            os.system("docker exec -it " + router.name +" bin/bash -c 'service bird start'")
+
             
 def config_bird(router):
     with open ('configs/bird_conf.txt',"r") as file:
@@ -304,6 +306,8 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
+    #time for manually excuting the delay/need to be automated
+    time.sleep(10)
     #Settings for tcpdump
     if (settings.tcp in ['tcpon']):
         os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
