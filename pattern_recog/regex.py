@@ -304,6 +304,7 @@ def shark(packet_type, protocol):
                 print('~', file=p)
                 if(ptype == '1'):
                     print('PACKET RECIEVED NUMBER IN CAPTURE: ' + str(count), file=spec)
+                    print('time_stamp' = pkt.sniff_timestamp, file=spec)
                     print('srcrouter: ' + pkt.ospf.srcrouter, file=spec)
                     print('hello_network_mask: ' + pkt.ospf.hello_network_mask, file=spec)
                     print('hello_hello_interval: ' + pkt.ospf.hello_hello_interval, file=spec)
