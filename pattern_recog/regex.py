@@ -295,12 +295,12 @@ def shark(packet_type, protocol):
 
     for pkt in cap:
         print(pkt, file=fc)
-        print('Time Stamp' + pkt.sniff_timestamp, file=p)
         print('~', file =fc)
         count += 1
         if protocol in pkt:
             if (pkt.ospf.msg == ptype) or (ptype == '6'):
                 print('PACKET RECIEVED NUMBER IN CAPTURE: ' +str(count), file=p)
+                print('Time Stamp' + pkt.sniff_timestamp, file=p)
                 print(pkt, file=p)
                 print('~', file=p)
                 if(ptype == '1'):
