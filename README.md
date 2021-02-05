@@ -1,7 +1,6 @@
 # protocol-verification
-<h1>
-Package Installation
-</h1>
+# Package Installation
+
 <p>
 Install the following packages using the following commands:
 <pre>
@@ -15,8 +14,9 @@ $ docker pull kaazing/tcpdump
 </pre>
 More details on how to install the packages:https://linuxize.com/post/how-to-install-and-use-docker-on-ubuntu-20-04/
 </p>
-<h2>Network Establishment and Configuration
-</h2>
+
+# Network Establishment and Configuration
+
 <p>
 The <code>frr_config.py</code> file can be used to create networks based on topologies provided in <code>.json</code> format, and currently supports routing protocol implementations including OSPF (FRRouting and BIRD) and BGP (FRRouting). All router and interface in the network are constructed using the Docker containers and networks.
   
@@ -33,8 +33,9 @@ optional arguments:
 </pre>
 Established network and routers run in the background until stopped and removed, and the interaction with running networks and routers are documented in the next section.
 </p>
-<h3>Network and Router CLI Commands (FRRouting)
-</h3>
+
+# Network and Router CLI Commands (FRRouting)
+
 <p>
 The Docker <code>exec</code> command allows for interaction with the network and routers running in the background, and the command started using docker exec only runs while the container’s primary process (PID 1) is running, and it is not restarted if the container is restarted.
   
@@ -61,8 +62,7 @@ INSTANCE_NAME# show ip ospf interface    Display OSPF interface information.
 More_info: http://docs.frrouting.org/en/latest/ospfd.html
 </p>
 
-<h4>Network and Router CLI Commands (BIRD)
-</h4>
+# Network and Router CLI Commands (BIRD)
 <p>
 Use command-line client <code>birdc</code> to talk with a running router/containers running BIRD OSPF.
   
