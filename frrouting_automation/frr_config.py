@@ -289,7 +289,7 @@ def main():
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
     parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
-
+    parser.add_argument("-d", "--delay", help="Interfaces to apply delay to", required=False)
     settings = parser.parse_args()
 
     # Load and parse configuration
@@ -306,9 +306,15 @@ def main():
             print("ERROR: %s is already running; stop or restart the topology" % topology)
         else:
             launch_topology(topology, routers, links, client)
+
     #time for manually excuting the delay/need to be automated
-    print("15 Seconds For Entering Delay")
-    time.sleep(15)
+    if settings.delay != None:
+        delaying_interfaces = settings.delay.split("/")
+        for delaying_interface in delaying_interfaces:
+            print(delaying_interface)
+            os.system('nohup pumba netem --duration 300s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time 3000 --jitter 100 &')
+            print(delaying_interface)
+
     #Settings for tcpdump
     if (settings.tcp in ['tcpon']):
         os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
