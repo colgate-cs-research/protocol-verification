@@ -22,7 +22,7 @@ The <code>frr_config.py</code> file can be used to create networks based on topo
   
 Following is a detailed description of <code>frr_config.py</code>:
 <pre>
-usage: python3 frr_config.py [-c Path_to_JSON _config_file] [-a Operation_to_perform] [-t Option_to_have_tcpdump_on]
+usage: python3 frr_config.py [-c Path_to_JSON _config_file] [-a Operation_to_perform] [-t Option_to_have_tcpdump_on] [-d Interfaces_to_apply_delay_to]
 
 optional arguments:
   -c , --config         Input path to JSON config/topology file for creating the network
@@ -30,6 +30,8 @@ optional arguments:
                         Choices=['start', 'stop', 'restart']
   -t, --tcp             Decide on whether to capture transmitted packets using tcpdump or not
                         Choices=['tcpon', NONE]               
+  -d, --delay           Input interfaces to apply default delay, seperated by '/'
+                        Example input: -d eth1/eth2/eth3      
 </pre>
 Established network and routers run in the background until stopped and removed, and the interaction with running networks and routers are documented in the next section.
 </p>
