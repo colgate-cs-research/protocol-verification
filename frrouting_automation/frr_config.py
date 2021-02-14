@@ -51,7 +51,7 @@ def create_containers(routers, client, topology):
         if router.image not in images:
             client.images.pull(router.image)
             images.add(router.image)
-        client.containers.create(router.image, detach=True, name=router.name, 
+        client.containers.create(router.image, detach=True, name=router.name,
                 labels=[topology], cap_add=["ALL"],
                 command="/bin/bash", stdin_open=True, tty=True)
 
@@ -74,7 +74,7 @@ def config_routers(routers, client):
         if "bird" in router.image:
             os.system("docker exec -it " + router.name +" bin/bash -c 'service bird start'")
 
-            
+
 def config_bird(router):
     with open ('configs/bird_conf.txt',"r") as file:
         template = file.read()
@@ -169,7 +169,7 @@ class Link:
 
     @classmethod
     def from_config(self, config, subnet):
-        link = Link(config["name"], subnet) 
+        link = Link(config["name"], subnet)
         return link
 
     def add_router(self, router):
@@ -189,7 +189,7 @@ class Link:
         return list(self.subnet.hosts())[self.routers.index(router)+1]
 
     def __str__(self):
-        return "Link<%s,%s,[%s]>" % (self.name, self.subnet, 
+        return "Link<%s,%s,[%s]>" % (self.name, self.subnet,
                 ','.join([r.name for r in self.routers]))
 
 class Router:
@@ -204,7 +204,7 @@ class Router:
 
     @classmethod
     def from_config(self, config, as_num):
-        router = Router(config["name"], as_num) 
+        router = Router(config["name"], as_num)
         if "protocols" in config:
             for protocol in config["protocols"]:
                 router.add_protocol(protocol)
@@ -226,7 +226,7 @@ class Router:
         return self.name < other.name
 
 class ConfigurationError(Exception):
-    pass    
+    pass
 
 def parse_config(config):
     '''Extract list of routers and links from config'''
@@ -240,7 +240,7 @@ def parse_config(config):
             as_num = router_config["as_num"]
         else:
             as_num = next(as_nums)
-        
+
         # Create router
         router = Router.from_config(router_config, as_num)
         routers[router.name] = router
@@ -250,7 +250,7 @@ def parse_config(config):
     n = 29 - n.bit_length()
     supernet = ipaddress.IPv4Network('10.10.0.0/%d' % n)
     subnets = supernet.subnets(new_prefix=29)
-    
+
     # Create link objects
     links = {}
     for link_config in config["links"]:
@@ -267,7 +267,7 @@ def parse_config(config):
         # Add routers to link
         for router_name in link_config["routers"]:
             if router_name not in routers:
-                raise ConfigurationError("No such node: %s" % router_name) 
+                raise ConfigurationError("No such node: %s" % router_name)
             router = routers[router_name]
             link.add_router(router)
             router.add_link(link)
@@ -279,7 +279,7 @@ def cleanup_topology(topology, client):
         print("Cleaning up running container %s" % container.name)
         container.stop()
         container.remove()
-    print("Cleaning up all unused containers")  
+    print("Cleaning up all unused containers")
     client.containers.prune()
     print("Cleaning up networks")
     client.networks.prune()
@@ -307,7 +307,8 @@ def main():
         else:
             launch_topology(topology, routers, links, client)
     #time for manually excuting the delay/need to be automated
-    time.sleep(10)
+    print("15 Seconds For Entering Delay")
+    time.sleep(15)
     #Settings for tcpdump
     if (settings.tcp in ['tcpon']):
         os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
