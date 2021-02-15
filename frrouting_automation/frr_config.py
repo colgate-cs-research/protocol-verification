@@ -309,10 +309,12 @@ def main():
 
     #time for manually excuting the delay/need to be automated
     if settings.delay != None:
-        delaying_interfaces = settings.delay.split("/")
+        delay_components = settings.delay.split("//")
+        delaying_interfaces = delay_components[0].split("/")
+        delaying_options = delay_components[1].split("/")
         for delaying_interface in delaying_interfaces:
             print('Appying delay to interface '+delaying_interface)
-            os.system('nohup pumba netem --duration 300s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time 3000 --jitter 100 >/dev/null 2>&1 &')
+            os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
 
     #Settings for tcpdump
     if (settings.tcp in ['tcpon']):
