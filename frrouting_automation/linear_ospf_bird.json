@@ -1,0 +1,38 @@
+{
+    "routers":[
+        {
+            "name": "router1",
+            "protocols": ["ospf"],
+            "image": "colgatenetresearch/bird:latest"
+        },
+        {
+            "name": "router2",
+            "protocols": ["ospf"],
+            "image": "colgatenetresearch/bird:latest"
+        },
+        {
+            "name": "router3",
+            "protocols": ["ospf"],
+            "image": "colgatenetresearch/bird:latest"
+        },
+        {
+            "name": "router4",
+            "protocols": ["ospf"],
+            "image": "colgatenetresearch/bird:latest"
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["router1", "router2"]
+        },
+        {
+            "name": "bridge2",
+            "routers": ["router2", "router3"]
+        },
+        {
+            "name": "bridge3",
+            "routers": ["router3", "router4"]
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "routers":[
+        {
+            "name": "router1",
+            "protocols": ["ospf"]
+        },
+        {
+            "name": "router2",
+            "protocols": ["ospf"]
+        },
+        {
+            "name": "router3",
+            "protocols": ["ospf"]
+        },
+        {
+            "name": "router4",
+            "protocols": ["ospf"]
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["router1", "router2"]
+        },
+        {
+            "name": "bridge2",
+            "routers": ["router1", "router3"]
+        },
+        {
+            "name": "bridge3",
+            "routers": ["router1", "router4"]
+        }
+    ]
+}
