@@ -43,12 +43,13 @@ def create_networks(links, client):
 
 def create_containers(routers, client, topology):
     '''Create a container for each router'''
-    images = set()
+    images = set([tag for img in client.images.list() for tag in img.tags])
 
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s (%s)" % (router.name, router.image))
         if router.image not in images:
+            print("Pulling %s" % (router.image))
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name,
@@ -195,7 +196,7 @@ class Link:
 class Router:
     def __init__(self, name, as_num):
         self.name = name
-        self.image = 'frrouting/frr'
+        self.image = 'frrouting/frr:latest'
         self.links = []
         self.protocols = set()
         self.as_num = as_num
