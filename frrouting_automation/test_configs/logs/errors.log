@@ -1,0 +1,77 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminalno bgp listen range 192.168.10.0/24 peer-group TESTspawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# no bgp listen range 192.168.10.0/24 peer-group TEST
+spawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# no bgp listen range 192.168.10.0/24 peer-group TEST
+% Unknown command: no bgp listen range 192.168.10.0/24 peer-group TEST
+router2(config)# do sh ip bgp peer-groupspawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# router bgp
+router2(config-router)# spawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# router bgp
+router2(config-router)# no bgp listen range 192.168.10.0/24 peer-group TEST
+% Peer-group does not exist
+router2(config-router)# spawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# router bgp
+router2(config-router)# no bgp listen range 192.168.10.0/24 peer-group TEST
+% Peer-group does not exist
+router2(config-router)# do sh ip bgp peer-group
+
+BGP peer-group TEST, remote AS 2
+  Peer-group type is internal
+  Configured address-families: IPv4 Unicast;
+  1 IPv4 listen range(s)
+    192.168.10.0/24
+router2(config-router)# exit
+router2(config)# exit
+router2# exit
+spawn vtysh
+
+Hello, this is FRRouting (version 7.2.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# configure terminal
+router2(config)# router bgp
+no bgp listen range 192.168.10.0/24 peer-group TEST
+router2(config-router)# no bgp listen range 192.168.10.0/24 peer-group TEST
+% Peer-group does not exist
+router2(config-router)# do sh ip bgp peer-group
+
+BGP peer-group TEST, remote AS 2
+  Peer-group type is internal
+  Configured address-families: IPv4 Unicast;
+  1 IPv4 listen range(s)
+    192.168.10.0/24
+router2(config-router)# exit
+exit
+router2(config)# exit
+exit
+router2# exit

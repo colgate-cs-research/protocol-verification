@@ -1,0 +1,27 @@
+!
+hostname <router_name>
+password zebra
+enable password zebra
+!
+router bgp <as_num>
+ bgp router-id <id_num>
+ no bgp ebgp-requires-policy
+ <neighbours>
+ address-family ipv4 unicast
+  redistribute connected
+ exit-address-family
+ bgp log-neighbor-changes
+ neighbor TEST peer-group
+ neighbor TEST remote-as internal
+ neighbor TEST description test_group
+ neighbor TEST update-source 192.168.10.10
+ bgp listen range 192.168.10.0/24 peer-group TEST
+!
+log file /tmp/bgp.log debugging
+debug bgp keepalives
+debug bgp neighbor-events
+debug bgp update-groups
+debug bgp updates in
+debug bgp updates out
+debug bgp zebra
+!

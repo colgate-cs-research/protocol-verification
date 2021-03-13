@@ -1,0 +1,44 @@
+!
+! Zebra configuration saved from vty
+!   2021/03/04 11:13:06
+!
+frr version 7.7-dev_git
+frr defaults traditional
+!
+hostname router2
+password zebra
+enable password zebra
+log file /tmp/bgp.log
+!
+debug bgp keepalives
+debug bgp neighbor-events
+debug bgp update-groups
+debug bgp updates in
+debug bgp updates out
+debug bgp zebra
+!
+!
+!
+router bgp 2
+ bgp router-id 10.10.0.3
+ bgp log-neighbor-changes
+ no bgp ebgp-requires-policy
+ neighbor TEST peer-group
+ neighbor TEST remote-as internal
+ neighbor TEST description test_group
+ neighbor TEST update-source 192.168.10.10
+ neighbor 10.10.0.2 remote-as 1
+ neighbor 10.10.0.11 remote-as 3
+ bgp listen range 192.168.10.0/24 peer-group TEST
+ !
+ address-family ipv4 unicast
+  redistribute connected
+  neighbor 10.10.0.2 next-hop-self
+  neighbor 10.10.0.11 next-hop-self
+ exit-address-family
+!
+!
+!
+!
+line vty
+!
