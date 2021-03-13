@@ -1,12 +1,12 @@
 import sys
 
 def remove_config(command):
-	tester.write('send -- "'+"no "+command+r'\r"'+'\n')
-	tester.write('expect "router*"'+'\n')
+	tester.write(r'send -- "'+"no "+command+r'\r"'+'\n')
+	tester.write(r'expect "*#"'+'\n')
 
 def add_config(command):
 	tester.write('send -- "'+command+r'\r"'+'\n')
-	tester.write('expect "router*"'+'\n')
+	tester.write(r'expect "*#"'+'\n')
 
 config = open(sys.argv[1], "r")
 tester = open("run_tests", "w")
@@ -19,12 +19,16 @@ current_indent = 0
 #Get indentation of next line
 next_indent = 0
 
+#Keep track of section count
+exits = 0
+
 tester.write("#!/usr/bin/expect -f"+'\n')
+tester.write("set timeout -1"+'\n')
 tester.write("log_file tests.log"+'\n')
 tester.write("spawn vtysh"+'\n')
-tester.write(r'expect "router*"'+'\n')
+tester.write(r'expect "*#"'+'\n')
 tester.write(r'send -- "configure terminal\r"'+'\n')
-tester.write(r'expect "router*"'+'\n')
+tester.write(r'expect "*#"'+'\n')
 
 for index in range(0, len(lines)-1):
 	
@@ -38,6 +42,7 @@ for index in range(0, len(lines)-1):
 		
 	if(current_indent < next_indent): #Indicates start of sub section
 		add_config(command)
+		exits = exits + 1
 		continue
 	
 	elif(current_indent > next_indent): #Indicates inside/end of sub section
@@ -48,7 +53,8 @@ for index in range(0, len(lines)-1):
 			remove_config(command)
 			add_config(command)
 		tester.write(r'send -- "exit\r"'+'\n')
-		tester.write('expect "router*"'+'\n')
+		exits = exits - 1
+		tester.write(r'expect "*#"'+'\n')
 		
 	else:
 		if(command.startswith("no ")):
@@ -57,6 +63,15 @@ for index in range(0, len(lines)-1):
 		else:
 			remove_config(command)
 			add_config(command)
+
+for i in range(0, exits+1):
+	tester.write(r'send -- "exit\r"'+'\n')
+	tester.write(r'expect "*#"'+'\n')
 	
+tester.write(r'send -- "exit\r"'+'\n')
+tester.write(r'expect "*#"'+'\n')
+
+tester.write(r'send -- "exit\r"'+'\n')
+
 tester.write("expect eof"+'\n')
 		
