@@ -11,13 +11,13 @@ def add_config(command):
 config = open(sys.argv[1], "r")
 tester = open("run_tests", "w")
 
-lines = config.readlines();
+lines = config.readlines()
 
 #Get indentation (ie number of whitespaces) of first line
-current_indent = 0;
+current_indent = 0
 
 #Get indentation of next line
-next_indent = 0;
+next_indent = 0
 
 tester.write("#!/usr/bin/expect -f"+'\n')
 tester.write("log_file tests.log"+'\n')
@@ -29,8 +29,9 @@ tester.write(r'expect "router*"'+'\n')
 for index in range(0, len(lines)-1):
 	
 	next_indent = len(lines[index+1]) - len(lines[index+1].lstrip())
-	
-	command = lines[index].strip();
+	current_indent = len(lines[index]) - len(lines[index].lstrip())
+
+	command = lines[index].strip()
 	
 	if(command == "!"):
 		continue
@@ -56,8 +57,6 @@ for index in range(0, len(lines)-1):
 		else:
 			remove_config(command)
 			add_config(command)
-		
-	current_indent = next_indent;
 	
-tester.write("expect eof"+'\n');
+tester.write("expect eof"+'\n')
 		
