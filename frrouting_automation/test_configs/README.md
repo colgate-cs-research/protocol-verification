@@ -13,3 +13,4 @@ takes about 3.45 minutes to run 6 configs
 1. Update configs to templates?
 2. Other configurations?
 3. Try to speed up by having less routers?
+4. Look at weird extra log, generated config file. 
