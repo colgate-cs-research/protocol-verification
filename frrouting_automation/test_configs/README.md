@@ -8,3 +8,8 @@ bgp_configs_list - contains list of bgp configs from /tests/topotests in the FRR
 Those configs were downloaded and put in /configs, using `wget -i bgp_configs_list`
 
 takes about 3.45 minutes to run 6 configs
+
+### Notes
+1. Update configs to templates?
+2. Other configurations?
+3. Try to speed up by having less routers?
