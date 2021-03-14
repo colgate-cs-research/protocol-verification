@@ -1,0 +1,130 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router3# configure terminal
+router3(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router3(config)# ! Zebra configuration saved from vty
+router3(config)# no !   2021/03/14 20:45:39
+% Unknown command: no !   2021/03/14 20:45:39
+router3(config)# !   2021/03/14 20:45:39
+router3(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router3(config)# frr version 7.7-dev_git
+router3(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router3(config)# frr defaults traditional
+router3(config)# no hostname router3
+(null)(config)# hostname router3
+router3(config)# no password zebra
+% Unknown command: no password zebra
+router3(config)# password zebra
+router3(config)# no enable password zebra
+% Unknown command: no enable password zebra
+router3(config)# enable password zebra
+router3(config)# no log file /tmp/bgp.log
+router3(config)# log file /tmp/bgp.log
+router3(config)# no debug bgp keepalives
+router3(config)# debug bgp keepalives
+router3(config)# no debug bgp neighbor-events
+router3(config)# debug bgp neighbor-events
+router3(config)# no debug bgp update-groups
+router3(config)# debug bgp update-groups
+router3(config)# no debug bgp updates in
+router3(config)# debug bgp updates in
+router3(config)# no debug bgp updates out
+router3(config)# debug bgp updates out
+router3(config)# no debug bgp zebra
+router3(config)# debug bgp zebra
+router3(config)# router bgp 3
+router3(config-router)# no bgp router-id 10.10.0.11
+router3(config-router)# bgp router-id 10.10.0.11
+router3(config-router)# no bgp log-neighbor-changes
+router3(config-router)# bgp log-neighbor-changes
+router3(config-router)# bgp ebgp-requires-policy
+router3(config-router)# no bgp ebgp-requires-policy
+router3(config-router)# no neighbor TEST peer-group
+% Ambiguous command: no neighbor TEST peer-group
+router3(config-router)# neighbor TEST peer-group
+router3(config-router)# no neighbor TEST remote-as internal
+vtysh: error reading from bgpd: Invalid argument (22)Warning: closing connection to bgpd because of an I/O error!
+router3(config-router)# neighbor TEST remote-as internal
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no neighbor TEST description test_group
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# neighbor TEST description test_group
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no neighbor TEST update-source 192.168.10.10
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# neighbor TEST update-source 192.168.10.10
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no neighbor 10.10.0.10 remote-as 2
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# neighbor 10.10.0.10 remote-as 2
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no neighbor 10.10.0.18 remote-as 1
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# neighbor 10.10.0.18 remote-as 1
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no bgp listen range 192.168.10.0/24 peer-group TEST
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# bgp listen range 192.168.10.0/24 peer-group TEST
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# address-family ipv4 unicast
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# no redistribute connected
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# redistribute connected
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# no neighbor 10.10.0.10 next-hop-self
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# neighbor 10.10.0.10 next-hop-self
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# no neighbor 10.10.0.18 next-hop-self
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# neighbor 10.10.0.18 next-hop-self
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router-af)# exit
+Warning: connecting to bgpd...failed!
+bgpd is not running
+router3(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+router3(config-router)# exit-address-family
+% Unknown command: exit-address-family
+router3(config-router)# exit
+Warning: connecting to bgpd...failed!
+bgpd is not running
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+router3(config)# no line vty
+% Unknown command: no line vty
+router3(config)# line vty
+Warning: connecting to bgpd...failed!
+router3(config-line)# exit
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+router3(config)# exit
+Warning: connecting to bgpd...failed!
+router3# exit
+Warning: connecting to bgpd...failed!
