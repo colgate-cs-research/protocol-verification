@@ -1,0 +1,62 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:45:04
+% Unknown command: no !   2021/03/30 10:45:04
+router1(config)# !   2021/03/30 10:45:04
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname b4ef70954673
+(null)(config)# hostname b4ef70954673
+b4ef70954673(config)# router bgp 100
+b4ef70954673(config-router)# bgp ebgp-requires-policy
+b4ef70954673(config-router)# no bgp ebgp-requires-policy
+b4ef70954673(config-router)# no neighbor 2001:db8:1::1 remote-as internal
+b4ef70954673(config-router)# neighbor 2001:db8:1::1 remote-as internal
+b4ef70954673(config-router)# no neighbor 2001:db8:1::1 bfd profile fast-tx
+b4ef70954673(config-router)# neighbor 2001:db8:1::1 bfd profile fast-tx
+b4ef70954673(config-router)# no neighbor 2001:db8:1::1 timers 3 10
+b4ef70954673(config-router)# neighbor 2001:db8:1::1 timers 3 10
+b4ef70954673(config-router)# no neighbor 2001:db8:2::1 remote-as external
+b4ef70954673(config-router)# neighbor 2001:db8:2::1 remote-as external
+b4ef70954673(config-router)# no neighbor 2001:db8:2::1 bfd profile slow-tx
+b4ef70954673(config-router)# neighbor 2001:db8:2::1 bfd profile slow-tx
+b4ef70954673(config-router)# no neighbor 2001:db8:2::1 timers 3 10
+b4ef70954673(config-router)# neighbor 2001:db8:2::1 timers 3 10
+b4ef70954673(config-router)# address-family ipv4 unicast
+b4ef70954673(config-router-af)# no redistribute connected
+b4ef70954673(config-router-af)# redistribute connected
+b4ef70954673(config-router-af)# exit
+b4ef70954673(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+b4ef70954673(config-router)# exit-address-family
+% Unknown command: exit-address-family
+b4ef70954673(config-router)# address-family ipv6 unicast
+b4ef70954673(config-router-af)# no redistribute connected
+b4ef70954673(config-router-af)# redistribute connected
+b4ef70954673(config-router-af)# no neighbor 2001:db8:1::1 activate
+b4ef70954673(config-router-af)# neighbor 2001:db8:1::1 activate
+b4ef70954673(config-router-af)# no neighbor 2001:db8:2::1 activate
+b4ef70954673(config-router-af)# neighbor 2001:db8:2::1 activate
+b4ef70954673(config-router-af)# exit
+b4ef70954673(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+b4ef70954673(config-router)# exit-address-family
+% Unknown command: exit-address-family
+b4ef70954673(config-router)# exit
+b4ef70954673(config)# no line vty
+% Unknown command: no line vty
+b4ef70954673(config)# line vty
+b4ef70954673(config-line)# exit
+b4ef70954673(config)# exit
+b4ef70954673# exit

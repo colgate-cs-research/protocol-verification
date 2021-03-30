@@ -1,0 +1,74 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:44:51
+% Unknown command: no !   2021/03/30 10:44:51
+router1(config)# !   2021/03/30 10:44:51
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 674204024ebc
+(null)(config)# hostname 674204024ebc
+674204024ebc(config)# router bgp 100
+674204024ebc(config-router)# bgp ebgp-requires-policy
+674204024ebc(config-router)# no bgp ebgp-requires-policy
+674204024ebc(config-router)# no neighbor 192.168.2.1 remote-as external
+674204024ebc(config-router)# neighbor 192.168.2.1 remote-as external
+674204024ebc(config-router)# no neighbor 192.168.2.1 bfd profile slow-tx
+674204024ebc(config-router)# neighbor 192.168.2.1 bfd profile slow-tx
+674204024ebc(config-router)# no neighbor 192.168.2.1 ebgp-multihop 2
+674204024ebc(config-router)# neighbor 192.168.2.1 ebgp-multihop 2
+674204024ebc(config-router)# no neighbor 192.168.2.1 timers 3 10
+674204024ebc(config-router)# neighbor 192.168.2.1 timers 3 10
+674204024ebc(config-router)# no neighbor 2001:db8:1::2 remote-as internal
+674204024ebc(config-router)# neighbor 2001:db8:1::2 remote-as internal
+674204024ebc(config-router)# no neighbor 2001:db8:1::2 bfd profile fast-tx
+674204024ebc(config-router)# neighbor 2001:db8:1::2 bfd profile fast-tx
+674204024ebc(config-router)# no neighbor 2001:db8:1::2 timers 3 10
+674204024ebc(config-router)# neighbor 2001:db8:1::2 timers 3 10
+674204024ebc(config-router)# no neighbor 2001:db8:3::1 remote-as external
+674204024ebc(config-router)# neighbor 2001:db8:3::1 remote-as external
+674204024ebc(config-router)# no neighbor 2001:db8:3::1 bfd profile slow-tx
+674204024ebc(config-router)# neighbor 2001:db8:3::1 bfd profile slow-tx
+674204024ebc(config-router)# no neighbor 2001:db8:3::1 ebgp-multihop 3
+674204024ebc(config-router)# neighbor 2001:db8:3::1 ebgp-multihop 3
+674204024ebc(config-router)# no neighbor 2001:db8:3::1 timers 3 10
+674204024ebc(config-router)# neighbor 2001:db8:3::1 timers 3 10
+674204024ebc(config-router)# address-family ipv4 unicast
+674204024ebc(config-router-af)# no redistribute connected
+674204024ebc(config-router-af)# redistribute connected
+674204024ebc(config-router-af)# exit
+674204024ebc(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+674204024ebc(config-router)# exit-address-family
+% Unknown command: exit-address-family
+674204024ebc(config-router)# address-family ipv6 unicast
+674204024ebc(config-router-af)# no redistribute connected
+674204024ebc(config-router-af)# redistribute connected
+674204024ebc(config-router-af)# no neighbor 192.168.2.1 activate
+674204024ebc(config-router-af)# neighbor 192.168.2.1 activate
+674204024ebc(config-router-af)# no neighbor 2001:db8:1::2 activate
+674204024ebc(config-router-af)# neighbor 2001:db8:1::2 activate
+674204024ebc(config-router-af)# no neighbor 2001:db8:3::1 activate
+674204024ebc(config-router-af)# neighbor 2001:db8:3::1 activate
+674204024ebc(config-router-af)# exit
+674204024ebc(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+674204024ebc(config-router)# exit-address-family
+% Unknown command: exit-address-family
+674204024ebc(config-router)# exit
+674204024ebc(config)# no line vty
+% Unknown command: no line vty
+674204024ebc(config)# line vty
+674204024ebc(config-line)# exit
+674204024ebc(config)# exit
+674204024ebc# exit

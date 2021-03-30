@@ -1,0 +1,42 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:47:26
+% Unknown command: no !   2021/03/30 10:47:26
+router1(config)# !   2021/03/30 10:47:26
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 8b6761cc8378
+(null)(config)# hostname 8b6761cc8378
+8b6761cc8378(config)# router bgp 65003
+8b6761cc8378(config-router)# bgp ebgp-requires-policy
+8b6761cc8378(config-router)# no bgp ebgp-requires-policy
+8b6761cc8378(config-router)# no neighbor 10.0.30.1 remote-as external
+8b6761cc8378(config-router)# neighbor 10.0.30.1 remote-as external
+8b6761cc8378(config-router)# no neighbor 10.0.30.1 timers 3 10
+8b6761cc8378(config-router)# neighbor 10.0.30.1 timers 3 10
+8b6761cc8378(config-router)# address-family ipv4 unicast
+8b6761cc8378(config-router-af)# no redistribute connected
+8b6761cc8378(config-router-af)# redistribute connected
+8b6761cc8378(config-router-af)# exit
+8b6761cc8378(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+8b6761cc8378(config-router)# exit-address-family
+% Unknown command: exit-address-family
+8b6761cc8378(config-router)# exit
+8b6761cc8378(config)# no line vty
+% Unknown command: no line vty
+8b6761cc8378(config)# line vty
+8b6761cc8378(config-line)# exit
+8b6761cc8378(config)# exit
+8b6761cc8378# exit

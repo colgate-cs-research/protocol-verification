@@ -1,0 +1,60 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:54:30
+% Unknown command: no !   2021/03/30 10:54:30
+router1(config)# !   2021/03/30 10:54:30
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname r5
+(null)(config)# hostname r5
+r5(config)# router bgp 65302
+r5(config-router)# no bgp router-id 11.1.5.1
+r5(config-router)# bgp router-id 11.1.5.1
+r5(config-router)# bgp ebgp-requires-policy
+r5(config-router)# no bgp ebgp-requires-policy
+r5(config-router)# no bgp bestpath as-path multipath-relax
+r5(config-router)# bgp bestpath as-path multipath-relax
+r5(config-router)# no neighbor 11.1.2.5 remote-as external
+r5(config-router)# neighbor 11.1.2.5 remote-as external
+r5(config-router)# no neighbor 11.1.2.5 timers 3 10
+r5(config-router)# neighbor 11.1.2.5 timers 3 10
+r5(config-router)# no neighbor 11.1.5.2 remote-as external
+r5(config-router)# neighbor 11.1.5.2 remote-as external
+r5(config-router)# no neighbor 11.1.5.2 timers 3 10
+r5(config-router)# neighbor 11.1.5.2 timers 3 10
+r5(config-router)# address-family ipv4 unicast
+r5(config-router-af)# no neighbor 11.1.2.5 route-map anycast_ip out
+r5(config-router-af)# neighbor 11.1.2.5 route-map anycast_ip out
+r5(config-router-af)# exit
+r5(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+r5(config-router)# exit-address-family
+% Unknown command: exit-address-family
+r5(config-router)# exit
+r5(config)# no ip prefix-list anycast_ip seq 10 permit 198.10.1.0/24 le 32
+r5(config)# ip prefix-list anycast_ip seq 10 permit 198.10.1.0/24 le 32
+r5(config)# route-map anycast_ip permit 10
+r5(config-route-map)# no set extcommunity bandwidth num-multipaths
+r5(config-route-map)# set extcommunity bandwidth num-multipaths
+r5(config-route-map)# no match ip address prefix-list anycast_ip
+r5(config-route-map)# match ip address prefix-list anycast_ip
+r5(config-route-map)# exit
+r5(config)# no route-map anycast_ip permit 20
+r5(config)# route-map anycast_ip permit 20
+r5(config-route-map)# no line vty
+% Unknown command: no line vty
+r5(config-route-map)# line vty
+r5(config-line)# exit
+r5(config)# exit
+r5# exit

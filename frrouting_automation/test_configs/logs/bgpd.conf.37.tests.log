@@ -1,0 +1,38 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:51:06
+% Unknown command: no !   2021/03/30 10:51:06
+router1(config)# !   2021/03/30 10:51:06
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 646657f7c08e
+(null)(config)# hostname 646657f7c08e
+646657f7c08e(config)# router bgp 100 vrf r1-cust1
+646657f7c08e(config-router)# no bgp router-id 10.0.1.1
+646657f7c08e(config-router)# bgp router-id 10.0.1.1
+646657f7c08e(config-router)# bgp ebgp-requires-policy
+646657f7c08e(config-router)# no bgp ebgp-requires-policy
+646657f7c08e(config-router)# no bgp bestpath as-path multipath-relax
+646657f7c08e(config-router)# bgp bestpath as-path multipath-relax
+646657f7c08e(config-router)# no neighbor 10.0.1.101 remote-as 99
+646657f7c08e(config-router)# neighbor 10.0.1.101 remote-as 99
+646657f7c08e(config-router)# no neighbor 10.0.1.101 timers 3 10
+646657f7c08e(config-router)# neighbor 10.0.1.101 timers 3 10
+646657f7c08e(config-router)# exit
+646657f7c08e(config)# no line vty
+% Unknown command: no line vty
+646657f7c08e(config)# line vty
+646657f7c08e(config-line)# exit
+646657f7c08e(config)# exit
+646657f7c08e# exit

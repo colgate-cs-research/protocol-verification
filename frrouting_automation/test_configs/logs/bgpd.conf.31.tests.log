@@ -1,0 +1,46 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:49:58
+% Unknown command: no !   2021/03/30 10:49:58
+router1(config)# !   2021/03/30 10:49:58
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 20746e5a85a6
+(null)(config)# hostname 20746e5a85a6
+20746e5a85a6(config)# router bgp 101 vrf r1-cust1
+20746e5a85a6(config-router)# bgp ebgp-requires-policy
+20746e5a85a6(config-router)# no bgp ebgp-requires-policy
+20746e5a85a6(config-router)# bgp network import-check
+20746e5a85a6(config-router)# no bgp network import-check
+20746e5a85a6(config-router)# no neighbor 192.168.0.2 remote-as 102
+20746e5a85a6(config-router)# neighbor 192.168.0.2 remote-as 102
+20746e5a85a6(config-router)# no neighbor 192.168.0.2 bfd
+20746e5a85a6(config-router)# neighbor 192.168.0.2 bfd
+20746e5a85a6(config-router)# no neighbor 192.168.0.2 timers 3 10
+20746e5a85a6(config-router)# neighbor 192.168.0.2 timers 3 10
+20746e5a85a6(config-router)# address-family ipv4 unicast
+20746e5a85a6(config-router-af)# no network 10.254.254.1/32
+20746e5a85a6(config-router-af)# network 10.254.254.1/32
+20746e5a85a6(config-router-af)# exit
+20746e5a85a6(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+20746e5a85a6(config-router)# exit-address-family
+% Unknown command: exit-address-family
+20746e5a85a6(config-router)# exit
+20746e5a85a6(config)# no line vty
+% Unknown command: no line vty
+20746e5a85a6(config)# line vty
+20746e5a85a6(config-line)# exit
+20746e5a85a6(config)# exit
+20746e5a85a6# exit

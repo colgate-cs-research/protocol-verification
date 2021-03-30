@@ -1,0 +1,80 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:47:39
+% Unknown command: no !   2021/03/30 10:47:39
+router1(config)# !   2021/03/30 10:47:39
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname f8f74b4ae688
+(null)(config)# hostname f8f74b4ae688
+f8f74b4ae688(config)# no debug bgp neighbor-events
+f8f74b4ae688(config)# debug bgp neighbor-events
+f8f74b4ae688(config)# no debug bgp updates in
+f8f74b4ae688(config)# debug bgp updates in
+f8f74b4ae688(config)# no debug bgp updates out
+f8f74b4ae688(config)# debug bgp updates out
+f8f74b4ae688(config)# no debug bgp zebra
+f8f74b4ae688(config)# debug bgp zebra
+f8f74b4ae688(config)# router bgp 65000
+f8f74b4ae688(config-router)# no bgp router-id 192.168.100.21
+f8f74b4ae688(config-router)# bgp router-id 192.168.100.21
+f8f74b4ae688(config-router)# no bgp log-neighbor-changes
+f8f74b4ae688(config-router)# bgp log-neighbor-changes
+f8f74b4ae688(config-router)# bgp default ipv4-unicast
+f8f74b4ae688(config-router)# no bgp default ipv4-unicast
+f8f74b4ae688(config-router)# no neighbor 192.168.100.41 remote-as 65000
+f8f74b4ae688(config-router)# neighbor 192.168.100.41 remote-as 65000
+f8f74b4ae688(config-router)# <neighbor 192.168.100.41 capability extended-nexthop
+f8f74b4ae688(config-router)# <neighbor 192.168.100.41 capability extended-nexthop
+f8f74b4ae688(config-router)# address-family l2vpn evpn
+f8f74b4ae688(config-router-af)# no neighbor 192.168.100.41 activate
+f8f74b4ae688(config-router-af)# neighbor 192.168.100.41 activate
+f8f74b4ae688(config-router-af)# no advertise-all-vni
+f8f74b4ae688(config-router-af)# advertise-all-vni
+f8f74b4ae688(config-router-af)# exit
+f8f74b4ae688(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+f8f74b4ae688(config-router)# exit-address-family
+% Unknown command: exit-address-family
+f8f74b4ae688(config-router)# exit
+f8f74b4ae688(config)# router bgp 65000 vrf r1-vrf-101
+f8f74b4ae688(config-router)# no bgp router-id 192.168.102.21
+f8f74b4ae688(config-router)# bgp router-id 192.168.102.21
+f8f74b4ae688(config-router)# no bgp log-neighbor-changes
+f8f74b4ae688(config-router)# bgp log-neighbor-changes
+f8f74b4ae688(config-router)# bgp network import-check
+f8f74b4ae688(config-router)# no bgp network import-check
+f8f74b4ae688(config-router)# address-family ipv4 unicast
+f8f74b4ae688(config-router-af)# no network 192.168.102.21/32
+f8f74b4ae688(config-router-af)# network 192.168.102.21/32
+f8f74b4ae688(config-router-af)# exit
+f8f74b4ae688(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+f8f74b4ae688(config-router)# exit-address-family
+% Unknown command: exit-address-family
+f8f74b4ae688(config-router)# address-family l2vpn evpn
+f8f74b4ae688(config-router-af)# no advertise ipv4 unicast
+f8f74b4ae688(config-router-af)# advertise ipv4 unicast
+f8f74b4ae688(config-router-af)# exit
+f8f74b4ae688(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+f8f74b4ae688(config-router)# exit-address-family
+% Unknown command: exit-address-family
+f8f74b4ae688(config-router)# exit
+f8f74b4ae688(config)# no line vty
+% Unknown command: no line vty
+f8f74b4ae688(config)# line vty
+f8f74b4ae688(config-line)# exit
+f8f74b4ae688(config)# exit
+f8f74b4ae688# exit

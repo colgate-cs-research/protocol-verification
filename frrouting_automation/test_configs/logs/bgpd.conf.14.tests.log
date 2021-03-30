@@ -1,0 +1,44 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:45:43
+% Unknown command: no !   2021/03/30 10:45:43
+router1(config)# !   2021/03/30 10:45:43
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 48d12911190c
+(null)(config)# hostname 48d12911190c
+48d12911190c(config)# router bgp 65001
+48d12911190c(config-router)# bgp ebgp-requires-policy
+48d12911190c(config-router)# no bgp ebgp-requires-policy
+48d12911190c(config-router)# bgp network import-check
+48d12911190c(config-router)# no bgp network import-check
+48d12911190c(config-router)# no neighbor 192.168.255.1 remote-as 65001
+48d12911190c(config-router)# neighbor 192.168.255.1 remote-as 65001
+48d12911190c(config-router)# no neighbor 192.168.255.1 timers connect 10
+48d12911190c(config-router)# neighbor 192.168.255.1 timers connect 10
+48d12911190c(config-router)# address-family ipv4 unicast
+48d12911190c(config-router-af)# no network 11.1.1.1/32
+48d12911190c(config-router-af)# network 11.1.1.1/32
+48d12911190c(config-router-af)# exit
+48d12911190c(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+48d12911190c(config-router)# exit-address-family
+% Unknown command: exit-address-family
+48d12911190c(config-router)# exit
+48d12911190c(config)# no line vty
+% Unknown command: no line vty
+48d12911190c(config)# line vty
+48d12911190c(config-line)# exit
+48d12911190c(config)# exit
+48d12911190c# exit

@@ -1,0 +1,36 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:46:47
+% Unknown command: no !   2021/03/30 10:46:47
+router1(config)# !   2021/03/30 10:46:47
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname d0b941af6891
+(null)(config)# hostname d0b941af6891
+d0b941af6891(config)# router bgp 65005
+d0b941af6891(config-router)# bgp ebgp-requires-policy
+d0b941af6891(config-router)# no bgp ebgp-requires-policy
+d0b941af6891(config-router)# no timers bgp 3 9
+d0b941af6891(config-router)# timers bgp 3 9
+d0b941af6891(config-router)# no neighbor 192.168.252.1 remote-as 65001
+d0b941af6891(config-router)# neighbor 192.168.252.1 remote-as 65001
+d0b941af6891(config-router)# no neighbor 192.168.252.1 timers connect 10
+d0b941af6891(config-router)# neighbor 192.168.252.1 timers connect 10
+d0b941af6891(config-router)# exit
+d0b941af6891(config)# no line vty
+% Unknown command: no line vty
+d0b941af6891(config)# line vty
+d0b941af6891(config-line)# exit
+d0b941af6891(config)# exit
+d0b941af6891# exit

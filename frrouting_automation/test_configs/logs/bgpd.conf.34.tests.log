@@ -1,0 +1,46 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:50:36
+% Unknown command: no !   2021/03/30 10:50:36
+router1(config)# !   2021/03/30 10:50:36
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 04ecf81b5bb1
+(null)(config)# hostname 04ecf81b5bb1
+04ecf81b5bb1(config)# router bgp 104 vrf r4-cust1
+04ecf81b5bb1(config-router)# bgp ebgp-requires-policy
+04ecf81b5bb1(config-router)# no bgp ebgp-requires-policy
+04ecf81b5bb1(config-router)# bgp network import-check
+04ecf81b5bb1(config-router)# no bgp network import-check
+04ecf81b5bb1(config-router)# no neighbor 192.168.2.2 remote-as 102
+04ecf81b5bb1(config-router)# neighbor 192.168.2.2 remote-as 102
+04ecf81b5bb1(config-router)# no neighbor 192.168.2.2 bfd
+04ecf81b5bb1(config-router)# neighbor 192.168.2.2 bfd
+04ecf81b5bb1(config-router)# no neighbor 192.168.2.2 timers 3 10
+04ecf81b5bb1(config-router)# neighbor 192.168.2.2 timers 3 10
+04ecf81b5bb1(config-router)# address-family ipv4 unicast
+04ecf81b5bb1(config-router-af)# no network 10.254.254.4/32
+04ecf81b5bb1(config-router-af)# network 10.254.254.4/32
+04ecf81b5bb1(config-router-af)# exit
+04ecf81b5bb1(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+04ecf81b5bb1(config-router)# exit-address-family
+% Unknown command: exit-address-family
+04ecf81b5bb1(config-router)# exit
+04ecf81b5bb1(config)# no line vty
+% Unknown command: no line vty
+04ecf81b5bb1(config)# line vty
+04ecf81b5bb1(config-line)# exit
+04ecf81b5bb1(config)# exit
+04ecf81b5bb1# exit

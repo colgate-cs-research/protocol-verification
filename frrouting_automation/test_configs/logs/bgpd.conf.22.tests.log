@@ -1,0 +1,82 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:47:53
+% Unknown command: no !   2021/03/30 10:47:53
+router1(config)# !   2021/03/30 10:47:53
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 2edb16f23d3a
+(null)(config)# hostname 2edb16f23d3a
+2edb16f23d3a(config)# no debug bgp neighbor-events
+2edb16f23d3a(config)# debug bgp neighbor-events
+2edb16f23d3a(config)# no debug bgp updates in
+2edb16f23d3a(config)# debug bgp updates in
+2edb16f23d3a(config)# no debug bgp updates out
+2edb16f23d3a(config)# debug bgp updates out
+2edb16f23d3a(config)# no debug bgp zebra
+2edb16f23d3a(config)# debug bgp zebra
+2edb16f23d3a(config)# router bgp 65000
+2edb16f23d3a(config-router)# no bgp router-id 192.168.100.41
+2edb16f23d3a(config-router)# bgp router-id 192.168.100.41
+2edb16f23d3a(config-router)# no bgp log-neighbor-changes
+2edb16f23d3a(config-router)# bgp log-neighbor-changes
+2edb16f23d3a(config-router)# bgp default ipv4-unicast
+2edb16f23d3a(config-router)# no bgp default ipv4-unicast
+2edb16f23d3a(config-router)# no neighbor 192.168.100.21 peer-group
+2edb16f23d3a(config-router)# neighbor 192.168.100.21 peer-group
+2edb16f23d3a(config-router)# no neighbor 192.168.100.21 remote-as 65000
+2edb16f23d3a(config-router)# neighbor 192.168.100.21 remote-as 65000
+2edb16f23d3a(config-router)# <neighbor 192.168.100.21 capability extended-nexthop
+2edb16f23d3a(config-router)# <neighbor 192.168.100.21 capability extended-nexthop
+2edb16f23d3a(config-router)# address-family l2vpn evpn
+2edb16f23d3a(config-router-af)# no neighbor 192.168.100.21 activate
+2edb16f23d3a(config-router-af)# neighbor 192.168.100.21 activate
+2edb16f23d3a(config-router-af)# no advertise-all-vni
+2edb16f23d3a(config-router-af)# advertise-all-vni
+2edb16f23d3a(config-router-af)# exit
+2edb16f23d3a(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+2edb16f23d3a(config-router)# exit-address-family
+% Unknown command: exit-address-family
+2edb16f23d3a(config-router)# exit
+2edb16f23d3a(config)# router bgp 65000 vrf r2-vrf-101
+2edb16f23d3a(config-router)# no bgp router-id 192.168.101.41
+2edb16f23d3a(config-router)# bgp router-id 192.168.101.41
+2edb16f23d3a(config-router)# no bgp log-neighbor-changes
+2edb16f23d3a(config-router)# bgp log-neighbor-changes
+2edb16f23d3a(config-router)# bgp network import-check
+2edb16f23d3a(config-router)# no bgp network import-check
+2edb16f23d3a(config-router)# address-family ipv4 unicast
+2edb16f23d3a(config-router-af)# no network 192.168.101.41/32
+2edb16f23d3a(config-router-af)# network 192.168.101.41/32
+2edb16f23d3a(config-router-af)# exit
+2edb16f23d3a(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+2edb16f23d3a(config-router)# exit-address-family
+% Unknown command: exit-address-family
+2edb16f23d3a(config-router)# address-family l2vpn evpn
+2edb16f23d3a(config-router-af)# no advertise ipv4 unicast
+2edb16f23d3a(config-router-af)# advertise ipv4 unicast
+2edb16f23d3a(config-router-af)# exit
+2edb16f23d3a(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+2edb16f23d3a(config-router)# exit-address-family
+% Unknown command: exit-address-family
+2edb16f23d3a(config-router)# exit
+2edb16f23d3a(config)# no line vty
+% Unknown command: no line vty
+2edb16f23d3a(config)# line vty
+2edb16f23d3a(config-line)# exit
+2edb16f23d3a(config)# exit
+2edb16f23d3a# exit

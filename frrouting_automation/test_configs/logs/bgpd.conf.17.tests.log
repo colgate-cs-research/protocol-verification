@@ -1,0 +1,46 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:46:35
+% Unknown command: no !   2021/03/30 10:46:35
+router1(config)# !   2021/03/30 10:46:35
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 1f739113737f
+(null)(config)# hostname 1f739113737f
+1f739113737f(config)# router bgp 65004
+1f739113737f(config-router)# bgp ebgp-requires-policy
+1f739113737f(config-router)# no bgp ebgp-requires-policy
+1f739113737f(config-router)# bgp network import-check
+1f739113737f(config-router)# no bgp network import-check
+1f739113737f(config-router)# no timers bgp 3 9
+1f739113737f(config-router)# timers bgp 3 9
+1f739113737f(config-router)# no neighbor 192.168.253.1 remote-as 65001
+1f739113737f(config-router)# neighbor 192.168.253.1 remote-as 65001
+1f739113737f(config-router)# no neighbor 192.168.253.1 timers connect 10
+1f739113737f(config-router)# neighbor 192.168.253.1 timers connect 10
+1f739113737f(config-router)# address-family ipv4 unicast
+1f739113737f(config-router-af)# no network 14.1.1.1/32
+1f739113737f(config-router-af)# network 14.1.1.1/32
+1f739113737f(config-router-af)# exit
+1f739113737f(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+1f739113737f(config-router)# exit-address-family
+% Unknown command: exit-address-family
+1f739113737f(config-router)# exit
+1f739113737f(config)# no line vty
+% Unknown command: no line vty
+1f739113737f(config)# line vty
+1f739113737f(config-line)# exit
+1f739113737f(config)# exit
+1f739113737f# exit

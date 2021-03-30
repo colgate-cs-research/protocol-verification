@@ -1,0 +1,64 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:45:25
+% Unknown command: no !   2021/03/30 10:45:25
+router1(config)# !   2021/03/30 10:45:25
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 6b843c817181
+(null)(config)# hostname 6b843c817181
+6b843c817181(config)# router bgp 400
+6b843c817181(config-router)# bgp ebgp-requires-policy
+6b843c817181(config-router)# no bgp ebgp-requires-policy
+6b843c817181(config-router)# no neighbor 2001:db8:1::1 remote-as external
+6b843c817181(config-router)# neighbor 2001:db8:1::1 remote-as external
+6b843c817181(config-router)# no neighbor 2001:db8:1::1 bfd profile slow-tx-mh
+6b843c817181(config-router)# neighbor 2001:db8:1::1 bfd profile slow-tx-mh
+6b843c817181(config-router)# no neighbor 2001:db8:1::1 ebgp-multihop 3
+6b843c817181(config-router)# neighbor 2001:db8:1::1 ebgp-multihop 3
+6b843c817181(config-router)# no neighbor 2001:db8:1::1 timers 3 10
+6b843c817181(config-router)# neighbor 2001:db8:1::1 timers 3 10
+6b843c817181(config-router)# no neighbor 2001:db8:3::2 remote-as external
+6b843c817181(config-router)# neighbor 2001:db8:3::2 remote-as external
+6b843c817181(config-router)# no neighbor 2001:db8:3::2 bfd profile slow-tx
+6b843c817181(config-router)# neighbor 2001:db8:3::2 bfd profile slow-tx
+6b843c817181(config-router)# no neighbor 2001:db8:3::2 timers 3 10
+6b843c817181(config-router)# neighbor 2001:db8:3::2 timers 3 10
+6b843c817181(config-router)# address-family ipv4 unicast
+6b843c817181(config-router-af)# no redistribute connected
+6b843c817181(config-router-af)# redistribute connected
+6b843c817181(config-router-af)# exit
+6b843c817181(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+6b843c817181(config-router)# exit-address-family
+% Unknown command: exit-address-family
+6b843c817181(config-router)# address-family ipv6 unicast
+6b843c817181(config-router-af)# no redistribute connected
+6b843c817181(config-router-af)# redistribute connected
+6b843c817181(config-router-af)# no neighbor 2001:db8:1::1 activate
+6b843c817181(config-router-af)# neighbor 2001:db8:1::1 activate
+6b843c817181(config-router-af)# no neighbor 2001:db8:3::2 activate
+6b843c817181(config-router-af)# neighbor 2001:db8:3::2 activate
+6b843c817181(config-router-af)# exit
+6b843c817181(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+6b843c817181(config-router)# exit-address-family
+% Unknown command: exit-address-family
+6b843c817181(config-router)# exit
+6b843c817181(config)# no line vty
+% Unknown command: no line vty
+6b843c817181(config)# line vty
+6b843c817181(config-line)# exit
+6b843c817181(config)# exit
+6b843c817181# exit

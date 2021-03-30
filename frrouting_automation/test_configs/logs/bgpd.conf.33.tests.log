@@ -1,0 +1,46 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:50:21
+% Unknown command: no !   2021/03/30 10:50:21
+router1(config)# !   2021/03/30 10:50:21
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 7f48a15b1470
+(null)(config)# hostname 7f48a15b1470
+7f48a15b1470(config)# router bgp 103 vrf r3-cust1
+7f48a15b1470(config-router)# bgp ebgp-requires-policy
+7f48a15b1470(config-router)# no bgp ebgp-requires-policy
+7f48a15b1470(config-router)# bgp network import-check
+7f48a15b1470(config-router)# no bgp network import-check
+7f48a15b1470(config-router)# no neighbor 192.168.1.2 remote-as 102
+7f48a15b1470(config-router)# neighbor 192.168.1.2 remote-as 102
+7f48a15b1470(config-router)# no neighbor 192.168.1.2 bfd
+7f48a15b1470(config-router)# neighbor 192.168.1.2 bfd
+7f48a15b1470(config-router)# no neighbor 192.168.1.2 timers 3 10
+7f48a15b1470(config-router)# neighbor 192.168.1.2 timers 3 10
+7f48a15b1470(config-router)# address-family ipv4 unicast
+7f48a15b1470(config-router-af)# no network 10.254.254.3/32
+7f48a15b1470(config-router-af)# network 10.254.254.3/32
+7f48a15b1470(config-router-af)# exit
+7f48a15b1470(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+7f48a15b1470(config-router)# exit-address-family
+% Unknown command: exit-address-family
+7f48a15b1470(config-router)# exit
+7f48a15b1470(config)# no line vty
+% Unknown command: no line vty
+7f48a15b1470(config)# line vty
+7f48a15b1470(config-line)# exit
+7f48a15b1470(config)# exit
+7f48a15b1470# exit

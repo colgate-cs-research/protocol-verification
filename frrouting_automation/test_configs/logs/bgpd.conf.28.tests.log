@@ -1,0 +1,62 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:49:06
+% Unknown command: no !   2021/03/30 10:49:06
+router1(config)# !   2021/03/30 10:49:06
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname cc7978787ec1
+(null)(config)# hostname cc7978787ec1
+cc7978787ec1(config)# no debug bgp zebra
+cc7978787ec1(config)# debug bgp zebra
+cc7978787ec1(config)# no debug bgp labelpool
+cc7978787ec1(config)# debug bgp labelpool
+cc7978787ec1(config)# router bgp 1
+cc7978787ec1(config-router)# no bgp router-id 10.0.0.1
+cc7978787ec1(config-router)# bgp router-id 10.0.0.1
+cc7978787ec1(config-router)# bgp ebgp-requires-policy
+cc7978787ec1(config-router)# no bgp ebgp-requires-policy
+cc7978787ec1(config-router)# bgp network import-check
+cc7978787ec1(config-router)# no bgp network import-check
+cc7978787ec1(config-router)# no timers bgp 3 9
+cc7978787ec1(config-router)# timers bgp 3 9
+cc7978787ec1(config-router)# no neighbor 10.0.0.2 remote-as 2
+cc7978787ec1(config-router)# neighbor 10.0.0.2 remote-as 2
+cc7978787ec1(config-router)# no neighbor 10.0.0.2 solo
+cc7978787ec1(config-router)# neighbor 10.0.0.2 solo
+cc7978787ec1(config-router)# no neighbor 10.0.0.2 timers connect 10
+cc7978787ec1(config-router)# neighbor 10.0.0.2 timers connect 10
+cc7978787ec1(config-router)# address-family ipv4 unicast
+cc7978787ec1(config-router-af)# neighbor 10.0.0.2 activate
+cc7978787ec1(config-router-af)# no neighbor 10.0.0.2 activate
+cc7978787ec1(config-router-af)# exit
+cc7978787ec1(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+cc7978787ec1(config-router)# exit-address-family
+% Unknown command: exit-address-family
+cc7978787ec1(config-router)# address-family ipv4 labeled-unicast
+cc7978787ec1(config-router-af)# no neighbor 10.0.0.2 activate
+cc7978787ec1(config-router-af)# neighbor 10.0.0.2 activate
+cc7978787ec1(config-router-af)# exit
+cc7978787ec1(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+cc7978787ec1(config-router)# exit-address-family
+% Unknown command: exit-address-family
+cc7978787ec1(config-router)# exit
+cc7978787ec1(config)# no line vty
+% Unknown command: no line vty
+cc7978787ec1(config)# line vty
+cc7978787ec1(config-line)# exit
+cc7978787ec1(config)# exit
+cc7978787ec1# exit

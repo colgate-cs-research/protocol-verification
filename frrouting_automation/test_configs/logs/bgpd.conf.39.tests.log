@@ -1,0 +1,26 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:51:36
+% Unknown command: no !   2021/03/30 10:51:36
+router1(config)# !   2021/03/30 10:51:36
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname f0f25625360c
+(null)(config)# hostname f0f25625360c
+f0f25625360c(config)# no line vty
+% Unknown command: no line vty
+f0f25625360c(config)# line vty
+f0f25625360c(config-line)# exit
+f0f25625360c(config)# exit
+f0f25625360c# exit

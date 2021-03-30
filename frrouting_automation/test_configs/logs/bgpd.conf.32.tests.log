@@ -1,0 +1,58 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:50:08
+% Unknown command: no !   2021/03/30 10:50:08
+router1(config)# !   2021/03/30 10:50:08
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 80a4ad79e06c
+(null)(config)# hostname 80a4ad79e06c
+80a4ad79e06c(config)# router bgp 102 vrf r2-cust1
+80a4ad79e06c(config-router)# bgp ebgp-requires-policy
+80a4ad79e06c(config-router)# no bgp ebgp-requires-policy
+80a4ad79e06c(config-router)# bgp network import-check
+80a4ad79e06c(config-router)# no bgp network import-check
+80a4ad79e06c(config-router)# no neighbor 192.168.0.1 remote-as 101
+80a4ad79e06c(config-router)# neighbor 192.168.0.1 remote-as 101
+80a4ad79e06c(config-router)# no neighbor 192.168.0.1 bfd
+80a4ad79e06c(config-router)# neighbor 192.168.0.1 bfd
+80a4ad79e06c(config-router)# no neighbor 192.168.0.1 timers 3 10
+80a4ad79e06c(config-router)# neighbor 192.168.0.1 timers 3 10
+80a4ad79e06c(config-router)# no neighbor 192.168.1.1 remote-as 103
+80a4ad79e06c(config-router)# neighbor 192.168.1.1 remote-as 103
+80a4ad79e06c(config-router)# no neighbor 192.168.1.1 bfd
+80a4ad79e06c(config-router)# neighbor 192.168.1.1 bfd
+80a4ad79e06c(config-router)# no neighbor 192.168.1.1 timers 3 10
+80a4ad79e06c(config-router)# neighbor 192.168.1.1 timers 3 10
+80a4ad79e06c(config-router)# no neighbor 192.168.2.1 remote-as 104
+80a4ad79e06c(config-router)# neighbor 192.168.2.1 remote-as 104
+80a4ad79e06c(config-router)# no neighbor 192.168.2.1 bfd
+80a4ad79e06c(config-router)# neighbor 192.168.2.1 bfd
+80a4ad79e06c(config-router)# no neighbor 192.168.2.1 timers 3 10
+80a4ad79e06c(config-router)# neighbor 192.168.2.1 timers 3 10
+80a4ad79e06c(config-router)# address-family ipv4 unicast
+80a4ad79e06c(config-router-af)# no network 10.254.254.2/32
+80a4ad79e06c(config-router-af)# network 10.254.254.2/32
+80a4ad79e06c(config-router-af)# exit
+80a4ad79e06c(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+80a4ad79e06c(config-router)# exit-address-family
+% Unknown command: exit-address-family
+80a4ad79e06c(config-router)# exit
+80a4ad79e06c(config)# no line vty
+% Unknown command: no line vty
+80a4ad79e06c(config)# line vty
+80a4ad79e06c(config-line)# exit
+80a4ad79e06c(config)# exit
+80a4ad79e06c# exit

@@ -1,0 +1,71 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:48:23
+% Unknown command: no !   2021/03/30 10:48:23
+router1(config)# !   2021/03/30 10:48:23
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname r4
+(null)(config)# hostname r4
+r4(config)# no log file //bgpd.log
+r4(config)# log file //bgpd.log
+can't open logfile //bgpd.log
+r4(config)# router bgp 65100
+r4(config-router)# no bgp router-id 192.168.100.1
+r4(config-router)# bgp router-id 192.168.100.1
+r4(config-router)# no bgp log-neighbor-changes
+r4(config-router)# bgp log-neighbor-changes
+r4(config-router)# bgp ebgp-requires-policy
+r4(config-router)# no bgp ebgp-requires-policy
+r4(config-router)# no coalesce-time 0
+r4(config-router)# coalesce-time 0
+r4(config-router)# no timers bgp 3 10
+r4(config-router)# timers bgp 3 10
+r4(config-router)# no neighbor 192.168.101.1 remote-as 65000
+r4(config-router)# neighbor 192.168.101.1 remote-as 65000
+r4(config-router)# <192.168.101.1 description Router R1 (eBGP AS 65000)
+r4(config-router)# <192.168.101.1 description Router R1 (eBGP AS 65000)
+r4(config-router)# no neighbor 192.168.101.1 timers 3 10
+r4(config-router)# neighbor 192.168.101.1 timers 3 10
+r4(config-router)# no neighbor 192.168.101.1 timers connect 5
+r4(config-router)# neighbor 192.168.101.1 timers connect 5
+r4(config-router)# address-family ipv4 unicast
+r4(config-router-af)# no network 192.168.100.0/24
+r4(config-router-af)# network 192.168.100.0/24
+r4(config-router-af)# no network 192.168.101.0/24
+r4(config-router-af)# network 192.168.101.0/24
+r4(config-router-af)# no network 192.168.102.0/24
+r4(config-router-af)# network 192.168.102.0/24
+r4(config-router-af)# no neighbor 192.168.101.1 default-originate
+r4(config-router-af)# neighbor 192.168.101.1 default-originate
+r4(config-router-af)# no neighbor 192.168.101.1 route-map testmap-in in
+r4(config-router-af)# neighbor 192.168.101.1 route-map testmap-in in
+r4(config-router-af)# no neighbor 192.168.101.1 route-map testmap-out out
+r4(config-router-af)# neighbor 192.168.101.1 route-map testmap-out out
+r4(config-router-af)# exit
+r4(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+r4(config-router)# exit-address-family
+% Unknown command: exit-address-family
+r4(config-router)# exit
+r4(config)# no route-map testmap-in permit 999
+r4(config)# route-map testmap-in permit 999
+r4(config-route-map)# no route-map testmap-out permit 999
+r4(config)# route-map testmap-out permit 999
+r4(config-route-map)# no line vty
+% Unknown command: no line vty
+r4(config-route-map)# line vty
+r4(config-line)# exit
+r4(config)# exit
+r4# exit

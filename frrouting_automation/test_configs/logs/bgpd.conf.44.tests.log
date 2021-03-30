@@ -1,0 +1,100 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:52:46
+% Unknown command: no !   2021/03/30 10:52:46
+router1(config)# !   2021/03/30 10:52:46
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 6334302427b1
+(null)(config)# hostname 6334302427b1
+6334302427b1(config)# router bgp 101
+6334302427b1(config-router)# no bgp router-id 10.254.254.1
+6334302427b1(config-router)# bgp router-id 10.254.254.1
+6334302427b1(config-router)# bgp ebgp-requires-policy
+6334302427b1(config-router)# no bgp ebgp-requires-policy
+6334302427b1(config-router)# no neighbor r2g peer-group
+% Ambiguous command: no neighbor r2g peer-group
+6334302427b1(config-router)# neighbor r2g peer-group
+6334302427b1(config-router)# no neighbor r2g remote-as external
+vtysh: error reading from bgpd: Invalid argument (22)Warning: closing connection to bgpd because of an I/O error!
+6334302427b1(config-router)# neighbor r2g remote-as external
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# no neighbor r2g bfd
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# neighbor r2g bfd
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# no neighbor r1-eth0 interface peer-group r2g
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# neighbor r1-eth0 interface peer-group r2g
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# no neighbor r1-eth0 timers 3 10
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# neighbor r1-eth0 timers 3 10
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# address-family ipv4 unicast
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# no redistribute connected
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# redistribute connected
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# exit
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+6334302427b1(config-router)# exit-address-family
+% Unknown command: exit-address-family
+6334302427b1(config-router)# address-family ipv6 unicast
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# no neighbor r2g activate
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# neighbor r2g activate
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router-af)# exit
+Warning: connecting to bgpd...failed!
+bgpd is not running
+6334302427b1(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+6334302427b1(config-router)# exit-address-family
+% Unknown command: exit-address-family
+6334302427b1(config-router)# exit
+Warning: connecting to bgpd...failed!
+bgpd is not running
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+6334302427b1(config)# no line vty
+% Unknown command: no line vty
+6334302427b1(config)# line vty
+Warning: connecting to bgpd...failed!
+6334302427b1(config-line)# exit
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+Warning: connecting to bgpd...failed!
+6334302427b1(config)# exit
+Warning: connecting to bgpd...failed!
+6334302427b1# exit
+Warning: connecting to bgpd...failed!

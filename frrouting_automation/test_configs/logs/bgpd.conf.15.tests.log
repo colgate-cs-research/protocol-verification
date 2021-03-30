@@ -1,0 +1,62 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:46:02
+% Unknown command: no !   2021/03/30 10:46:02
+router1(config)# !   2021/03/30 10:46:02
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname b88619a2e632
+(null)(config)# hostname b88619a2e632
+b88619a2e632(config)# router bgp 65001
+b88619a2e632(config-router)# bgp ebgp-requires-policy
+b88619a2e632(config-router)# no bgp ebgp-requires-policy
+b88619a2e632(config-router)# no timers bgp 3 9
+b88619a2e632(config-router)# timers bgp 3 9
+b88619a2e632(config-router)# no neighbor 192.168.254.2 remote-as 65003
+b88619a2e632(config-router)# neighbor 192.168.254.2 remote-as 65003
+b88619a2e632(config-router)# no neighbor 192.168.254.2 timers connect 10
+b88619a2e632(config-router)# neighbor 192.168.254.2 timers connect 10
+b88619a2e632(config-router)# no neighbor 192.168.255.2 remote-as 65001
+b88619a2e632(config-router)# neighbor 192.168.255.2 remote-as 65001
+b88619a2e632(config-router)# no neighbor 192.168.255.2 timers connect 10
+b88619a2e632(config-router)# neighbor 192.168.255.2 timers connect 10
+b88619a2e632(config-router)# address-family ipv4 unicast
+b88619a2e632(config-router-af)# no redistribute connected
+b88619a2e632(config-router-af)# redistribute connected
+b88619a2e632(config-router-af)# exit
+b88619a2e632(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+b88619a2e632(config-router)# exit-address-family
+% Unknown command: exit-address-family
+b88619a2e632(config-router)# exit
+b88619a2e632(config)# router bgp 65001 vrf vrf1
+b88619a2e632(config-router)# bgp ebgp-requires-policy
+b88619a2e632(config-router)# no bgp ebgp-requires-policy
+b88619a2e632(config-router)# no timers bgp 3 9
+b88619a2e632(config-router)# timers bgp 3 9
+b88619a2e632(config-router)# no neighbor 192.168.252.2 remote-as 65005
+b88619a2e632(config-router)# neighbor 192.168.252.2 remote-as 65005
+b88619a2e632(config-router)# no neighbor 192.168.252.2 timers connect 10
+b88619a2e632(config-router)# neighbor 192.168.252.2 timers connect 10
+b88619a2e632(config-router)# no neighbor 192.168.253.2 remote-as 65004
+b88619a2e632(config-router)# neighbor 192.168.253.2 remote-as 65004
+b88619a2e632(config-router)# no neighbor 192.168.253.2 timers connect 10
+b88619a2e632(config-router)# neighbor 192.168.253.2 timers connect 10
+b88619a2e632(config-router)# exit
+b88619a2e632(config)# no line vty
+% Unknown command: no line vty
+b88619a2e632(config)# line vty
+b88619a2e632(config-line)# exit
+b88619a2e632(config)# exit
+b88619a2e632# exit

@@ -1,0 +1,42 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:46:59
+% Unknown command: no !   2021/03/30 10:46:59
+router1(config)# !   2021/03/30 10:46:59
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 319ef247f3ea
+(null)(config)# hostname 319ef247f3ea
+319ef247f3ea(config)# router bgp 65001
+319ef247f3ea(config-router)# bgp ebgp-requires-policy
+319ef247f3ea(config-router)# no bgp ebgp-requires-policy
+319ef247f3ea(config-router)# no neighbor 10.0.30.3 remote-as external
+319ef247f3ea(config-router)# neighbor 10.0.30.3 remote-as external
+319ef247f3ea(config-router)# no neighbor 10.0.30.3 timers 3 10
+319ef247f3ea(config-router)# neighbor 10.0.30.3 timers 3 10
+319ef247f3ea(config-router)# address-family ipv4 unicast
+319ef247f3ea(config-router-af)# no redistribute connected
+319ef247f3ea(config-router-af)# redistribute connected
+319ef247f3ea(config-router-af)# exit
+319ef247f3ea(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+319ef247f3ea(config-router)# exit-address-family
+% Unknown command: exit-address-family
+319ef247f3ea(config-router)# exit
+319ef247f3ea(config)# no line vty
+% Unknown command: no line vty
+319ef247f3ea(config)# line vty
+319ef247f3ea(config-line)# exit
+319ef247f3ea(config)# exit
+319ef247f3ea# exit

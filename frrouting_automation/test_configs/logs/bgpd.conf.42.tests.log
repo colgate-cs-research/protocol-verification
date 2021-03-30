@@ -1,0 +1,56 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:52:22
+% Unknown command: no !   2021/03/30 10:52:22
+router1(config)# !   2021/03/30 10:52:22
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 87327a7de3e8
+(null)(config)# hostname 87327a7de3e8
+87327a7de3e8(config)# router bgp 65001
+87327a7de3e8(config-router)# bgp ebgp-requires-policy
+87327a7de3e8(config-router)# no bgp ebgp-requires-policy
+87327a7de3e8(config-router)# no neighbor 192.168.1.2 remote-as external
+87327a7de3e8(config-router)# neighbor 192.168.1.2 remote-as external
+87327a7de3e8(config-router)# no neighbor 192.168.1.2 timers 3 10
+87327a7de3e8(config-router)# neighbor 192.168.1.2 timers 3 10
+87327a7de3e8(config-router)# no neighbor 192.168.2.3 remote-as external
+87327a7de3e8(config-router)# neighbor 192.168.2.3 remote-as external
+87327a7de3e8(config-router)# no neighbor 192.168.2.3 timers 3 10
+87327a7de3e8(config-router)# neighbor 192.168.2.3 timers 3 10
+87327a7de3e8(config-router)# address-family ipv4 unicast
+87327a7de3e8(config-router-af)# no redistribute connected
+87327a7de3e8(config-router-af)# redistribute connected
+87327a7de3e8(config-router-af)# exit
+87327a7de3e8(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+87327a7de3e8(config-router)# exit-address-family
+% Unknown command: exit-address-family
+87327a7de3e8(config-router)# address-family l2vpn evpn
+87327a7de3e8(config-router-af)# no neighbor 192.168.1.2 activate
+87327a7de3e8(config-router-af)# neighbor 192.168.1.2 activate
+87327a7de3e8(config-router-af)# no neighbor 192.168.2.3 activate
+87327a7de3e8(config-router-af)# neighbor 192.168.2.3 activate
+87327a7de3e8(config-router-af)# exit
+87327a7de3e8(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+87327a7de3e8(config-router)# exit-address-family
+% Unknown command: exit-address-family
+87327a7de3e8(config-router)# exit
+87327a7de3e8(config)# no line vty
+% Unknown command: no line vty
+87327a7de3e8(config)# line vty
+87327a7de3e8(config-line)# exit
+87327a7de3e8(config)# exit
+87327a7de3e8# exit

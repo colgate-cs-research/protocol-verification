@@ -1,0 +1,42 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:53:06
+% Unknown command: no !   2021/03/30 10:53:06
+router1(config)# !   2021/03/30 10:53:06
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname r1
+(null)(config)# hostname r1
+r1(config)# router bgp 65101
+r1(config-router)# no bgp router-id 11.1.1.1
+r1(config-router)# bgp router-id 11.1.1.1
+r1(config-router)# bgp ebgp-requires-policy
+r1(config-router)# no bgp ebgp-requires-policy
+r1(config-router)# no bgp bestpath as-path multipath-relax
+r1(config-router)# bgp bestpath as-path multipath-relax
+r1(config-router)# no neighbor 11.1.1.2 remote-as external
+r1(config-router)# neighbor 11.1.1.2 remote-as external
+r1(config-router)# no neighbor 11.1.1.2 timers 3 10
+r1(config-router)# neighbor 11.1.1.2 timers 3 10
+r1(config-router)# no neighbor 11.1.1.6 remote-as external
+r1(config-router)# neighbor 11.1.1.6 remote-as external
+r1(config-router)# no neighbor 11.1.1.6 timers 3 10
+r1(config-router)# neighbor 11.1.1.6 timers 3 10
+r1(config-router)# exit
+r1(config)# no line vty
+% Unknown command: no line vty
+r1(config)# line vty
+r1(config-line)# exit
+r1(config)# exit
+r1# exit

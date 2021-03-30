@@ -1,0 +1,66 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:49:18
+% Unknown command: no !   2021/03/30 10:49:18
+router1(config)# !   2021/03/30 10:49:18
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname 5c66eb0e4a95
+(null)(config)# hostname 5c66eb0e4a95
+5c66eb0e4a95(config)# no debug bgp zebra
+5c66eb0e4a95(config)# debug bgp zebra
+5c66eb0e4a95(config)# no debug bgp labelpool
+5c66eb0e4a95(config)# debug bgp labelpool
+5c66eb0e4a95(config)# router bgp 2
+5c66eb0e4a95(config-router)# no bgp router-id 10.0.0.2
+5c66eb0e4a95(config-router)# bgp router-id 10.0.0.2
+5c66eb0e4a95(config-router)# bgp ebgp-requires-policy
+5c66eb0e4a95(config-router)# no bgp ebgp-requires-policy
+5c66eb0e4a95(config-router)# bgp network import-check
+5c66eb0e4a95(config-router)# no bgp network import-check
+5c66eb0e4a95(config-router)# no timers bgp 3 9
+5c66eb0e4a95(config-router)# timers bgp 3 9
+5c66eb0e4a95(config-router)# no neighbor 10.0.0.1 remote-as 1
+5c66eb0e4a95(config-router)# neighbor 10.0.0.1 remote-as 1
+5c66eb0e4a95(config-router)# no neighbor 10.0.0.1 timers connect 10
+5c66eb0e4a95(config-router)# neighbor 10.0.0.1 timers connect 10
+5c66eb0e4a95(config-router)# no neighbor 10.0.1.3 remote-as 2
+5c66eb0e4a95(config-router)# neighbor 10.0.1.3 remote-as 2
+5c66eb0e4a95(config-router)# no neighbor 10.0.1.3 update-source 10.0.1.2
+5c66eb0e4a95(config-router)# neighbor 10.0.1.3 update-source 10.0.1.2
+5c66eb0e4a95(config-router)# no neighbor 10.0.1.3 timers connect 10
+5c66eb0e4a95(config-router)# neighbor 10.0.1.3 timers connect 10
+5c66eb0e4a95(config-router)# address-family ipv4 unicast
+5c66eb0e4a95(config-router-af)# neighbor 10.0.0.1 activate
+5c66eb0e4a95(config-router-af)# no neighbor 10.0.0.1 activate
+5c66eb0e4a95(config-router-af)# exit
+5c66eb0e4a95(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+5c66eb0e4a95(config-router)# exit-address-family
+% Unknown command: exit-address-family
+5c66eb0e4a95(config-router)# address-family ipv4 labeled-unicast
+5c66eb0e4a95(config-router-af)# no neighbor 10.0.0.1 activate
+5c66eb0e4a95(config-router-af)# neighbor 10.0.0.1 activate
+5c66eb0e4a95(config-router-af)# exit
+5c66eb0e4a95(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+5c66eb0e4a95(config-router)# exit-address-family
+% Unknown command: exit-address-family
+5c66eb0e4a95(config-router)# exit
+5c66eb0e4a95(config)# no line vty
+% Unknown command: no line vty
+5c66eb0e4a95(config)# line vty
+5c66eb0e4a95(config-line)# exit
+5c66eb0e4a95(config)# exit
+5c66eb0e4a95# exit

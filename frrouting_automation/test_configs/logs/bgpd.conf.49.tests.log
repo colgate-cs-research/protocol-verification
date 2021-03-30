@@ -1,0 +1,76 @@
+spawn vtysh
+
+Hello, this is FRRouting (version 7.7-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
+% Unknown command: no ! Zebra configuration saved from vty
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:53:58
+% Unknown command: no !   2021/03/30 10:53:58
+router1(config)# !   2021/03/30 10:53:58
+router1(config)# no frr version 7.7-dev_git
+% Unknown command: no frr version 7.7-dev_git
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
+% Unknown command: no frr defaults traditional
+router1(config)# frr defaults traditional
+router1(config)# no hostname r4
+(null)(config)# hostname r4
+r4(config)# no log file //bgpd.log
+r4(config)# log file //bgpd.log
+can't open logfile //bgpd.log
+r4(config)# no debug bgp bestpath 198.10.1.1/32
+BGP bestpath debugging is off for 198.10.1.1/32
+r4(config)# debug bgp bestpath 198.10.1.1/32
+r4(config)# no debug bgp updates in
+r4(config)# debug bgp updates in
+r4(config)# no debug bgp updates out
+r4(config)# debug bgp updates out
+r4(config)# no debug bgp zebra
+r4(config)# debug bgp zebra
+r4(config)# router bgp 65301
+r4(config-router)# no bgp router-id 11.1.4.1
+r4(config-router)# bgp router-id 11.1.4.1
+r4(config-router)# bgp ebgp-requires-policy
+r4(config-router)# no bgp ebgp-requires-policy
+r4(config-router)# no bgp bestpath as-path multipath-relax
+r4(config-router)# bgp bestpath as-path multipath-relax
+r4(config-router)# no neighbor 11.1.2.1 remote-as external
+r4(config-router)# neighbor 11.1.2.1 remote-as external
+r4(config-router)# no neighbor 11.1.2.1 timers 3 10
+r4(config-router)# neighbor 11.1.2.1 timers 3 10
+r4(config-router)# no neighbor 11.1.4.2 remote-as external
+r4(config-router)# neighbor 11.1.4.2 remote-as external
+r4(config-router)# no neighbor 11.1.4.2 timers 3 10
+r4(config-router)# neighbor 11.1.4.2 timers 3 10
+r4(config-router)# no neighbor 11.1.4.6 remote-as external
+r4(config-router)# neighbor 11.1.4.6 remote-as external
+r4(config-router)# no neighbor 11.1.4.6 timers 3 10
+r4(config-router)# neighbor 11.1.4.6 timers 3 10
+r4(config-router)# address-family ipv4 unicast
+r4(config-router-af)# no neighbor 11.1.2.1 route-map anycast_ip out
+r4(config-router-af)# neighbor 11.1.2.1 route-map anycast_ip out
+r4(config-router-af)# exit
+r4(config-router)# no exit-address-family
+% Unknown command: no exit-address-family
+r4(config-router)# exit-address-family
+% Unknown command: exit-address-family
+r4(config-router)# exit
+r4(config)# no ip prefix-list anycast_ip seq 10 permit 198.10.1.0/24 le 32
+r4(config)# ip prefix-list anycast_ip seq 10 permit 198.10.1.0/24 le 32
+r4(config)# route-map anycast_ip permit 10
+r4(config-route-map)# no set extcommunity bandwidth num-multipaths
+r4(config-route-map)# set extcommunity bandwidth num-multipaths
+r4(config-route-map)# no match ip address prefix-list anycast_ip
+r4(config-route-map)# match ip address prefix-list anycast_ip
+r4(config-route-map)# exit
+r4(config)# no route-map anycast_ip permit 20
+r4(config)# route-map anycast_ip permit 20
+r4(config-route-map)# no line vty
+% Unknown command: no line vty
+r4(config-route-map)# line vty
+r4(config-line)# exit
+r4(config)# exit
+r4# exit

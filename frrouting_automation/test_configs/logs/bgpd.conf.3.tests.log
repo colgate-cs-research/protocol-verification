@@ -3,54 +3,54 @@ spawn vtysh
 Hello, this is FRRouting (version 7.7-dev_git).
 Copyright 1996-2005 Kunihiro Ishiguro, et al.
 
-router3# configure terminal
-router3(config)# no ! Zebra configuration saved from vty
+router1# configure terminal
+router1(config)# no ! Zebra configuration saved from vty
 % Unknown command: no ! Zebra configuration saved from vty
-router3(config)# ! Zebra configuration saved from vty
-router3(config)# no !   2021/03/14 20:54:50
-% Unknown command: no !   2021/03/14 20:54:50
-router3(config)# !   2021/03/14 20:54:50
-router3(config)# no frr version 7.7-dev_git
+router1(config)# ! Zebra configuration saved from vty
+router1(config)# no !   2021/03/30 10:49:32
+% Unknown command: no !   2021/03/30 10:49:32
+router1(config)# !   2021/03/30 10:49:32
+router1(config)# no frr version 7.7-dev_git
 % Unknown command: no frr version 7.7-dev_git
-router3(config)# frr version 7.7-dev_git
-router3(config)# no frr defaults traditional
+router1(config)# frr version 7.7-dev_git
+router1(config)# no frr defaults traditional
 % Unknown command: no frr defaults traditional
-router3(config)# frr defaults traditional
-router3(config)# no hostname 8c0b7d8cd34f
-(null)(config)# hostname 8c0b7d8cd34f
-8c0b7d8cd34f(config)# router bgp 65003
-8c0b7d8cd34f(config-router)# no bgp router-id 3.3.3.3
-8c0b7d8cd34f(config-router)# bgp router-id 3.3.3.3
-8c0b7d8cd34f(config-router)# no timers bgp 3 9
-8c0b7d8cd34f(config-router)# timers bgp 3 9
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 remote-as 65001
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 remote-as 65001
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 password hello2
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 password hello2
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 ebgp-multihop 3
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 ebgp-multihop 3
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 update-source lo
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 update-source lo
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 timers 3 10
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 timers 3 10
-8c0b7d8cd34f(config-router)# no neighbor 1.1.1.1 timers connect 10
-8c0b7d8cd34f(config-router)# neighbor 1.1.1.1 timers connect 10
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 remote-as 65002
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 remote-as 65002
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 password hello3
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 password hello3
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 ebgp-multihop 3
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 ebgp-multihop 3
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 update-source lo
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 update-source lo
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 timers 3 10
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 timers 3 10
-8c0b7d8cd34f(config-router)# no neighbor 2.2.2.2 timers connect 10
-8c0b7d8cd34f(config-router)# neighbor 2.2.2.2 timers connect 10
-8c0b7d8cd34f(config-router)# exit
-8c0b7d8cd34f(config)# no line vty
+router1(config)# frr defaults traditional
+router1(config)# no hostname 60fddffa5974
+(null)(config)# hostname 60fddffa5974
+60fddffa5974(config)# router bgp 65003
+60fddffa5974(config-router)# no bgp router-id 3.3.3.3
+60fddffa5974(config-router)# bgp router-id 3.3.3.3
+60fddffa5974(config-router)# no timers bgp 3 9
+60fddffa5974(config-router)# timers bgp 3 9
+60fddffa5974(config-router)# no neighbor 1.1.1.1 remote-as 65001
+60fddffa5974(config-router)# neighbor 1.1.1.1 remote-as 65001
+60fddffa5974(config-router)# no neighbor 1.1.1.1 password hello2
+60fddffa5974(config-router)# neighbor 1.1.1.1 password hello2
+60fddffa5974(config-router)# no neighbor 1.1.1.1 ebgp-multihop 3
+60fddffa5974(config-router)# neighbor 1.1.1.1 ebgp-multihop 3
+60fddffa5974(config-router)# no neighbor 1.1.1.1 update-source lo
+60fddffa5974(config-router)# neighbor 1.1.1.1 update-source lo
+60fddffa5974(config-router)# no neighbor 1.1.1.1 timers 3 10
+60fddffa5974(config-router)# neighbor 1.1.1.1 timers 3 10
+60fddffa5974(config-router)# no neighbor 1.1.1.1 timers connect 10
+60fddffa5974(config-router)# neighbor 1.1.1.1 timers connect 10
+60fddffa5974(config-router)# no neighbor 2.2.2.2 remote-as 65002
+60fddffa5974(config-router)# neighbor 2.2.2.2 remote-as 65002
+60fddffa5974(config-router)# no neighbor 2.2.2.2 password hello3
+60fddffa5974(config-router)# neighbor 2.2.2.2 password hello3
+60fddffa5974(config-router)# no neighbor 2.2.2.2 ebgp-multihop 3
+60fddffa5974(config-router)# neighbor 2.2.2.2 ebgp-multihop 3
+60fddffa5974(config-router)# no neighbor 2.2.2.2 update-source lo
+60fddffa5974(config-router)# neighbor 2.2.2.2 update-source lo
+60fddffa5974(config-router)# no neighbor 2.2.2.2 timers 3 10
+60fddffa5974(config-router)# neighbor 2.2.2.2 timers 3 10
+60fddffa5974(config-router)# no neighbor 2.2.2.2 timers connect 10
+60fddffa5974(config-router)# neighbor 2.2.2.2 timers connect 10
+60fddffa5974(config-router)# exit
+60fddffa5974(config)# no line vty
 % Unknown command: no line vty
-8c0b7d8cd34f(config)# line vty
-8c0b7d8cd34f(config-line)# exit
-8c0b7d8cd34f(config)# exit
-8c0b7d8cd34f# exit
+60fddffa5974(config)# line vty
+60fddffa5974(config-line)# exit
+60fddffa5974(config)# exit
+60fddffa5974# exit
