@@ -1,0 +1,10 @@
+{
+    "routers":[
+        {
+            "name": "router1",
+            "protocols": ["bgp"]
+        }
+    ],
+    "links": [
+    ]
+}
