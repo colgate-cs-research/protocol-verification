@@ -5,6 +5,8 @@ import os
 import subprocess
 import xml.etree.ElementTree as ET
 
+myfile = open("parsed_tcp.txt", "w")
+
 def gen_xml(pcappath):
     basepath, pcapfilename  = os.path.split(pcappath)
     xmlfilename =  pcapfilename.replace('.pcap', '_ospf.xml')
@@ -19,14 +21,14 @@ def parse_xml(xmlpath):
 
 def print_field(field, indent=""):
     if 'showname' in field.attrib:
-        print(indent + field.attrib['showname'])
+        myfile.write(indent + field.attrib['showname']+"\n")
     elif 'show' in field.attrib:
-        print(indent + field.attrib['show'])
+        myfile.write(indent + field.attrib['show']+"\n")
     for child in field:
         print_field(child, indent + " "*4)
 
 def print_proto(proto):
-    print("Layer %s:" % (proto.attrib['name'].upper()))
+    myfile.write("Layer %s:" % (proto.attrib['name'].upper())+"\n")
     for field in proto:
         print_field(field, " "*4)
 
@@ -36,7 +38,7 @@ def print_packet(packet, short=False):
         if (proto.attrib['name'] == 'geninfo'):
             for field in proto:
                 if (field.attrib['name'] == 'timestamp'):
-                    print('Time Stamp%s' % field.attrib['value'])
+                    myfile.write('Time Stamp%s' % field.attrib['value']+"\n")
         elif ((not short and proto.attrib['name'] != "frame") 
                 or proto.attrib['name'] == "ospf"):
             print_proto(proto)
@@ -45,9 +47,9 @@ def print_packets(xml, short=False):
     count = 0
     for packet in xml:
         count += 1
-        print('PACKET RECIEVED NUMBER IN CAPTURE: %d' % (count))
+        myfile.write('PACKET RECIEVED NUMBER IN CAPTURE: %d' % (count)+"\n")
         print_packet(packet, short)
-        print('~')
+        myfile.write('~'+"\n")
 
 def main():
     parser = argparse.ArgumentParser()
