@@ -3,26 +3,25 @@ import random
 def is_brackets(string):
 	open_brackets = ['<', '[', '(', '{']
 	close_brackets = ['>', ']', ')', '}']
-	if(string[0] in open_brackets):
-		if(close_brackets.index(string[-1]) == open_brackets.index(string[0])):
-			return 1
+	if(string[0] in open_brackets and string[-1] in close_brackets):
+		return 1
 	return 0
 
 def make_command(string):
-	print(string)
-	if is_brackets(string):
-		substrings = extract_brackets(string[1:-1])
-	else:
-		substrings = extract_brackets(string)
-		outputs = [string]
+	substrings = extract_brackets(string)
+	outputs = [string]
 	if not substrings:
 		return sub_command(string)
 	else:
-		if is_brackets(string):
-			outputs = sub_command(string)
 		for substring in substrings:
 			commands = make_command(substring)
 			outputs = add_commands(outputs, commands, substring)
+	if(is_brackets(string)):
+		final_outputs = []
+		for output in outputs:
+			final_outputs.extend(sub_command(output))
+		outputs = final_outputs
+	
 	return outputs
 			
 def add_commands(outputs, commands, substring):
@@ -32,7 +31,6 @@ def add_commands(outputs, commands, substring):
 			index = output.index(substring)
 			new_output = output[:index] + command + output[index+len(substring):]
 			new_outputs.append(new_output)
-	print(new_outputs)
 	return new_outputs
 
 def remove_comments(string):
@@ -49,7 +47,7 @@ def remove_comments(string):
 			i = i+1
 	return string
 
-def extract_brackets(string):
+def extract_brackets(string): #returns bracketed string
 	open_brackets = ['<', '[', '(', '{']
 	close_brackets = ['>', ']', ')', '}']
 	start_index = -1
@@ -57,6 +55,8 @@ def extract_brackets(string):
 	nested_count = 0
 	bracket_index = -1
 	substrings = []
+	if string[0] in open_brackets and string[-1] in close_brackets:
+		string = string[1:-1]
 	for i, char in enumerate(string):	
 		if (char in open_brackets):
 			if(nested_count == 0):
@@ -107,13 +107,14 @@ def bracket_cr(string):
 	outputs.append(str(random.randint(start, end)))
 	return outputs
 
-#test_command = "access-list WORD$name [seq (1-4294967295)$seq] <deny|permit>$action <A.B.C.D/M$prefix [exact-match$exact]|any>"
+test_command = "access-list WORD$name [seq (1-4294967295)$seq] <deny|permit>$action <A.B.C.D/M$prefix [exact-match$exact]|any>"
 #print(remove_comments(test_command))
 #print(extract_brackets(remove_comments(test_command)))
 
-test_command = "access-list WORD$name [seq (1-5)]"
+#test_command = "access-list WORD$name [seq (1-5)$seq]"
+#test_command = "[seq (1-425)]"
 
-made_commands = make_command(remove_comments(test_command))
+commands = make_command(remove_comments(test_command))
 
-for mc in made_commands:
-	print(mc)
+for command in commands:
+	print(command)
