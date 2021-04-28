@@ -289,7 +289,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
+    parser.add_argument("-t", "--tcp", action='store_true', help="Option to have tcpdump on", required=False)
     parser.add_argument("-d", "--delay", help="Interfaces to apply delay to", required=False)
     settings = parser.parse_args()
 
@@ -318,7 +318,7 @@ def main():
             os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
 
     #Settings for tcpdump
-    if (settings.tcp in ['tcpon']):
+    if (settings.tcp):
         os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
     client.close()
 
