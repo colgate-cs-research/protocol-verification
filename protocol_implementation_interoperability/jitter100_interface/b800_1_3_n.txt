@@ -1,0 +1,18 @@
+router1# 10.10.0.2
+
+Router ID       Pri          State      DTime   Interface  Router IP
+10.10.0.3         1     Full/DR         42.157  eth1       10.10.0.3
+10.10.0.11        1     Full/DR         46.078  eth2       10.10.0.19
+
+router2# 10.10.0.3
+
+Router ID       Pri          State      DTime   Interface  Router IP
+10.10.0.2         1     Full/BDR        44.987  eth1       10.10.0.2
+10.10.0.11        1     Full/DR         42.966  eth2       10.10.0.11
+
+
+router3# 10.10.0.11
+
+Router ID       Pri          State      DTime   Interface  Router IP
+10.10.0.3         1     Full/BDR        46.481  eth1       10.10.0.10
+10.10.0.2         1     Full/BDR        42.420  eth2       10.10.0.18
