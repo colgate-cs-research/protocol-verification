@@ -1,0 +1,22 @@
+jchauhan@scoobydoo:~/protocol-verification/pattern_recog$ docker exec -it router1 vtysh
+
+Hello, this is FRRouting (version 7.5-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router1# show ip ospf neighbor
+
+Neighbor ID     Pri State           Dead Time Address         Interface                        RXmtL RqstL DBsmL
+172.17.0.4        1 Full/DR           36.318s 10.10.0.3       eth1:10.10.0.2                       0     0     0
+
+router1# exit
+jchauhan@scoobydoo:~/protocol-verification/pattern_recog$ docker exec -it router2 vtysh
+
+Hello, this is FRRouting (version 7.5-dev_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+router2# show ip ospf neighbor
+
+Neighbor ID     Pri State           Dead Time Address         Interface                        RXmtL RqstL DBsmL
+172.17.0.3        1 Full/Backup       35.511s 10.10.0.2       eth1:10.10.0.3                       0     0     0
+
+router2# exit

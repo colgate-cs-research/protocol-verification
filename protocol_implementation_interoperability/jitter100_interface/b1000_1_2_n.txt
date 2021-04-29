@@ -1,0 +1,9 @@
+router1# 10.10.0.2
+
+Router ID       Pri          State      DTime   Interface  Router IP
+10.10.0.3         1     Full/DR         44.809  eth1       10.10.0.3
+
+router2# 10.10.0.3
+
+Router ID       Pri          State      DTime   Interface  Router IP
+10.10.0.2         1     Full/BDR        40.320  eth1       10.10.0.2
