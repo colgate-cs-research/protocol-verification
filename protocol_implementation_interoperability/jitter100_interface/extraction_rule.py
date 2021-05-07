@@ -89,8 +89,12 @@ def triangle(fname):
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
                                 if "/AR"+ARline + "SN"+SNline not in message:
-                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline
+                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/"
                         else:
                             break
                 
@@ -115,8 +119,12 @@ def triangle(fname):
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
                                 if "/AR"+ARline + "SN"+SNline not in message:
-                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline
+                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/"
                         else:
                             break
                 #####
@@ -196,8 +204,12 @@ def double(fname):
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
                                 if "/AR"+ARline + "SN"+SNline not in message:
-                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline
+                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/"
                         else:
                             break
                 
@@ -222,8 +234,12 @@ def double(fname):
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
                                 if "/AR"+ARline + "SN"+SNline not in message:
-                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline
+                                    message = message + "/LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/"
                         else:
                             break
                 #####
@@ -309,6 +325,9 @@ def rule_extraction(final_frequency):
     found_ar_rule = set()
     found_lst_rule = set()
     found_lsid_rule = set()
+    found_lssn_rule = set()
+    found_lscs_rule = set()
+    found_lssn_greater_rule = set()
     for i in investigating:
         #finding the needed field values
         first_packet = i.split("|||")[0]
@@ -322,6 +341,12 @@ def rule_extraction(final_frequency):
         #lsid values
         first_packet_lsid = re.findall(r'LSID(.*?)AR', first_packet,re.DOTALL)
         second_packet_lsid = re.findall(r'LSID(.*?)AR', second_packet,re.DOTALL)
+        #lssn values
+        first_packet_lssn = re.findall(r'SN(.*?)CS', first_packet,re.DOTALL)
+        second_packet_lssn = re.findall(r'SN(.*?)CS', second_packet,re.DOTALL)
+        #lscs values
+        first_packet_lscs = re.findall(r'CS(.*?)/', first_packet,re.DOTALL)
+        second_packet_lscs = re.findall(r'CS(.*?)/', second_packet,re.DOTALL)
 
         # adding send or receive to packets
         if "Send" in first_packet:
@@ -333,24 +358,32 @@ def rule_extraction(final_frequency):
         else:
             second_packet_id = second_packet.split('/')[0] + " Receive"
 
- #identifying packets with intersection in types/id, more conditions can be added to add specification        if len(list(set(first_packet_lst) & set(second_packet_lst)))>=1:
+        #identifying packets with intersection in types/id, more conditions can be added to add specification        
+        if len(list(set(first_packet_lst) & set(second_packet_lst)))>=1:
             found_lst_rule.add(first_packet_id + "|" + second_packet_id)
         if len(list(set(first_packet_lsid) & set(second_packet_lsid)))>=1:
             found_lsid_rule.add(first_packet_id + "|" + second_packet_id)
         if len(list(set(first_packet_ar) & set(second_packet_ar)))>=1:
             found_ar_rule.add(first_packet_id + "|" + second_packet_id)
+        if len(list(set(first_packet_lssn) & set(second_packet_lssn)))>=1:
+            found_lssn_rule.add(first_packet_id + "|" + second_packet_id)
+        if len(list(set(first_packet_lscs) & set(second_packet_lscs)))>=1:
+            found_lscs_rule.add(first_packet_id + "|" + second_packet_id)
+        if min(first_packet_lssn) > max(second_packet_lssn):
+            found_lssn_greater_rule.add(first_packet_id + "|" + second_packet_id)
+
     #outputing the rules
     with open ("extracted_rules.txt","w") as efile:
         efile.write("Observed packets with intersecting LS Type sets:\n")
         rule_counter = 0
-        for i in found_ar_rule:
+        for i in found_lst_rule:
             efile.write(str(rule_counter)+") "+i+"\n")
             rule_counter = rule_counter+1
         efile.write("------------------------------------------------------------------------------\n")
 
         rule_counter = 0
         efile.write("Observed packets with intersecting Link State ID sets:\n")
-        for i in found_ar_rule:
+        for i in found_lsid_rule:
             efile.write(str(rule_counter)+") "+i+"\n")
             rule_counter = rule_counter+1
         efile.write("------------------------------------------------------------------------------\n")
@@ -360,7 +393,27 @@ def rule_extraction(final_frequency):
         for i in found_ar_rule:
             efile.write(str(rule_counter)+") "+i+"\n")
             rule_counter = rule_counter+1
-        
+        efile.write("------------------------------------------------------------------------------\n")        
+
+        rule_counter = 0
+        efile.write("Observed packets with intersecting Link State Sequence Number sets:\n")
+        for i in found_lssn_rule:
+            efile.write(str(rule_counter)+") "+i+"\n")
+            rule_counter = rule_counter+1
+        efile.write("------------------------------------------------------------------------------\n")        
+
+        rule_counter = 0
+        efile.write("Observed packets with intersecting Link State Checksum sets:\n")
+        for i in found_lscs_rule:
+            efile.write(str(rule_counter)+") "+i+"\n")
+            rule_counter = rule_counter+1
+        efile.write("------------------------------------------------------------------------------\n")        
+
+        rule_counter = 0
+        efile.write("test:\n")
+        for i in found_lssn_greater_rule:
+            efile.write(str(rule_counter)+") "+i+"\n")
+            rule_counter = rule_counter+1
 
 
 def main():
