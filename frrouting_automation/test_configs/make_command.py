@@ -1,6 +1,7 @@
 import random
 import sys
 
+#simple function to check if string starts and ends with brackets
 def is_brackets(string):
 	open_brackets = ['<', '[', '(', '{']
 	close_brackets = ['>', ']', ')', '}']
@@ -8,31 +9,37 @@ def is_brackets(string):
 		return 1
 	return 0
 
+#main function to return all possible combinations of commands
 def make_command(string):
 	substrings = extract_brackets(string)
 	outputs = [string]
+	if(is_brackets(string)):
+		outputs = sub_command(string)
 	if not substrings:
 		return sub_command(string)
 	else:
 		for substring in substrings:
 			commands = make_command(substring)
 			outputs = add_commands(outputs, commands, substring)
-	if(is_brackets(string)):
-		final_outputs = []
-		for output in outputs:
-			final_outputs.extend(sub_command(output))
-		outputs = final_outputs
 	return outputs
-			
+
+#make all possible combinations of bracketed template
 def add_commands(outputs, commands, substring):
 	new_outputs = []
+	temp_outputs = set()
 	for command in commands:
 		for output in outputs:
-			index = output.index(substring)
-			new_output = output[:index] + command + output[index+len(substring):]
-			new_outputs.append(new_output)
+			try:
+				index = output.index(substring)
+				new_output = output[:index] + command + output[index+len(substring):]
+				new_outputs.append(new_output)
+			except ValueError:
+				temp_outputs.add(output)
+	temp_outputs = list(temp_outputs)
+	new_outputs.extend(temp_outputs)
 	return new_outputs
 
+#removes comments from string template ($...)
 def remove_comments(string):
 	i = 0
 	while i<len(string)-1:
@@ -47,7 +54,8 @@ def remove_comments(string):
 			i = i+1
 	return string
 
-def extract_brackets(string): #returns bracketed string
+#returns highest level bracketed string
+def extract_brackets(string):
 	open_brackets = ['<', '[', '(', '{']
 	close_brackets = ['>', ']', ')', '}']
 	start_index = -1
@@ -74,6 +82,7 @@ def extract_brackets(string): #returns bracketed string
 					substrings.append(string[start_index:end_index+1])
 	return substrings
 
+#substitute/fill-in commands depending on bracket type
 def sub_command(string):
 	if(string[0] == '<' and string[-1] == '>'):
 		return bracket_gt(string[1:-1])
@@ -86,7 +95,8 @@ def sub_command(string):
 	else:
 		print(string)
 		raise Exception("Unexpected bracket type in command")
-	
+		
+#substitute commands of the form <...>
 def bracket_gt(string):
 	num_options = string.count("|") + 1
 	start_index = 0
@@ -99,12 +109,14 @@ def bracket_gt(string):
 	outputs.append(string[start_index:])
 	return outputs
 
+#substitute commands of the form [...]
 def bracket_sq(string):
 	outputs = []
 	outputs.append(string)
 	outputs.append("")
 	return outputs
 
+#substitute commands of the form (...)
 def bracket_cr(string):
 	outputs = []
 	index = string.index("-")
@@ -113,13 +125,10 @@ def bracket_cr(string):
 	outputs.append(str(random.randint(start, end)))
 	return outputs
 
-test_command = "access-list WORD$name [seq (1-4294967295)$seq] <deny|permit>$action <A.B.C.D/M$prefix [exact-match$exact]|any>"
-
+#test_command = "access-list WORD$name [seq (1-4294967295)$seq] <deny|permit>$action <A.B.C.D/M$prefix [exact-match$exact]|any>"
 test_command = sys.argv[1]
 
 commands = make_command(remove_comments(test_command))
-
-print(remove_comments(test_command))
 
 for command in commands:
 	print(command)
