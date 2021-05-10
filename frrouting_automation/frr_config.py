@@ -45,6 +45,9 @@ def create_containers(routers, client, topology):
     '''Create a container for each router'''
     images = set([tag for img in client.images.list() for tag in img.tags])
 
+    volumes = { os.path.dirname(os.path.dirname(os.path.abspath(__file__))) :
+        {"bind": "/host", "mode": "rw"}}
+
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s (%s)" % (router.name, router.image))
@@ -53,7 +56,7 @@ def create_containers(routers, client, topology):
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name,
-                labels=[topology], cap_add=["ALL"],
+                labels=[topology], cap_add=["ALL"], volumes=volumes,
                 command="/bin/sh", stdin_open=True, tty=True)
 
 def config_routers(routers, client):
