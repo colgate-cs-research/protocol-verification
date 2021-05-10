@@ -1,0 +1,19 @@
+{
+    "routers":[
+        {
+            "name": "frr",
+            "protocols": ["ospf"],
+            "image": "frrouting/frr:latest"
+        },
+        {
+            "name": "scapy",
+            "image": "colgatenetresearch/scapy:latest"
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["frr", "scapy"]
+        }
+    ]
+}

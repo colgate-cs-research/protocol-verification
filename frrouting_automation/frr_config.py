@@ -45,6 +45,9 @@ def create_containers(routers, client, topology):
     '''Create a container for each router'''
     images = set([tag for img in client.images.list() for tag in img.tags])
 
+    volumes = { os.path.dirname(os.path.dirname(os.path.abspath(__file__))) :
+        {"bind": "/host", "mode": "rw"}}
+
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s (%s)" % (router.name, router.image))
@@ -53,8 +56,8 @@ def create_containers(routers, client, topology):
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name,
-                labels=[topology], cap_add=["ALL"],
-                command="/bin/bash", stdin_open=True, tty=True)
+                labels=[topology], cap_add=["ALL"], volumes=volumes,
+                command="/bin/sh", stdin_open=True, tty=True)
 
 def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
@@ -289,7 +292,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", choices=['tcpon'], help="Option to have tcpdump on", required=False)
+    parser.add_argument("-t", "--tcp", help="Path to store tcpdump output", required=False)
     parser.add_argument("-d", "--delay", help="Interfaces to apply delay to", required=False)
     settings = parser.parse_args()
 
@@ -318,8 +321,8 @@ def main():
             os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
 
     #Settings for tcpdump
-    if (settings.tcp in ['tcpon']):
-        os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
+    if (settings.tcp is not None):
+        os.system('docker run --rm --net=host -v %s:/tcpdump kaazing/tcpdump' % settings.tcp)
     client.close()
 
 if __name__ == "__main__":
