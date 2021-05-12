@@ -288,6 +288,27 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
+def apply_delay(delay):
+    delay_components = delay.split("//")
+    delaying_interfaces = delay_components[0].split("/")
+    delaying_options = delay_components[1].split("/")
+    for delaying_interface in delaying_interfaces:
+        print('Appying delay to interface '+delaying_interface)
+        os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
+
+def capture_packets(outdir, packets, filter, client, topology):
+    tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap"]
+    if (packets is not None):
+        tcpdump_args.extend(["-c", str(packets)])
+    if (filter is not None):
+        tcpdump_args.append(filter)
+    volumes = { outdir : {"bind": "/tcpdump", "mode": "rw"}}
+    print("Capturing packets...")
+    client.containers.run("kaazing/tcpdump", name="tcpdump",
+            labels=[topology], volumes=volumes, network_mode="host",
+            command=tcpdump_args, remove=True)
+    print("Finished capturing packets")
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
@@ -313,29 +334,14 @@ def main():
         else:
             launch_topology(topology, routers, links, client)
 
-    #time for manually excuting the delay/need to be automated
-    if settings.delay != None:
-        delay_components = settings.delay.split("//")
-        delaying_interfaces = delay_components[0].split("/")
-        delaying_options = delay_components[1].split("/")
-        for delaying_interface in delaying_interfaces:
-            print('Appying delay to interface '+delaying_interface)
-            os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
+            #time for manually excuting the delay/need to be automated
+            if settings.delay != None:
+                apply_delay(settings.delay)
 
-    #Settings for tcpdump
-    if (settings.tcp is not None):
-        tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap"]
-        if (settings.packets is not None):
-            tcpdump_args.extend(["-c", str(settings.packets)])
-        if (settings.filter is not None):
-            tcpdump_args.append(settings.filter)
-        #os.system('docker run --rm --net=host -v %s:/tcpdump kaazing/tcpdump %s' % (settings.tcp, " ".join(tcpdump_args)))
-        volumes = { settings.tcp : {"bind": "/tcpdump", "mode": "rw"}}
-        print("Capturing packets...")
-        client.containers.run("kaazing/tcpdump", name="tcpdump",
-                labels=[topology], volumes=volumes, network_mode="host",
-                command=tcpdump_args, remove=True)
-        print("Finished capturing packets")
+            #Settings for tcpdump
+            if (settings.tcp is not None):
+                capture_packets(settings.tcp, settings.packets, settings.filter, client, topology)
+                
     client.close()
 
 if __name__ == "__main__":
