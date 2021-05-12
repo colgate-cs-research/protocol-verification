@@ -373,7 +373,7 @@ def rule_extraction(final_frequency):
             found_lssn_rule.add(first_packet_id + "|" + second_packet_id)
         if len(list(set(first_packet_lscs) & set(second_packet_lscs)))>=1:
             found_lscs_rule.add(first_packet_id + "|" + second_packet_id)
-        if min(first_packet_lssn) > max(second_packet_lssn):
+        if max(first_packet_lssn) < min(second_packet_lssn):
             found_lssn_greater_rule.add(first_packet_id + "|" + second_packet_id)
 
     #outputing the rules
@@ -414,7 +414,7 @@ def rule_extraction(final_frequency):
         efile.write("------------------------------------------------------------------------------\n")        
 
         rule_counter = 0
-        efile.write("test:\n")
+        efile.write("Observed packets with second having all greater Link State Sequence Numbers:\n")
         for i in found_lssn_greater_rule:
             efile.write(str(rule_counter)+") "+i+"\n")
             rule_counter = rule_counter+1
