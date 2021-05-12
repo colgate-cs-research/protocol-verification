@@ -369,7 +369,7 @@ def rule_extraction(final_frequency):
             found_lssn_rule.add(first_packet_id + "|" + second_packet_id)
         if len(list(set(first_packet_lscs) & set(second_packet_lscs)))>=1:
             found_lscs_rule.add(first_packet_id + "|" + second_packet_id)
-        if min(first_packet_lssn) > max(second_packet_lssn):
+        if max(first_packet_lssn) < min(second_packet_lssn):
             found_lssn_greater_rule.add(first_packet_id + "|" + second_packet_id)
 
     #outputing the rules
@@ -410,7 +410,7 @@ def rule_extraction(final_frequency):
         efile.write("------------------------------------------------------------------------------\n")        
 
         rule_counter = 0
-        efile.write("test:\n")
+        efile.write("Observed packets with second having all greater Link State Sequence Numbers:\n")
         for i in found_lssn_greater_rule:
             efile.write(str(rule_counter)+") "+i+"\n")
             rule_counter = rule_counter+1
@@ -420,8 +420,10 @@ def main():
 
     final_result = []
     print("Isolating packets from log files...")
+    #### jittering is 3000 ms on each interface
     ###i800_1 to 5 is 250 and 800 interface down
     ###i800_6 to 9 is 250 and down for 60s
+
     files3 = ['800_1_3.txt','800_2_3.txt','800_3_3.txt','800_4_3.txt',
     '800_5_3.txt','800_6_3.txt','800_7_3.txt','800_8_3.txt',
     '800_9_3.txt','800_10_3.txt','800_11_3.txt','800_12_3.txt',
@@ -433,6 +435,22 @@ def main():
     "1000_5_2.txt","1000_6_2.txt","1000_7_2.txt","1000_8_2.txt","1000_9_2.txt",
     "1000_10_2.txt","i1000_1_2.txt","i1000_2_2.txt","i1000_3_2.txt","i1000_4_2.txt",
     "i1000_5_2.txt"]
+
+    # files3 = ['800_1_3.txt','800_2_3.txt','800_3_3.txt','800_4_3.txt',
+    # '800_5_3.txt','800_6_3.txt','800_7_3.txt','800_8_3.txt',
+    # '800_9_3.txt','800_10_3.txt','800_11_3.txt','800_12_3.txt',
+    # '800_13_3.txt','800_14_3.txt','800_15_3.txt']
+    # files2 = ["1000_1_2.txt","1000_2_2.txt","1000_3_2.txt","1000_4_2.txt",
+    # "1000_5_2.txt","1000_6_2.txt","1000_7_2.txt","1000_8_2.txt","1000_9_2.txt",
+    # "1000_10_2.txt"]
+
+    # files3 = ['s800_1_3.txt','s800_2_3.txt','s800_3_3.txt','s800_4_3.txt',
+    # 's800_5_3.txt','s800_6_3.txt','s800_7_3.txt','s800_8_3.txt',
+    # 's800_9_3.txt','s800_10_3.txt']
+    # files2 = ["s1000_1_2.txt","s1000_2_2.txt","s1000_3_2.txt","s1000_4_2.txt",
+    # "s1000_5_2.txt"]
+
+
     for input_file3 in files3:
         final_result.append(triangle(input_file3))
     for input_file2 in files2:
