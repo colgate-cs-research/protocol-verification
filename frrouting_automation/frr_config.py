@@ -294,6 +294,8 @@ def main():
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
     parser.add_argument("-t", "--tcp", help="Path to store tcpdump output", required=False)
     parser.add_argument("-d", "--delay", help="Interfaces to apply delay to", required=False)
+    parser.add_argument("-p", "--packets", help="Number of packets to capture", required=False, type=int)
+    parser.add_argument("-f", "--filter", help="Packet filter", required=False)
     settings = parser.parse_args()
 
     # Load and parse configuration
@@ -322,7 +324,18 @@ def main():
 
     #Settings for tcpdump
     if (settings.tcp is not None):
-        os.system('docker run --rm --net=host -v %s:/tcpdump kaazing/tcpdump' % settings.tcp)
+        tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap"]
+        if (settings.packets is not None):
+            tcpdump_args.extend(["-c", str(settings.packets)])
+        if (settings.filter is not None):
+            tcpdump_args.append(settings.filter)
+        #os.system('docker run --rm --net=host -v %s:/tcpdump kaazing/tcpdump %s' % (settings.tcp, " ".join(tcpdump_args)))
+        volumes = { settings.tcp : {"bind": "/tcpdump", "mode": "rw"}}
+        print("Capturing packets...")
+        client.containers.run("kaazing/tcpdump", name="tcpdump",
+                labels=[topology], volumes=volumes, network_mode="host",
+                command=tcpdump_args, remove=True)
+        print("Finished capturing packets")
     client.close()
 
 if __name__ == "__main__":
