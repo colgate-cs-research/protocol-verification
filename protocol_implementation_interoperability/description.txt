@@ -1,14 +1,13 @@
-extraction.py - packet causal relationship extractor for frrouting ospf
-extraction_bird.py - packet causal relationship extractor for bird ospf
+causal.py - packet causal relationship extractor for frrouting ospf
+causal_bird.py - packet causal relationship extractor for bird ospf
 
-extraction_rule.py - acceptable packet sequence extractor for frrouting ospf (also creates markov chain if needed)
-extraction_rule_bird.py - acceptable packet sequence extractor for bird ospf (also creates markov chain if needed)
+accept.py - acceptable packet sequence extractor for frrouting ospf (also creates markov chain if needed)
+accept_bird.py - acceptable packet sequence extractor for bird ospf (also creates markov chain if needed)
 
-800_#_#.txt - frrouting ospf triangle topology logs
-1000_#_#.txt - frrouting ospf double topology logs
-
-b800_#_#.txt - bird ospf triangle topology logs
-b1000_#_#.txt - bird ospf double topology logs
-
-i800_#_#.txt - frrouting ospf triangle topology logs with interface shutdowns
-i1000_#_#.txt - frrouting ospf double topology logs with interface shutdowns
+logs:
+  800_#_#.txt - frrouting ospf triangle topology logs with jittering
+  1000_#_#.txt - frrouting ospf double topology logs with jittering
+  b - bird implementation
+  i - interface shutdowns implemented
+  s - normal logs without any interference
+  l - logs with latency implemented
