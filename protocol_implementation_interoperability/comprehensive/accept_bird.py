@@ -377,7 +377,7 @@ def rule_extraction(final_frequency):
             found_lssn_greater_rule.add(first_packet_id + "|" + second_packet_id)
 
     #outputing the rules
-    with open ("extracted_rules_bird.txt","w") as efile:
+    with open ("output/accept_bird.txt","w") as efile:
         efile.write("Observed packets with intersecting LS Type sets:\n")
         rule_counter = 0
         for i in found_lst_rule:
@@ -425,13 +425,13 @@ def main():
 
     final_result = []
     print("Isolating packets from log files...")
-    files3 = ['b800_1_3.txt','b800_2_3.txt','b800_3_3.txt','b800_4_3.txt',
-    'b800_5_3.txt','b800_6_3.txt','b800_7_3.txt','b800_8_3.txt',
-    'b800_9_3.txt','b800_10_3.txt','b800_11_3.txt','b800_12_3.txt',
-    'b800_13_3.txt','b800_14_3.txt','b800_15_3.txt']
-    files2 = ["b1000_1_2.txt","b1000_2_2.txt","b1000_3_2.txt","b1000_4_2.txt",
-    "b1000_5_2.txt","b1000_6_2.txt","b1000_7_2.txt","b1000_8_2.txt","b1000_9_2.txt",
-    "b1000_10_2.txt"]
+    files3 = ['logs/b800_1_3.txt','logs/b800_2_3.txt','logs/b800_3_3.txt','logs/b800_4_3.txt',
+    'logs/b800_5_3.txt','logs/b800_6_3.txt','logs/b800_7_3.txt','logs/b800_8_3.txt',
+    'logs/b800_9_3.txt','logs/b800_10_3.txt','logs/b800_11_3.txt','logs/b800_12_3.txt',
+    'logs/b800_13_3.txt','logs/b800_14_3.txt','logs/b800_15_3.txt']
+    files2 = ["logs/b1000_1_2.txt","logs/b1000_2_2.txt","logs/b1000_3_2.txt","logs/b1000_4_2.txt",
+    "logs/b1000_5_2.txt","logs/b1000_6_2.txt","logs/b1000_7_2.txt","logs/b1000_8_2.txt","logs/b1000_9_2.txt",
+    "logs/b1000_10_2.txt"]
     for input_file3 in files3:
         final_result.append(triangle(input_file3))
     for input_file2 in files2:
