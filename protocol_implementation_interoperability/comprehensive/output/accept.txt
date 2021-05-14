@@ -1,0 +1,98 @@
+Observed packets with intersecting LS Type sets:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Send|LS Update (4) Send
+5) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+6) LS Update (4) Send|LS Acknowledge (5) Receive
+7) LS Acknowledge (5) Send|LS Update (4) Receive
+8) LS Update (4) Receive|LS Update (4) Receive
+9) LS Update (4) Receive|LS Acknowledge (5) Send
+10) LS Update (4) Receive|LS Update (4) Send
+11) LS Acknowledge (5) Receive|LS Update (4) Receive
+12) LS Update (4) Send|LS Acknowledge (5) Send
+13) LS Update (4) Send|LS Update (4) Receive
+14) LS Acknowledge (5) Receive|LS Update (4) Send
+15) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive
+------------------------------------------------------------------------------
+Observed packets with intersecting Link State ID sets:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+5) LS Update (4) Send|LS Acknowledge (5) Receive
+6) LS Acknowledge (5) Send|LS Update (4) Receive
+7) LS Update (4) Receive|LS Update (4) Receive
+8) LS Update (4) Receive|LS Acknowledge (5) Send
+9) LS Update (4) Receive|LS Update (4) Send
+10) LS Acknowledge (5) Receive|LS Update (4) Receive
+11) LS Update (4) Send|LS Acknowledge (5) Send
+12) LS Update (4) Send|LS Update (4) Receive
+13) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive
+------------------------------------------------------------------------------
+Observed packets with intersecting Advertising Router sets:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+5) LS Update (4) Send|LS Acknowledge (5) Receive
+6) LS Acknowledge (5) Send|LS Update (4) Receive
+7) LS Update (4) Receive|LS Update (4) Receive
+8) LS Update (4) Receive|LS Update (4) Send
+9) LS Acknowledge (5) Receive|LS Update (4) Receive
+10) LS Update (4) Receive|LS Acknowledge (5) Send
+11) LS Update (4) Send|LS Update (4) Receive
+12) LS Update (4) Send|LS Acknowledge (5) Send
+13) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive
+------------------------------------------------------------------------------
+Observed packets with intersecting Link State Sequence Number sets:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Send|LS Update (4) Send
+5) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+6) LS Update (4) Send|LS Acknowledge (5) Receive
+7) LS Acknowledge (5) Send|LS Update (4) Receive
+8) LS Update (4) Receive|LS Update (4) Receive
+9) LS Update (4) Receive|LS Acknowledge (5) Send
+10) LS Update (4) Receive|LS Update (4) Send
+11) LS Acknowledge (5) Receive|LS Update (4) Receive
+12) LS Update (4) Send|LS Acknowledge (5) Send
+13) LS Update (4) Send|LS Update (4) Receive
+14) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive
+------------------------------------------------------------------------------
+Observed packets with intersecting Link State Checksum sets:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+5) LS Update (4) Send|LS Acknowledge (5) Receive
+6) LS Acknowledge (5) Send|LS Update (4) Receive
+7) LS Update (4) Receive|LS Update (4) Receive
+8) LS Update (4) Receive|LS Acknowledge (5) Send
+9) LS Update (4) Receive|LS Update (4) Send
+10) LS Acknowledge (5) Receive|LS Update (4) Receive
+11) LS Update (4) Send|LS Acknowledge (5) Send
+12) LS Update (4) Send|LS Update (4) Receive
+13) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive
+------------------------------------------------------------------------------
+Observed packets with second having all greater Link State Sequence Numbers:
+0) LS Update (4) Send|LS Update (4) Send
+1) LS Update (4) Receive|LS Acknowledge (5) Receive
+2) LS Acknowledge (5) Send|LS Acknowledge (5) Receive
+3) LS Acknowledge (5) Send|LS Acknowledge (5) Send
+4) LS Acknowledge (5) Send|LS Update (4) Send
+5) LS Acknowledge (5) Receive|LS Acknowledge (5) Send
+6) LS Acknowledge (5) Send|LS Update (4) Receive
+7) LS Update (4) Receive|LS Update (4) Receive
+8) LS Update (4) Receive|LS Acknowledge (5) Send
+9) LS Update (4) Receive|LS Update (4) Send
+10) LS Acknowledge (5) Receive|LS Update (4) Receive
+11) LS Update (4) Send|LS Acknowledge (5) Send
+12) LS Update (4) Send|LS Update (4) Receive
+13) LS Acknowledge (5) Receive|LS Acknowledge (5) Receive

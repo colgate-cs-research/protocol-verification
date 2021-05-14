@@ -1,0 +1,11 @@
+List of packets with greater sn that can be received given last sent packet type
+LS Update (4)
+{'LS Update (4)', 'LS Acknowledge (5)'}
+LS Acknowledge (5)
+{'LS Update (4)'}
+###########################################################################################################################################################
+List of packets with greater sn that can be send given last received packet type
+LS Update (4)
+{'LS Update (4)', 'LS Acknowledge (5)'}
+LS Acknowledge (5)
+{'LS Update (4)'}
