@@ -63,12 +63,32 @@ def triangle(fname):
                     while peek_line(file):
                         line = file.readline()
                         if "~" not in line:
-                            if "Sequence Number" in line:
+                            if "LS Age" in line:
+                                LSAGEline = line.strip("\n")
+                                LSAGEline = LSAGEline.strip('\t')
+                                LSAGEline = LSAGEline.split("LS Age (seconds): ")[1]
+                            elif "LS Type" in line:
+                                LSTline = line.strip("\n")
+                                LSTline = LSTline.strip('\t')
+                                LSTline = LSTline.strip("LS Type: ")
+                            elif "Link State ID: " in line:
+                                LSIDline = line.strip("\n")
+                                LSIDline = LSIDline.strip('\t')
+                                LSIDline = LSIDline.strip("Link State ID: ")
+                            elif "Advertising Router" in line:
+                                ARline = line.strip("\n")
+                                ARline = ARline.strip('\t')
+                                ARline = ARline.strip("Advertising Router: ")
+                            elif "Sequence Number" in line:
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
-                                if "SN"+SNline not in message:
-                                    message = message + "/SN"+SNline+"END"
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
+                                if "/AR"+ARline + "SN"+SNline not in message:
+                                    message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/#"
                         else:
                             break
                 #####
@@ -131,12 +151,32 @@ def double(fname):
                     while peek_line(file):
                         line = file.readline()
                         if "~" not in line:
-                            if "Sequence Number" in line:
+                            if "LS Age" in line:
+                                LSAGEline = line.strip("\n")
+                                LSAGEline = LSAGEline.strip('\t')
+                                LSAGEline = LSAGEline.split("LS Age (seconds): ")[1]
+                            elif "LS Type" in line:
+                                LSTline = line.strip("\n")
+                                LSTline = LSTline.strip('\t')
+                                LSTline = LSTline.strip("LS Type: ")
+                            elif "Link State ID: " in line:
+                                LSIDline = line.strip("\n")
+                                LSIDline = LSIDline.strip('\t')
+                                LSIDline = LSIDline.strip("Link State ID: ")
+                            elif "Advertising Router" in line:
+                                ARline = line.strip("\n")
+                                ARline = ARline.strip('\t')
+                                ARline = ARline.strip("Advertising Router: ")
+                            elif "Sequence Number" in line:
                                 SNline = line.strip("\n")
                                 SNline = SNline.strip('\t')
                                 SNline = SNline.strip("Sequence Number: ")
-                                if "SN"+SNline not in message:
-                                    message = message + "/SN"+SNline+"END"
+                            elif "Checksum" in line and "Length" in peek_line(file):
+                                CSline = line.strip("\n")
+                                CSline = CSline.strip('\t')
+                                CSline = CSline.strip("Checksum: ")
+                                if "/AR"+ARline + "SN"+SNline not in message:
+                                    message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/#"
                         else:
                             break
                 #####
@@ -204,50 +244,122 @@ def run(final_result):
             f.write(key+"\n")
             f.write(str(send_dict[key])+"\n")
 
-    specific_causal_recv = defaultdict(set)
-    specific_causal_send = defaultdict(set)
+    specific_causal_recv_sn = defaultdict(set)
+    specific_causal_send_sn = defaultdict(set)
+    specific_causal_recv_age = defaultdict(set)
+    specific_causal_send_age = defaultdict(set)
     with open ('output/specific_causal_bird.txt','w') as f:
         for key in recv_dict:
+            #check if related to lsa
             if "LS Update (4)" in key or "LS Acknowledge (5)" in key:
                 for i in recv_dict[key]:
                     if "LS Update (4)" in i or "LS Acknowledge (5)" in i:
-                        first_sn = re.findall(r'/SN(.*?)END', key,re.DOTALL)
-                        second_sn = re.findall(r'/SN(.*?)END', i,re.DOTALL)
-                        if max(first_sn) < min(second_sn):
-                            specific_causal_recv[key.split("/")[0]].add(i.split("/")[0])
+                        #listing all lsa in the two packets
+                        first_lsa_list = (key.split("/",1)[1]).split("#")
+                        second_lsa_list = (i.split("/",1)[1]).split("#")
+                        first_lsa_list.remove("")
+                        second_lsa_list.remove("")
+                        #iterate through all lsas in the first and second packets
+                        for f_lsa in first_lsa_list:
+                            for s_lsa in second_lsa_list:
+                                first_packet_age = re.findall(r'AGE(.*?)LST', f_lsa,re.DOTALL)
+                                second_packet_age = re.findall(r'AGE(.*?)LST', s_lsa,re.DOTALL)
+
+                                first_packet_ar = re.findall(r'AR(.*?)SN', f_lsa,re.DOTALL)
+                                second_packet_ar = re.findall(r'AR(.*?)SN', s_lsa,re.DOTALL)
+                                #lst values
+                                first_packet_lst = re.findall(r'LST(.*?)LSID', f_lsa,re.DOTALL)
+                                second_packet_lst = re.findall(r'LST(.*?)LSID', s_lsa,re.DOTALL)
+                                #lsid values
+                                first_packet_lsid = re.findall(r'LSID(.*?)AR', f_lsa,re.DOTALL)
+                                second_packet_lsid = re.findall(r'LSID(.*?)AR', s_lsa,re.DOTALL)
+                                #lssn values
+                                first_packet_lssn = re.findall(r'SN(.*?)CS', f_lsa,re.DOTALL)
+                                second_packet_lssn = re.findall(r'SN(.*?)CS', s_lsa,re.DOTALL)
+                                #lscs values
+                                first_packet_lscs = re.findall(r'CS(.*?)/', f_lsa,re.DOTALL)
+                                second_packet_lscs = re.findall(r'CS(.*?)/', s_lsa,re.DOTALL)
+                                #check if the lsas are correspondng by ar, type, and id
+                                if first_packet_lst == second_packet_lst and first_packet_lsid == second_packet_lsid and first_packet_ar == second_packet_ar:
+                                    # input relation values to be checked
+                                    if first_packet_lssn[0] < second_packet_lssn[0]:
+                                        specific_causal_recv_sn[key.split("/")[0]].add(i.split("/")[0])
+                                    if int(first_packet_age[0]) < int(second_packet_age[0]):
+                                        specific_causal_recv_age[key.split("/")[0]].add(i.split("/")[0])
+
+
+
         for key in send_dict:
             if "LS Update (4)" in key or "LS Acknowledge (5)" in key:
                 for i in recv_dict[key]:
                     if "LS Update (4)" in i or "LS Acknowledge (5)" in i:
-                        first_sn = re.findall(r'/SN(.*?)END', key,re.DOTALL)
-                        second_sn = re.findall(r'/SN(.*?)END', i,re.DOTALL)
-                        if max(first_sn) < min(second_sn):
-                            specific_causal_send[key.split("/")[0]].add(i.split("/")[0])
-        f.write("List of packets with greater sn that can be received given last sent packet type"+"\n")
-        for key in specific_causal_recv:
+                        #listing all lsa in the two packets
+                        first_lsa_list = (key.split("/",1)[1]).split("#")
+                        second_lsa_list = (i.split("/",1)[1]).split("#")
+                        first_lsa_list.remove("")
+                        second_lsa_list.remove("")
+                        #iterate through all lsas in the first and second packets
+                        for f_lsa in first_lsa_list:
+                            for s_lsa in second_lsa_list:
+                                first_packet_age = re.findall(r'AGE(.*?)LST', f_lsa,re.DOTALL)
+                                second_packet_age = re.findall(r'AGE(.*?)LST', s_lsa,re.DOTALL)
+
+                                first_packet_ar = re.findall(r'AR(.*?)SN', f_lsa,re.DOTALL)
+                                second_packet_ar = re.findall(r'AR(.*?)SN', s_lsa,re.DOTALL)
+                                #lst values
+                                first_packet_lst = re.findall(r'LST(.*?)LSID', f_lsa,re.DOTALL)
+                                second_packet_lst = re.findall(r'LST(.*?)LSID', s_lsa,re.DOTALL)
+                                #lsid values
+                                first_packet_lsid = re.findall(r'LSID(.*?)AR', f_lsa,re.DOTALL)
+                                second_packet_lsid = re.findall(r'LSID(.*?)AR', s_lsa,re.DOTALL)
+                                #lssn values
+                                first_packet_lssn = re.findall(r'SN(.*?)CS', f_lsa,re.DOTALL)
+                                second_packet_lssn = re.findall(r'SN(.*?)CS', s_lsa,re.DOTALL)
+                                #lscs values
+                                first_packet_lscs = re.findall(r'CS(.*?)/', f_lsa,re.DOTALL)
+                                second_packet_lscs = re.findall(r'CS(.*?)/', s_lsa,re.DOTALL)
+                                #check if the lsas are correspondng by ar, type, and id
+                                if first_packet_lst == second_packet_lst and first_packet_lsid == second_packet_lsid and first_packet_ar == second_packet_ar:
+                                    # input relation values to be checked
+                                    if first_packet_lssn[0] < second_packet_lssn[0]:
+                                        specific_causal_send_sn[key.split("/")[0]].add(i.split("/")[0])
+                                    if int(first_packet_age[0]) < int(second_packet_age[0]):
+                                        specific_causal_send_age[key.split("/")[0]].add(i.split("/")[0])
+
+        f.write("--------------Given a packet is sent, packets to receive as a response with responding lsa containing greater sn."+"\n")
+        for key in specific_causal_recv_sn:
             f.write(key+"\n")
-            f.write(str(specific_causal_recv[key])+"\n")
-        f.write("###########################################################################################################################################################\n")
-        f.write("List of packets with greater sn that can be send given last received packet type"+"\n")
-        for key in specific_causal_send:
+            f.write(str(specific_causal_recv_sn[key])+"\n")
+            f.write("\n")
+        f.write("--------------Given a packet is received, packets to send as a response with responding lsa containg greater sn"+"\n")
+        for key in specific_causal_send_sn:
             f.write(key+"\n")
-            f.write(str(specific_causal_send[key])+"\n")
+            f.write(str(specific_causal_send_sn[key])+"\n")
+            f.write("\n")
+        
+        f.write("--------------Given a packet is sent, packets to receive as a response with responding lsa containing greater age."+"\n")
+        for key in specific_causal_recv_age:
+            f.write(key+"\n")
+            f.write(str(specific_causal_recv_age[key])+"\n")
+            f.write("\n")
+        f.write("--------------Given a packet is received, packets to send as a response twith responding lsa containg greater age"+"\n")
+        for key in specific_causal_send_age:
+            f.write(key+"\n")
+            f.write(str(specific_causal_send_age[key])+"\n")
+            f.write("\n")
 
 
 def main():
     final_result = []
-    files3 = ['logs/lb800_1_3.txt',
-    'logs/lb800_2_3.txt']
+    files3 = ['logs/b800_1_3.txt',
+    'logs/b800_2_3.txt']
 
     for input_file3 in files3:
         final_result.append(triangle(input_file3))
 
-    files2 = ['logs/lb1000_1_2.txt']
+    files2 = ['logs/b1000_1_2.txt']
     for input_file2 in files2:
         final_result.append(double(input_file2))
-
-    #final_result.append(star('star_1000.txt'))
-    #final_result.append(linear('linear_1000.txt'))
 
     run(final_result)
 main()
