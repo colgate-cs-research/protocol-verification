@@ -23,7 +23,7 @@ def main():
     experiment, config = load_config(settings.config)
 
     # Prepare output directory
-    base_outdir = os.path.join(settings.output, experiment)
+    base_outdir = os.path.join(os.path.abspath(settings.output), experiment)
     os.makedirs(base_outdir, exist_ok=True)
 
     base_frr_cmd = ["python3", "frr_config.py", "-a" ]
