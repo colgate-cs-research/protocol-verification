@@ -345,8 +345,8 @@ def rule_extraction(final_frequency):
         first_packet_lsid = re.findall(r'LSID(.*?)AR', first_packet,re.DOTALL)
         second_packet_lsid = re.findall(r'LSID(.*?)AR', second_packet,re.DOTALL)
         #lssn values
-        first_packet_lssn = re.findall(r'SN(.*?)/', first_packet,re.DOTALL)
-        second_packet_lssn = re.findall(r'SN(.*?)/', second_packet,re.DOTALL)
+        first_packet_lssn = re.findall(r'SN(.*?)CS', first_packet,re.DOTALL)
+        second_packet_lssn = re.findall(r'SN(.*?)CS', second_packet,re.DOTALL)
         #lscs values
         first_packet_lscs = re.findall(r'CS(.*?)/', first_packet,re.DOTALL)
         second_packet_lscs = re.findall(r'CS(.*?)/', second_packet,re.DOTALL)
