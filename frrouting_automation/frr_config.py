@@ -297,7 +297,7 @@ def apply_delay(delay):
         os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
 
 def capture_packets(outdir, packets, filter, client, topology):
-    tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap"]
+    tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap", "-Q", "out"]
     if (packets is not None):
         tcpdump_args.extend(["-c", str(packets)])
     if (filter is not None):
