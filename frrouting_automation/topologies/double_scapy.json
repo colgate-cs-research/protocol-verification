@@ -1,0 +1,18 @@
+{
+    "routers":[
+        {
+            "name": "scapy1",
+            "image": "colgatenetresearch/scapy:latest"
+        },
+        {
+            "name": "scapy2",
+            "image": "colgatenetresearch/scapy:latest"
+        }
+    ],
+    "links": [
+        {
+            "name": "bridge1",
+            "routers": ["scapy1", "scapy2"]
+        }
+    ]
+}

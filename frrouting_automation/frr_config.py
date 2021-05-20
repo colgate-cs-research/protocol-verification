@@ -45,6 +45,9 @@ def create_containers(routers, client, topology):
     '''Create a container for each router'''
     images = set([tag for img in client.images.list() for tag in img.tags])
 
+    volumes = { os.path.dirname(os.path.dirname(os.path.abspath(__file__))) :
+        {"bind": "/host", "mode": "rw"}}
+
     for router_name in sorted(routers.keys()):
         router = routers[router_name]
         print("Creating %s (%s)" % (router.name, router.image))
@@ -53,8 +56,8 @@ def create_containers(routers, client, topology):
             client.images.pull(router.image)
             images.add(router.image)
         client.containers.create(router.image, detach=True, name=router.name,
-                labels=[topology], cap_add=["ALL"],
-                command="/bin/bash", stdin_open=True, tty=True)
+                labels=[topology], cap_add=["ALL"], volumes=volumes,
+                command="/bin/sh", stdin_open=True, tty=True)
 
 def config_routers(routers, client):
     for router_name in sorted(routers.keys()):
@@ -285,12 +288,35 @@ def cleanup_topology(topology, client):
     print("Cleaning up networks")
     client.networks.prune()
 
+def apply_delay(delay):
+    delay_components = delay.split("//")
+    delaying_interfaces = delay_components[0].split("/")
+    delaying_options = delay_components[1].split("/")
+    for delaying_interface in delaying_interfaces:
+        print('Appying delay to interface '+delaying_interface)
+        os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
+
+def capture_packets(outdir, packets, filter, client, topology):
+    tcpdump_args = ["-i", "any", "-w", "/tcpdump/tcpdump.pcap", "-Q", "out"]
+    if (packets is not None):
+        tcpdump_args.extend(["-c", str(packets)])
+    if (filter is not None):
+        tcpdump_args.append(filter)
+    volumes = { outdir : {"bind": "/tcpdump", "mode": "rw"}}
+    print("Capturing packets...")
+    client.containers.run("kaazing/tcpdump", name="tcpdump",
+            labels=[topology], volumes=volumes, network_mode="host",
+            command=tcpdump_args, remove=True)
+    print("Finished capturing packets")
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Path to JSON config file", required=True)
     parser.add_argument("-a", "--action", choices=['start', 'stop', 'restart'], help="Operation to perform", required=True)
-    parser.add_argument("-t", "--tcp", action='store_true', help="Option to have tcpdump on", required=False)
+    parser.add_argument("-t", "--tcp", help="Path to store tcpdump output", required=False)
     parser.add_argument("-d", "--delay", help="Interfaces to apply delay to", required=False)
+    parser.add_argument("-p", "--packets", help="Number of packets to capture", required=False, type=int)
+    parser.add_argument("-f", "--filter", help="Packet filter", required=False)
     settings = parser.parse_args()
 
     # Load and parse configuration
@@ -308,18 +334,14 @@ def main():
         else:
             launch_topology(topology, routers, links, client)
 
-    #time for manually excuting the delay/need to be automated
-    if settings.delay != None:
-        delay_components = settings.delay.split("//")
-        delaying_interfaces = delay_components[0].split("/")
-        delaying_options = delay_components[1].split("/")
-        for delaying_interface in delaying_interfaces:
-            print('Appying delay to interface '+delaying_interface)
-            os.system('nohup pumba netem --duration '+delaying_options[0]+'s -i '+ delaying_interface +' --tc-image gaiadocker/iproute2 delay --time '+delaying_options[1]+' --jitter '+delaying_options[2]+' >/dev/null 2>&1 &')
+            #time for manually excuting the delay/need to be automated
+            if settings.delay != None:
+                apply_delay(settings.delay)
 
-    #Settings for tcpdump
-    if (settings.tcp):
-        os.system('docker run --rm --net=host -v ~/protocol-verification/pattern_recog:/tcpdump kaazing/tcpdump')
+            #Settings for tcpdump
+            if (settings.tcp is not None):
+                capture_packets(settings.tcp, settings.packets, settings.filter, client, topology)
+                
     client.close()
 
 if __name__ == "__main__":

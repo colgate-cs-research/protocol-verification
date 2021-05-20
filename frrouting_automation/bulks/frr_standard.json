@@ -1,0 +1,10 @@
+{
+    "topologies" : [
+        "double_ospf_frr",
+        "linear_ospf",
+        "star_ospf",
+        "triangle_ospf"
+    ],
+    "packets" : 100,
+    "filter" : "proto ospf"
+}
