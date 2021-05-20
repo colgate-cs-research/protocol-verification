@@ -1,0 +1,15 @@
+{
+    "topologies" : [
+        "triangle_ospf",
+	"triangle_ospf_bird"
+    ],
+    "packets":200,
+    "filter" : "proto ospf",
+    "delay": "eth1/eth2//300/3000/0"
+
+
+
+
+
+
+}
