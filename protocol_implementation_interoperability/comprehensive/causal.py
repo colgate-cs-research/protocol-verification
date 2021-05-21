@@ -320,62 +320,72 @@ def run(final_result, causal_file, specific_causal_file):
             f.write(str(specific_causal_send_age[key])+"\n")
             f.write("\n")
 
-
-
-def main_frr():
+"""Perform causal analysis for FRR"""
+def main_frr(topology):
     final_result = []
 
-    files3 = ['logs/l800_1_3.txt','logs/l800_2_3.txt',
-    'logs/l800_3_3.txt','logs/l800_4_3.txt',
-    'logs/l800_5_3.txt','logs/l800_6_3.txt',
-    'logs/l800_7_3.txt','logs/l800_8_3.txt',
-    'logs/l800_9_3.txt','logs/l800_10_3.txt',]
-    #source router + interface = destination router
-    recv3 = {"172.17.0.210.10.0.2":"172.17.0.3","172.17.0.210.10.0.18":"172.17.0.4","172.17.0.310.10.0.3":"172.17.0.2","172.17.0.310.10.0.10":"172.17.0.4","172.17.0.410.10.0.11":"172.17.0.3","172.17.0.410.10.0.19":"172.17.0.2"} 
-    for input_file3 in files3:
-        final_result.append(parse_logs(input_file3, recv3))
+    # triangle topology
+    if (topology in ["triangle", "all"]):
+        files3 = ['logs/l800_1_3.txt','logs/l800_2_3.txt',
+        'logs/l800_3_3.txt','logs/l800_4_3.txt',
+        'logs/l800_5_3.txt','logs/l800_6_3.txt',
+        'logs/l800_7_3.txt','logs/l800_8_3.txt',
+        'logs/l800_9_3.txt','logs/l800_10_3.txt',]
+        #source router + interface = destination router
+        recv3 = {"172.17.0.210.10.0.2":"172.17.0.3","172.17.0.210.10.0.18":"172.17.0.4","172.17.0.310.10.0.3":"172.17.0.2","172.17.0.310.10.0.10":"172.17.0.4","172.17.0.410.10.0.11":"172.17.0.3","172.17.0.410.10.0.19":"172.17.0.2"} 
+        for input_file3 in files3:
+            final_result.append(parse_logs(input_file3, recv3))
 
-    files2 = ['logs/l1000_1_2.txt','logs/l1000_2_2.txt',
-    'logs/l1000_3_2.txt','logs/l1000_4_2.txt',
-    'logs/l1000_5_2.txt']
-    #source router + interface = destination router
-    recv2 = {"172.17.0.210.10.0.2":"172.17.0.3","172.17.0.310.10.0.3":"172.17.0.2"}
-    for input_file2 in files2:
-        final_result.append(parse_logs(input_file2, recv2))
+    # double topology
+    if (topology in ["double", "all"]):
+        files2 = ['logs/l1000_1_2.txt','logs/l1000_2_2.txt',
+        'logs/l1000_3_2.txt','logs/l1000_4_2.txt',
+        'logs/l1000_5_2.txt']
+        #source router + interface = destination router
+        recv2 = {"172.17.0.210.10.0.2":"172.17.0.3","172.17.0.310.10.0.3":"172.17.0.2"}
+        for input_file2 in files2:
+            final_result.append(parse_logs(input_file2, recv2))
 
     run(final_result, 'output/causal_frr.txt', 'output/specific_causal_frr.txt')
 
-def main_bird():
+"""Perform causal analysis for Bird"""
+def main_bird(topology):
     final_result = []
-    files3 = ['logs/lb800_1_3.txt','logs/lb800_2_3.txt',
-    'logs/lb800_3_3.txt','logs/lb800_4_3.txt',
-    'logs/lb800_5_3.txt','logs/lb800_6_3.txt',
-    'logs/lb800_7_3.txt','logs/lb800_8_3.txt',
-    'logs/lb800_9_3.txt','logs/lb800_10_3.txt',]
-    #source router + interface = destination router
-    recv3 = {"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.210.10.0.18":"10.10.0.11","10.10.0.310.10.0.3":"10.10.0.2","10.10.0.310.10.0.10":"10.10.0.11","10.10.0.1110.10.0.11":"10.10.0.3","10.10.0.1110.10.0.19":"10.10.0.2"}
-    for input_file3 in files3:
-        final_result.append(parse_logs(input_file3, recv3))
 
-    files2 = ['logs/lb1000_1_2.txt','logs/lb1000_2_2.txt',
-    'logs/lb1000_3_2.txt','logs/lb1000_4_2.txt',
-    'logs/lb1000_5_2.txt']
-    #source router + interface = destination router
-    recv2 = {"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.310.10.0.3":"10.10.0.2"}
-    for input_file2 in files2:
-        final_result.append(parse_logs(input_file2, recv2))
+    # triangle topology
+    if (topology in ["triangle", "all"]):
+        files3 = ['logs/lb800_1_3.txt','logs/lb800_2_3.txt',
+        'logs/lb800_3_3.txt','logs/lb800_4_3.txt',
+        'logs/lb800_5_3.txt','logs/lb800_6_3.txt',
+        'logs/lb800_7_3.txt','logs/lb800_8_3.txt',
+        'logs/lb800_9_3.txt','logs/lb800_10_3.txt',]
+        #source router + interface = destination router
+        recv3 = {"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.210.10.0.18":"10.10.0.11","10.10.0.310.10.0.3":"10.10.0.2","10.10.0.310.10.0.10":"10.10.0.11","10.10.0.1110.10.0.11":"10.10.0.3","10.10.0.1110.10.0.19":"10.10.0.2"}
+        for input_file3 in files3:
+            final_result.append(parse_logs(input_file3, recv3))
+
+    # double topology
+    if (topology in ["double", "all"]):
+        files2 = ['logs/lb1000_1_2.txt','logs/lb1000_2_2.txt',
+        'logs/lb1000_3_2.txt','logs/lb1000_4_2.txt',
+        'logs/lb1000_5_2.txt']
+        #source router + interface = destination router
+        recv2 = {"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.310.10.0.3":"10.10.0.2"}
+        for input_file2 in files2:
+            final_result.append(parse_logs(input_file2, recv2))
 
     run(final_result, 'output/causal_bird.txt', 'output/specific_causal_bird.txt')
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--implementation", choices=['frr', 'bird', 'all'], help="Implementation for which to perform causal analysis", default='all')
+    parser.add_argument("-t", "--topology", choices=['triangle', 'double', 'all'], help="Topology for which to perform causal analysis", default='all')
     settings = parser.parse_args()
 
     if (settings.implementation in ["frr", "all"]):
-        main_frr()
+        main_frr(settings.topology)
     if (settings.implementation in ["bird", "all"]):
-        main_bird()
+        main_bird(settings.topology)
 
 if __name__ == "__main__":
     main()
