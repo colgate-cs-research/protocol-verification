@@ -30,72 +30,59 @@ def parse_logs(fname, recv):
         if value not in pkts:
             pkts[value] = []
     with open (fname) as file:
-        while peek_line(file):
-            line = file.readline()
+        line = file.readline()
+        while line:
+            line = line.strip()
+            #print("\t"+line)
             #timestamp of msg
-            if "Time Stamp" in line:
-                line = line.strip("\n")
-                line = line.strip('\t')
-                line = line.strip("Time Stamp")
-                time = line
+            if line.startswith("Time Stamp"):
+                time = line.replace("Time Stamp", "")
             #interface of message
-            elif "Source: 10" in line:
-                line = line.strip("\n")
-                line = line.strip('\t')
-                line = line.strip("Source: ")
-                inter = line
+            elif line.startswith("Source:"):
+                inter = line.replace("Source: ", "")
             #type of message
-            elif "Message Type" in line:
-                line = line.strip("\n")
-                line = line.strip('\t')
-                line = line.strip("Message Type: ")
-                message = line
+            elif line.startswith("Message Type:"):
+                message = line.replace("Message Type: ", "")
             #source and dest router of message
-            elif "Source OSPF Router" in line:
-                line = line.strip("\n")
-                line = line.strip('\t')
-                line = line.strip("Source OSPF Router: ")
-                src_router = line
+            elif line.startswith("Source OSPF Router:"):
+                src_router = line.replace("Source OSPF Router: ", "")
                 recv_key = src_router+inter
                 des_router = recv[recv_key]
                 #####can add more information/conditions to distinguish packets if want to
                 #####below is excample
                 if message == "LS Update (4)" or message == "LS Acknowledge (5)":
-                    while peek_line(file):
+                    # Process each LSA
+                    LSTline = None
+                    line = file.readline()
+                    while line and '~' not in line:
+                        line = line.strip()
+                        #print("\t"+line)
+                        value = None
+                        if ":" in line:
+                            value = line.split(":")[1].strip()
+                        if "LS Age" in line:
+                            LSAGEline = value
+                        elif line.startswith("LS Type:"):
+                            if LSTline is not None:
+                                #if "/AR"+ARline + "SN"+SNline not in message:
+                                message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"/#"
+                            LSTline = value
+                        elif line.startswith("Link State ID:"):
+                            LSIDline = value
+                        elif line.startswith("Advertising Router:"):
+                            ARline = value
+                        elif line.startswith("Sequence Number:"):
+                            SNline = value
                         line = file.readline()
-                        if "~" not in line:
-                            if "LS Age" in line:
-                                LSAGEline = line.strip("\n")
-                                LSAGEline = LSAGEline.strip('\t')
-                                LSAGEline = LSAGEline.split("LS Age (seconds): ")[1]
-                            elif "LS Type" in line:
-                                LSTline = line.strip("\n")
-                                LSTline = LSTline.strip('\t')
-                                LSTline = LSTline.strip("LS Type: ")
-                            elif "Link State ID: " in line:
-                                LSIDline = line.strip("\n")
-                                LSIDline = LSIDline.strip('\t')
-                                LSIDline = LSIDline.strip("Link State ID: ")
-                            elif "Advertising Router" in line:
-                                ARline = line.strip("\n")
-                                ARline = ARline.strip('\t')
-                                ARline = ARline.strip("Advertising Router: ")
-                            elif "Sequence Number" in line:
-                                SNline = line.strip("\n")
-                                SNline = SNline.strip('\t')
-                                SNline = SNline.strip("Sequence Number: ")
-                            elif "Checksum" in line and "Length" in peek_line(file):
-                                CSline = line.strip("\n")
-                                CSline = CSline.strip('\t')
-                                CSline = CSline.strip("Checksum: ")
-                                if "/AR"+ARline + "SN"+SNline not in message:
-                                    message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"CS"+CSline+"/#"
-                        else:
-                            break
+                    if LSTline is not None:
+                        #if "/AR"+ARline + "SN"+SNline not in message:
+                        message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"/#"
+                print(message)
                 #####
                 #Assign messages to router sets with sent or receive at end of message
                 pkts[src_router].append(message+"Send at "+time + " to " + des_router)
                 pkts[des_router].append(message+"Receive at "+time + " from " +src_router)
+            line = file.readline() 
     return pkts
 
 #computing the causal sets
@@ -205,11 +192,8 @@ def run(final_result, causal_file, specific_causal_file):
                                 first_packet_lsid = re.findall(r'LSID(.*?)AR', f_lsa,re.DOTALL)
                                 second_packet_lsid = re.findall(r'LSID(.*?)AR', s_lsa,re.DOTALL)
                                 #lssn values
-                                first_packet_lssn = re.findall(r'SN(.*?)CS', f_lsa,re.DOTALL)
-                                second_packet_lssn = re.findall(r'SN(.*?)CS', s_lsa,re.DOTALL)
-                                #lscs values
-                                first_packet_lscs = re.findall(r'CS(.*?)/', f_lsa,re.DOTALL)
-                                second_packet_lscs = re.findall(r'CS(.*?)/', s_lsa,re.DOTALL)
+                                first_packet_lssn = re.findall(r'SN(.*?)/', f_lsa,re.DOTALL)
+                                second_packet_lssn = re.findall(r'SN(.*?)/', s_lsa,re.DOTALL)
                                 #check if the lsas are correspondng by ar, type, and id
                                 if first_packet_lst == second_packet_lst and first_packet_lsid == second_packet_lsid and first_packet_ar == second_packet_ar:
                                     # input relation values to be checked
@@ -264,11 +248,8 @@ def run(final_result, causal_file, specific_causal_file):
                                 first_packet_lsid = re.findall(r'LSID(.*?)AR', f_lsa,re.DOTALL)
                                 second_packet_lsid = re.findall(r'LSID(.*?)AR', s_lsa,re.DOTALL)
                                 #lssn values
-                                first_packet_lssn = re.findall(r'SN(.*?)CS', f_lsa,re.DOTALL)
-                                second_packet_lssn = re.findall(r'SN(.*?)CS', s_lsa,re.DOTALL)
-                                #lscs values
-                                first_packet_lscs = re.findall(r'CS(.*?)/', f_lsa,re.DOTALL)
-                                second_packet_lscs = re.findall(r'CS(.*?)/', s_lsa,re.DOTALL)
+                                first_packet_lssn = re.findall(r'SN(.*?)/', f_lsa,re.DOTALL)
+                                second_packet_lssn = re.findall(r'SN(.*?)/', s_lsa,re.DOTALL)
                                 #check if the lsas are correspondng by ar, type, and id
                                 if first_packet_lst == second_packet_lst and first_packet_lsid == second_packet_lsid and first_packet_ar == second_packet_ar:
                                     # input relation values to be checked
