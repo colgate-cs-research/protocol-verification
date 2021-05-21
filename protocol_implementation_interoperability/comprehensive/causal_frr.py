@@ -251,7 +251,7 @@ def run(final_result):
                                 break
 
     #output general causal relations based on type
-    with open ('output/causal.txt', 'w') as f:
+    with open ('output/causal_frr.txt', 'w') as f:
         f.write("receive -> send\n")
         for key in recv_dict:
             f.write(key+"\n")
@@ -280,7 +280,7 @@ def run(final_result):
     specific_causal_send_age = defaultdict(set)
     
     #output more specific causal relationships
-    with open ('output/specific_causal.txt','w') as f:
+    with open ('output/specific_causal_frr.txt','w') as f:
         for key in recv_dict:
             #check if related to lsa
             if "LS Update (4)" in key or "LS Acknowledge (5)" in key:
