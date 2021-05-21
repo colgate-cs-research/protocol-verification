@@ -1,29 +1,23 @@
 --------------Recv -> send, responding lsa containing greater sn.
 LS Update (4)
-{'LS Acknowledge (5)', 'LS Update (4)'}
+{'LS Update (4)', 'LS Acknowledge (5)'}
 
 LS Acknowledge (5)
-{'LS Acknowledge (5)', 'LS Update (4)'}
+{'LS Update (4)'}
 
 --------------send -> recv, responding lsa containg greater sn
 LS Update (4)
-{'LS Acknowledge (5)', 'LS Update (4)'}
+{'LS Update (4)', 'LS Acknowledge (5)'}
 
 LS Acknowledge (5)
-{'LS Acknowledge (5)', 'LS Update (4)'}
+{'LS Update (4)'}
 
 ###########################################################################################################################################################
 --------------recv -> send, responding lsa containing greater age.
 LS Update (4)
 {'LS Acknowledge (5)'}
 
-LS Acknowledge (5)
-{'LS Update (4)'}
-
 --------------send -> recv, responding lsa containg greater age
 LS Update (4)
 {'LS Acknowledge (5)'}
-
-LS Acknowledge (5)
-{'LS Update (4)'}
 

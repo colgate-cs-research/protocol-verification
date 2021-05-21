@@ -112,11 +112,13 @@ def triangle(fname):
                     r3.append(message+"Receive at "+time + " from " +src_router)
     return r1,r2,r3
 
+#extract messages for each router in double topology
 def double(fname):
     inter = ""
     src_router = ""
     des_router = ""
     message = ""
+    #source router + interface = destination router
     recv ={"172.17.0.210.10.0.2":"172.17.0.3","172.17.0.310.10.0.3":"172.17.0.2"}
     #r1 = 172.17.0.2
     r1 = []
@@ -197,6 +199,7 @@ def double(fname):
                     r2.append(message+"Receive at "+time + " from " +src_router)
     return r1, r2
 
+#computing the causal sets
 def run(final_result):
     # send -> receive
     send_dict = defaultdict(set)
@@ -247,6 +250,7 @@ def run(final_result):
                                 recv_dict[current_msg.split("Receive")[0]].add(next_msg.split("Send")[0])
                                 break
 
+    #output general causal relations based on type
     with open ('output/causal.txt', 'w') as f:
         f.write("receive -> send\n")
         for key in recv_dict:
@@ -274,6 +278,8 @@ def run(final_result):
     specific_causal_recv_age = defaultdict(set)
     #  send -> recv
     specific_causal_send_age = defaultdict(set)
+    
+    #output more specific causal relationships
     with open ('output/specific_causal.txt','w') as f:
         for key in recv_dict:
             #check if related to lsa
@@ -429,11 +435,11 @@ def main():
     for input_file3 in files3:
         final_result.append(triangle(input_file3))
 
-    # files2 = ['logs/l1000_1_2.txt','logs/l1000_2_2.txt',
-    # 'logs/l1000_3_2.txt','logs/l1000_4_2.txt',
-    # 'logs/l1000_5_2.txt']
-    # for input_file2 in files2:
-    #     final_result.append(double(input_file2))
+    files2 = ['logs/l1000_1_2.txt','logs/l1000_2_2.txt',
+    'logs/l1000_3_2.txt','logs/l1000_4_2.txt',
+    'logs/l1000_5_2.txt']
+    for input_file2 in files2:
+        final_result.append(double(input_file2))
 
     run(final_result)
 main()

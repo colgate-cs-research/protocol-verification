@@ -18,11 +18,13 @@ def peek_line(f):
     f.seek(pos)
     return line
 
+#extract messages for each router in triangle topology
 def triangle(fname):
     inter = ""
     src_router = ""
     des_router = ""
     message = ""
+    #source router + interface = destination router
     recv ={"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.210.10.0.18":"10.10.0.11","10.10.0.310.10.0.3":"10.10.0.2","10.10.0.310.10.0.10":"10.10.0.11","10.10.0.1110.10.0.11":"10.10.0.3","10.10.0.1110.10.0.19":"10.10.0.2"}
     #r1 = 172.17.0.2
     r1 = []
@@ -111,11 +113,13 @@ def triangle(fname):
 
     return r1, r2, r3
 
+#extract messages for each router in double topology
 def double(fname):
     inter = ""
     src_router = ""
     des_router = ""
     message = ""
+    #source router + interface = destination router
     recv ={"10.10.0.210.10.0.2":"10.10.0.3","10.10.0.310.10.0.3":"10.10.0.2"}
     #r1 = 172.17.0.2
     r1 = []
@@ -149,6 +153,7 @@ def double(fname):
                 src_router = line
                 recv_key = src_router+inter
                 des_router = recv[recv_key]
+                #####can add more information/conditions to distinguish packets if want to
                 if message == "LS Update (4)" or message == "LS Acknowledge (5)":
                     while peek_line(file):
                         line = file.readline()
@@ -195,6 +200,7 @@ def double(fname):
 
     return r1, r2
 
+#computing the causal sets
 def run(final_result):
     # send -> receive
     send_dict = defaultdict(set)
@@ -245,6 +251,7 @@ def run(final_result):
                                 recv_dict[current_msg.split("Receive")[0]].add(next_msg.split("Send")[0])
                                 break
 
+    #output general causal relations based on type
     with open ('output/causal_bird.txt', 'w') as f:
         f.write("receive -> send\n")
         for key in recv_dict:
@@ -272,6 +279,8 @@ def run(final_result):
     specific_causal_recv_age = defaultdict(set)
     #  send -> recv
     specific_causal_send_age = defaultdict(set)
+
+    #output more specific causal relationships
     with open ('output/specific_causal_bird.txt','w') as f:
         for key in recv_dict:
             #check if related to lsa
@@ -308,16 +317,16 @@ def run(final_result):
                                     # input relation values to be checked
                                     if first_packet_lssn[0] < second_packet_lssn[0]:
                                         specific_causal_recv_sn[key.split("/")[0]].add(i.split("/")[0])
-                                        # ######optional code to trace these paired packets
-                                        # for i1 in timestamp_trace_recv_send:
-                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
-                                        #         for j1 in timestamp_trace_recv_send[i1]:
-                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
-                                        #                 print(i1)
-                                        #                 print(j1)
-                                        #                 print()
-                                        #                 break
-                                        # ########
+                                        ######optional code to trace these paired packets
+                                        for i1 in timestamp_trace_recv_send:
+                                            if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
+                                                for j1 in timestamp_trace_recv_send[i1]:
+                                                    if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
+                                                        print(i1)
+                                                        print(j1)
+                                                        print()
+                                                        break
+                                        ########
                                     if int(first_packet_age[0]) < int(second_packet_age[0]):
                                         specific_causal_recv_age[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
@@ -425,11 +434,11 @@ def main():
     for input_file3 in files3:
         final_result.append(triangle(input_file3))
 
-    # files2 = ['logs/lb1000_1_2.txt','logs/lb1000_2_2.txt',
-    # 'logs/lb1000_3_2.txt','logs/lb1000_4_2.txt',
-    # 'logs/lb1000_5_2.txt']
-    # for input_file2 in files2:
-    #     final_result.append(double(input_file2))
+    files2 = ['logs/lb1000_1_2.txt','logs/lb1000_2_2.txt',
+    'logs/lb1000_3_2.txt','logs/lb1000_4_2.txt',
+    'logs/lb1000_5_2.txt']
+    for input_file2 in files2:
+        final_result.append(double(input_file2))
 
     run(final_result)
 main()
