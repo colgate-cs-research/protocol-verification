@@ -53,11 +53,11 @@ def main():
 
             # Run ospf_dump.py
             pcap_path = os.path.join(topo_outdir, "tcpdump.pcap")
-            ospf_dump_args = ["python3", "../pattern_recog/ospf_dump.py", "-p", pcap_path]
+            outfile_path = os.path.join(topo_outdir, "parsed_tcp.txt")
+            ospf_dump_args = ["python3", "../pattern_recog/ospf_dump.py", "-p", pcap_path, "-o", outfile_path, "-s"]
             ospf_dump_cmd = " ".join(ospf_dump_args)
             print(ospf_dump_cmd)
             os.system(ospf_dump_cmd)
-            shutil.move("parsed_tcp.txt", os.path.join(topo_outdir, "parsed_tcp.txt"))
 
 if __name__ == "__main__":
     main()
