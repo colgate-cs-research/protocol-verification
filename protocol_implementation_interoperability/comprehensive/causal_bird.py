@@ -224,7 +224,7 @@ def run(final_result):
                             recv_time = re.search('Receive at (.*) from ', next_msg)
                             recv_time = float(recv_time.group(1))
                             #appending to causal if condition is met: time diff > 3 and communicating routers are identical
-                            if (recv_time - send_time)>3 and curr_t_router == next_t_router:
+                            if (recv_time - send_time)>0.9 and curr_t_router == next_t_router:
                                 timestamp_trace_send_recv[current_msg.split(" to ")[0]].add(next_msg.split(" from ")[0])
                                 send_dict[current_msg.split("Send")[0]].add(next_msg.split("Receive")[0])
                                 break
@@ -240,7 +240,7 @@ def run(final_result):
                             next_t_router = next_msg.split("to ")[1]
                             send_time = re.search('Send at (.*) to ', next_msg)
                             send_time = float(send_time.group(1))
-                            if (send_time - recv_time)>3 and curr_t_router == next_t_router:
+                            if (send_time - recv_time)>0.9 and curr_t_router == next_t_router:
                                 timestamp_trace_recv_send[current_msg.split(" from ")[0]].add(next_msg.split(" to ")[0])
                                 recv_dict[current_msg.split("Receive")[0]].add(next_msg.split("Send")[0])
                                 break
@@ -308,16 +308,16 @@ def run(final_result):
                                     # input relation values to be checked
                                     if first_packet_lssn[0] < second_packet_lssn[0]:
                                         specific_causal_recv_sn[key.split("/")[0]].add(i.split("/")[0])
-                                        ######optional code to trace these paired packets
-                                        for i1 in timestamp_trace_recv_send:
-                                            if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
-                                                for j1 in timestamp_trace_recv_send[i1]:
-                                                    if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
-                                                        print(i1)
-                                                        print(j1)
-                                                        print()
-                                                        break
-                                        ########
+                                        # ######optional code to trace these paired packets
+                                        # for i1 in timestamp_trace_recv_send:
+                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
+                                        #         for j1 in timestamp_trace_recv_send[i1]:
+                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
+                                        #                 print(i1)
+                                        #                 print(j1)
+                                        #                 print()
+                                        #                 break
+                                        # ########
                                     if int(first_packet_age[0]) < int(second_packet_age[0]):
                                         specific_causal_recv_age[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
