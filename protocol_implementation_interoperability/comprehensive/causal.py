@@ -77,7 +77,7 @@ def parse_logs(fname, recv):
                     if LSTline is not None:
                         #if "/AR"+ARline + "SN"+SNline not in message:
                         message = message + "/AGE"+LSAGEline+"LST"+LSTline+ "LSID"+LSIDline+ "AR"+ARline + "SN"+SNline+"/#"
-                print(message)
+                #print(message)
                 #####
                 #Assign messages to router sets with sent or receive at end of message
                 pkts[src_router].append(message+"Send at "+time + " to " + des_router)
@@ -86,7 +86,7 @@ def parse_logs(fname, recv):
     return pkts
 
 #computing the causal sets
-def run(final_result, causal_file, specific_causal_file):
+def run(final_result, logs_file, causal_file, specific_causal_file):
     # send -> receive
     send_dict = defaultdict(set)
     # receive -> send
@@ -95,6 +95,10 @@ def run(final_result, causal_file, specific_causal_file):
     timestamp_trace_send_recv = defaultdict(set)
     # receive -> send
     timestamp_trace_recv_send = defaultdict(set)
+
+    with open(logs_file, 'w') as f:
+        json.dump(final_result, f, indent=4)
+
     #iterate through topologies
     for topologies in final_result:
         #iterate through logs in each topology
@@ -327,7 +331,7 @@ def main_frr(topology):
         for input_file2 in files2:
             final_result.append(parse_logs(input_file2, recv2))
 
-    run(final_result, 'output/causal_frr.txt', 'output/specific_causal_frr.txt')
+    run(final_result, 'output/logs_frr.txt', 'output/causal_frr.txt', 'output/specific_causal_frr.txt')
 
 """Perform causal analysis for Bird"""
 def main_bird(topology):
@@ -355,7 +359,7 @@ def main_bird(topology):
         for input_file2 in files2:
             final_result.append(parse_logs(input_file2, recv2))
 
-    run(final_result, 'output/causal_bird.txt', 'output/specific_causal_bird.txt')
+    run(final_result, 'output/logs_bird.txt', 'output/causal_bird.txt', 'output/specific_causal_bird.txt')
 
 def main():
     parser = argparse.ArgumentParser()
