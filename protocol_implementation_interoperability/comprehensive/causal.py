@@ -102,13 +102,13 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
     #iterate through topologies
     for topologies in final_result:
         #iterate through logs in each topology
-        for logs in topologies.values():
+        for router, logs in topologies.items():
             # iterate through all msgs in each log
             for k in range(len(logs)):
                 #after sending a packet
                 if "Send" in logs[k]:
                     current_msg = logs[k]
-                    send_time = re.search('Send at (.*) to ', current_msg)
+                    send_time = re.search('at (\d+\.\d+) ', current_msg)
                     send_time = float(send_time.group(1))
                     curr_t_router = current_msg.split("to ")[1]
                     #finding first msg received
@@ -116,10 +116,11 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
                         next_msg = logs[l]
                         if "Receive" in next_msg:
                             next_t_router = next_msg.split("from ")[1]
-                            recv_time = re.search('Receive at (.*) from ', next_msg)
+                            recv_time = re.search('at (\d+\.\d+) ', next_msg)
                             recv_time = float(recv_time.group(1))
                             #appending to causal if condition is met: time diff > 6 and communicating routers are identical
                             if (recv_time - send_time)>0.9 and curr_t_router == next_t_router:
+                                #print(current_msg, next_msg)
                                 timestamp_trace_send_recv[current_msg.split(" to ")[0]].add(next_msg.split(" from ")[0])
                                 send_dict[current_msg.split("Send")[0]].add(next_msg.split("Receive")[0])
                                 break
