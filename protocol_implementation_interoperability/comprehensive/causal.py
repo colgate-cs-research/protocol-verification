@@ -87,10 +87,13 @@ def parse_logs(fname, recv):
 
 #computing the causal sets
 def run(final_result, logs_file, causal_file, specific_causal_file):
+    #dictionaries with all information on packets
     # send -> receive
     send_dict = defaultdict(set)
     # receive -> send
     recv_dict = defaultdict(set)
+
+    #dictionary of all information on packets with timestamps
     # send -> receive
     timestamp_trace_send_recv = defaultdict(set)
     # receive -> send
@@ -142,11 +145,29 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
                                 break
 
     #output general causal relations based on type
+    #dictionary with only type information
+        # send -> receive
+    type_send_dict = defaultdict(set)
+    # receive -> send
+    type_recv_dict = defaultdict(set)
+    for key in send_dict:
+        f_type = key.split('/')[0]
+        for s_packet in send_dict[key]:
+            s_type = s_packet.split('/')[0]
+            type_send_dict[f_type].add(s_type)
+    
+    for key in recv_dict:
+        f_type = key.split('/')[0]
+        for s_packet in recv_dict[key]:
+            s_type = s_packet.split('/')[0]
+            type_recv_dict[f_type].add(s_type)
+    
+
     with open (causal_file, 'w') as f:
         f.write("receive -> send\n")
-        for key in recv_dict:
+        for key in type_recv_dict:
             f.write(key+"\n")
-            f.write(str(recv_dict[key])+"\n")
+            f.write(str(type_recv_dict[key])+"\n")
             # ##### amount of packet can be added by uncommenting
             # p_amount = ""
             # for value in recv_dict[key]:
@@ -157,9 +178,9 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
             # #####
         f.write("###########################################################################################################################################################\n")
         f.write("send -> receive\n")
-        for key in send_dict:
+        for key in type_send_dict:
             f.write(key+"\n")
-            f.write(str(send_dict[key])+"\n")
+            f.write(str(type_send_dict[key])+"\n")
     
     #  recv -> send
     specific_causal_recv_sn = defaultdict(set)
@@ -205,26 +226,48 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
                                     if first_packet_lssn[0] < second_packet_lssn[0]:
                                         specific_causal_recv_sn[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
-                                        # for i1 in timestamp_trace_recv_send:
-                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
-                                        #         for j1 in timestamp_trace_recv_send[i1]:
-                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
-                                        #                 print(i1)
-                                        #                 print(j1)
-                                        #                 print()
-                                        #                 break
+                                        # for f_packet in timestamp_trace_recv_send:
+                                        #     for i1 in f_packet.split('#'):
+                                        #         found_f = False
+                                        #         if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
+                                        #             found_f = True
+                                        #             for s_packet in timestamp_trace_recv_send[f_packet]:
+                                        #                 found_s = False
+                                        #                 for j1 in s_packet.split('#'):
+                                        #                     if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
+                                        #                         print(f_packet)
+                                        #                         print(s_packet)
+                                        #                         print(i1)
+                                        #                         print(j1)
+                                        #                         print()
+                                        #                         found_s= True
+                                        #                 if found_s == True:
+                                        #                     break
+                                        #         if found_f == True:
+                                        #             break
                                         # ########
                                     if int(first_packet_age[0]) < int(second_packet_age[0]):
                                         specific_causal_recv_age[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
-                                        # for i1 in timestamp_trace_recv_send:
-                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and "AGE"+first_packet_age[0] in i1:
-                                        #         for j1 in timestamp_trace_recv_send[i1]:
-                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and "AGE"+second_packet_age[0] in j1:
-                                        #                 print(i1)
-                                        #                 print(j1)
-                                        #                 print()
-                                        #                 break
+                                        # for f_packet in timestamp_trace_recv_send:
+                                        #     for i1 in f_packet.split('#'):
+                                        #         found_f = False
+                                        #         if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and "AGE"+first_packet_age[0] in i1:
+                                        #             found_f = True
+                                        #             for s_packet in timestamp_trace_recv_send[f_packet]:
+                                        #                 found_s = False
+                                        #                 for j1 in s_packet.split('#'):
+                                        #                     if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and "AGE"+second_packet_age[0] in j1:
+                                        #                         print(f_packet)
+                                        #                         print(s_packet)
+                                        #                         print(i1)
+                                        #                         print(j1)
+                                        #                         print()
+                                        #                         found_s= True
+                                        #                 if found_s == True:
+                                        #                     break
+                                        #         if found_f == True:
+                                        #             break
                                         # ########
 
 
@@ -261,26 +304,48 @@ def run(final_result, logs_file, causal_file, specific_causal_file):
                                     if first_packet_lssn[0] < second_packet_lssn[0]:
                                         specific_causal_send_sn[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
-                                        # for i1 in timestamp_trace_send_recv:
-                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
-                                        #         for j1 in timestamp_trace_send_recv[i1]:
-                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
-                                        #                 print(i1)
-                                        #                 print(j1)
-                                        #                 print()
-                                        #                 break
+                                        # for f_packet in timestamp_trace_send_recv:
+                                        #     for i1 in f_packet.split('#'):
+                                        #         found_f = False
+                                        #         if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and first_packet_lssn[0] in i1:
+                                        #             found_f = True
+                                        #             for s_packet in timestamp_trace_send_recv[f_packet]:
+                                        #                 found_s = False
+                                        #                 for j1 in s_packet.split('#'):
+                                        #                     if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and second_packet_lssn[0] in j1:
+                                        #                         print(f_packet)
+                                        #                         print(s_packet)
+                                        #                         print(i1)
+                                        #                         print(j1)
+                                        #                         print()
+                                        #                         found_s= True
+                                        #                 if found_s == True:
+                                        #                     break
+                                        #         if found_f == True:
+                                        #             break
                                         # ########
                                     if int(first_packet_age[0]) < int(second_packet_age[0]):
                                         specific_causal_send_age[key.split("/")[0]].add(i.split("/")[0])
                                         # ######optional code to trace these paired packets
-                                        # for i1 in timestamp_trace_send_recv:
-                                        #     if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and "AGE"+first_packet_age[0] in i1:
-                                        #         for j1 in timestamp_trace_send_recv[i1]:
-                                        #             if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and "AGE"+second_packet_age[0] in j1:
-                                        #                 print(i1)
-                                        #                 print(j1)
-                                        #                 print()
-                                        #                 break
+                                        # for f_packet in timestamp_trace_send_recv:
+                                        #     for i1 in f_packet.split('#'):
+                                        #         found_f = False
+                                        #         if first_packet_lst[0] in i1 and first_packet_lsid[0] in i1 and first_packet_ar[0] in i1 and "AGE"+first_packet_age[0] in i1:
+                                        #             found_f = True
+                                        #             for s_packet in timestamp_trace_send_recv[f_packet]:
+                                        #                 found_s = False
+                                        #                 for j1 in s_packet.split('#'):
+                                        #                     if second_packet_lst[0] in j1 and second_packet_lsid[0] in j1 and second_packet_ar[0] in j1 and "AGE"+second_packet_age[0] in j1:
+                                        #                         print(f_packet)
+                                        #                         print(s_packet)
+                                        #                         print(i1)
+                                        #                         print(j1)
+                                        #                         print()
+                                        #                         found_s= True
+                                        #                 if found_s == True:
+                                        #                     break
+                                        #         if found_f == True:
+                                        #             break
                                         # ########
                                         
         f.write("--------------Recv -> send, responding lsa containing greater sn."+"\n")
