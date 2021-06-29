@@ -5,7 +5,7 @@
     ],
     "packets":200,
     "filter" : "proto ospf",
-    "delay": "eth1/eth2//300/900/0"
+    "delay": "eth1/eth2//300/100/0"
 
 
 
